@@ -1,2 +1,2 @@
-# maude-se.github.io
-Maude-SE Website
+# maude-se-web
+Maude SE Jekyll Website

@@ -1,0 +1,86 @@
+{"0": {
+    "doc": "Download",
+    "title": "Download",
+    "content": " ",
+    "url": "/docs/download.html",
+    "relUrl": "/docs/download.html"
+  },"1": {
+    "doc": "Download",
+    "title": "Table of contents",
+    "content": ". | Supported Version | . Maude-SE currently supports three major SMT solvers (i.e., Z3, Yices2, and CVC4). Every version of Maude-SE supports quantifier free nonlinear theories as well as linear theories. We will going to support dReal SMT solver (dReal3 and dReal4) in the future. ",
+    "url": "/docs/download.html#table-of-contents",
+    "relUrl": "/docs/download.html#table-of-contents"
+  },"2": {
+    "doc": "Download",
+    "title": "Supported Version",
+    "content": "| # | Name | Files | . | 1 | maude-se-z3 | [MacOS (Intel)][Ubuntu] | . | 2 | maude-se-yices2 | [MacOS (Intel)][Ubuntu] | . | 3 | maude-se-cvc4 | [MacOS (Intel)][Ubuntu] | . | 4 | maude-se-dreal4 |   | . Currently, we support Maude-SE executables for Intel MacOS only. We will provide executables for the Apple silicon MacOS later. ",
+    "url": "/docs/download.html#supported-version",
+    "relUrl": "/docs/download.html#supported-version"
+  },"3": {
+    "doc": "Examples",
+    "title": "Examples",
+    "content": " ",
+    "url": "/docs/examples.html",
+    "relUrl": "/docs/examples.html"
+  },"4": {
+    "doc": "Examples",
+    "title": "Table of contents",
+    "content": ". | Examples . | Full Maude Robot | GCD | Robot | . | . ",
+    "url": "/docs/examples.html#table-of-contents",
+    "relUrl": "/docs/examples.html#table-of-contents"
+  },"5": {
+    "doc": "Examples",
+    "title": "Examples",
+    "content": "We provide three examples: robot-full.maude, gcd.maude, and robot.maude. Full Maude Robot . (omod ROBOT-DYNAMICS is pr REAL . inc CONFIGURATION . sort Vector . op `[_`,_`] : Real Real -&gt; Vector [ctor] . sorts RobotTraceItem RobotTrace . subsort Vector &lt; RobotTraceItem &lt; RobotTrace . op ==`(_:_`)==&gt; : Vector Real -&gt; RobotTraceItem [ctor] . op __ : RobotTrace RobotTrace -&gt; RobotTrace [ctor assoc] . class Robot | pos : Vector, vel : Vector, acc : Vector, clock : Real, trace : RobotTrace . sort State . op r : -&gt; Oid [ctor] . subsort Configuration &lt; State . vars O : Oid . vars PX VX AX PY VY AY PX' VX' AX' PY' VY' AY' T T' TAU : Real . var ATTS : AttributeSet . var TRACE : RobotTrace . crl [move]: &lt; O : Robot | pos : [PX, PY], vel : [VX, VY], acc : [AX, AY], clock : T, trace : TRACE &gt; =&gt; &lt; O : Robot | pos : [PX', PY'], vel : [VX', VY'], clock : T + TAU, trace : TRACE ==([VX', VY'] : T + TAU)==&gt; [PX', PY'] &gt; if VX' = VX + AX * TAU /\\ VY' = VY + AY * TAU /\\ PX' = 1/2 * AX * TAU * TAU + VX * TAU + PX /\\ PY' = 1/2 * AY * TAU * TAU + VY * TAU + PY /\\ TAU &gt;= 0/1 = true [nonexec] . crl [accX]: &lt; O : Robot | acc : [AX, AY] &gt; =&gt; &lt; O : Robot | acc : [AX', AY] &gt; if AY = 0/1 [nonexec] . crl [accY]: &lt; O : Robot | acc : [AX, AY] &gt; =&gt; &lt; O : Robot | acc : [AX, AY'] &gt; if AX = 0/1 [nonexec] . endom) (smt-search2 [1] &lt; r : Robot | pos : [0/1, 0/1], vel : [0/1, 0/1], acc : [0/1, 0/1], clock : 0/1, trace : [0/1, 0/1] &gt; =&gt;* &lt; r : Robot | pos : [10/1, 10/1] &gt; .) . To run the full-maude robot example using Z3 binding of Maude SE, go to the top directory (where the exectuable is placed) and type the following command: . $ ./maude-se-z3 examples/full/robot.maude . GCD . mod GCD is protecting INTEGER-EXPR . pr SMT-CHECK . pr META-LEVEL . ops a b : -&gt; SMTVarId [ctor] . sort GcdResult . op gcd : IntegerExpr IntegerExpr -&gt; GcdResult [ctor] . op ret : IntegerExpr -&gt; GcdResult [ctor] . sort State . op {_,_} : BooleanExpr GcdResult -&gt; State [ctor] . vars CONST CONST' : BooleanExpr . vars X Y : IntegerExpr . var SS : SatAssignmentSet . crl {CONST, gcd(X, Y)} =&gt; {simplifyFormula(CONST'), gcd(X - Y, Y)} if CONST' := CONST and (X &gt; Y) === (true).Boolean / smtCheck(CONST', false) . crl {CONST, gcd(X, Y)} =&gt; {simplifyFormula(CONST'), gcd(X, Y - X)} if CONST' := CONST and (X &lt; Y) === (true).Boolean / smtCheck(CONST', false) . crl {CONST, gcd(X, Y)} =&gt; {simplifyFormula(CONST'), ret(X)} if CONST' := CONST and (X === Y) === (true).Boolean / smtCheck(CONST', false) . endm search [1] {true, gcd(i(a), i(b))} =&gt;* {CONST, ret(NN:IntegerExpr)} such that CONST' := CONST and i(a) + i(b) === 27 and NN:IntegerExpr === 3 /\\ smtCheck(CONST') = (true).Bool . To run the GCD example using Z3 binding of Maude SE, go to top directory (whre the executable is placed) and type the following command: . $ ./maude-se-z3 examples/gcd.maude . Robot . mod ROBOT is pr REAL-EXPR . inc CONFIGURATION . sort Robot . subsort Robot &lt; Cid . op Robot : -&gt; Robot [ctor format(! o)] . op pos`:_ : Vector -&gt; Attribute [ctor gather(&amp;)] . op vel`:_ : Vector -&gt; Attribute [ctor gather(&amp;)] . op acc`:_ : Vector -&gt; Attribute [ctor gather(&amp;)] . op time`:_ : RealExpr -&gt; Attribute [ctor gather(&amp;)] . sort Vector . op [_,_] : RealExpr RealExpr -&gt; Vector [ctor] . endm mod ROBOT-DYNAMICS is pr ROBOT . pr SMT-CHECK . inc NAT . pr META-LEVEL . sort State . subsort Nat &lt; SMTVarId . op {_,_,_} : BooleanExpr Nat Configuration -&gt; State [ctor] . var N : Nat . vars O : Oid . vars CONST CONST' : BooleanExpr . vars PX VX AX PY VY AY PX' VX' AX' PY' VY' AY' T T' TAU : RealExpr . var ATTS : AttributeSet . crl [move]: {CONST, N, &lt; O : C:Robot | pos : [PX, PY], vel : [VX, VY], acc : [AX, AY], time : T, ATTS &gt;} =&gt; {CONST', N + 5, &lt; O : C:Robot | pos : [PX', PY'], vel : [VX', VY'], acc : [AX, AY], time : T + TAU, ATTS &gt;} if TAU := r(N) /\\ [PX', PY'] := [r(N + 1), r(N + 2)] /\\ [VX', VY'] := [r(N + 3), r(N + 4)] /\\ CONST' := simplifyFormula(CONST and TAU &gt;= toReal(0) and VX' === VX + AX * TAU and VY' === VY + AY * TAU and PX' === 1/2 * AX * TAU * TAU + VX * TAU + PX and PY' === 1/2 * AY * TAU * TAU + VY * TAU + PY) /\\ smtCheck(CONST') . crl [accX]: {CONST, N, &lt; O : C:Robot | acc : [AX, AY], ATTS &gt;} =&gt; {CONST', s N, &lt; O : C:Robot | acc : [AX', AY], ATTS &gt;} if AX' := r(N) /\\ CONST' := simplifyFormula(CONST and AY === toReal(0)) /\\ smtCheck(CONST') . crl [accY]: {CONST, N, &lt; O : C:Robot | acc : [AX, AY], ATTS &gt;} =&gt; {CONST', s N, &lt; O : C:Robot | acc : [AX, AY'], ATTS &gt;} if AY' := r(N) /\\ CONST' := simplifyFormula(CONST and AX === toReal(0)) /\\ smtCheck(CONST') . endm mod ROBOT-ANALYSIS is inc ROBOT-DYNAMICS . var N : Nat . vars CONST : BooleanExpr . vars PX VX AX PY VY AY T : RealExpr . var SS : SatAssignmentSet . var OBJ : Object . var ATTS : AttributeSet . op r : -&gt; Oid [ctor] . endm search [1] {true, 0, &lt; r : Robot | pos : [toReal(0), toReal(0)], vel : [toReal(0), toReal(0)], acc : [toReal(0), toReal(0)], time : toReal(0) &gt;} =&gt;* {CONST, N, &lt; r : Robot | pos : [PX, PY], ATTS &gt;} such that {SS} := smtCheck(CONST and PX === 10/1 and PY === 10/1, true) . To run the robot example using Z3 binding of Maude SE, go to top directory (whre the executable is placed) and type the following command: . $ ./maude-se-z3 examples/robot.maude . ",
+    "url": "/docs/examples.html",
+    "relUrl": "/docs/examples.html"
+  },"6": {
+    "doc": "Home",
+    "title": "About Maude SE",
+    "content": "Maude SE is a rewriting modulo SMT extension of Maude at C++ level. It provides a Maude user interface to specify an SMT formula with equations and rules and can generate a set of concrete assignments when the formula is satisfied. Currently supported SMT solvers are Z3, Yices2, CVC4, and dReal. Get started now Paper . Maude-SE is an SMT extension of Maude that tightly integrates Maude and SMT solvers with extra functionality. It extends the original Maude-SMT at core Maude level. In addition to the existing SMT solving capability of Maude, the tool provides three additional features that are not currently supported by Maude but that are very useful for rewriting modulo SMT: . | building satisfying assignments by SMT solving, | simplifying formulas using the underlying SMT solver, and | dealing with non-linear arithmetic formulas. | . Maude-SE can analyze nontrivial systems that cannot be dealt with by the previous Maude-SMT implementation. There are three versions of Maude SE (i.e., Z3, Yices2, CVC4), depending on an underlying SMT solver it uses. ",
+    "url": "/#about-maude-se",
+    "relUrl": "/#about-maude-se"
+  },"7": {
+    "doc": "Home",
+    "title": "Getting started",
+    "content": "To use Maude SE, please follow the instructions below: . | Download one of the zip files from here (e.g., maude-se-z3.tar.gz). | Extract the zip file to somewhere you want. # you can see `smt-check.maude` at the top directory. $ tar -xvzf maude-se-z3.tar.gz &amp;&amp; cd maude-se-z3 . | Load or include smt-check.maude in your own module. | . ",
+    "url": "/#getting-started",
+    "relUrl": "/#getting-started"
+  },"8": {
+    "doc": "Home",
+    "title": "How to Cite",
+    "content": "Use one of the followings to cite our paper. | Bibtex | EndNote | RefMan | RefWorks | . ",
+    "url": "/#how-to-cite",
+    "relUrl": "/#how-to-cite"
+  },"9": {
+    "doc": "Home",
+    "title": "Home",
+    "content": " ",
+    "url": "/",
+    "relUrl": "/"
+  },"10": {
+    "doc": "SMT Interface",
+    "title": "SMT Interface",
+    "content": " ",
+    "url": "/docs/smt-interface.html",
+    "relUrl": "/docs/smt-interface.html"
+  },"11": {
+    "doc": "SMT Interface",
+    "title": "Table of contents",
+    "content": ". | Full Maude Interface . | Search Command | Usage | . | Core Maude Interface . | Core Maude Functions | Usage | . | . ",
+    "url": "/docs/smt-interface.html#table-of-contents",
+    "relUrl": "/docs/smt-interface.html#table-of-contents"
+  },"12": {
+    "doc": "SMT Interface",
+    "title": "Full Maude Interface",
+    "content": "The Full Maude interface of Maude SE provides smt-search2 command for symbolic reachability analysis. Search Command . Given an initial state t, a goal pattern u, and a goal condition cond, the following command searches for n states that are reachable within m rewrite steps from the initial state t, match the goal pattern u, and satisfy the goal condition cond. (smt-search2 [n, m] in M : t =&gt;* u such that cond.) . Usage . To see the usage of this command, refer to the Maude-SE paper for more details. For the simple usage of the command, see the full/robot.maude example. ",
+    "url": "/docs/smt-interface.html#full-maude-interface",
+    "relUrl": "/docs/smt-interface.html#full-maude-interface"
+  },"13": {
+    "doc": "SMT Interface",
+    "title": "Core Maude Interface",
+    "content": "The main functionality of the Maude SE is implemented in the predefined functional module SMT-CHECK which also contains signatures for both SMT formulas and their solutions. The interface contains two main functions in the module SMT-CHECK: . | smtCheck for checking the satisfiability of an SMT formula, and | simplifyFormula for simplifying the formula. | . Core Maude Functions . op smtCheck : BooleanExpr -&gt; SmtCheckResult . eq smtCheck(BE:BooleanExpr) = smtCheck(BE:BooleanExpr, false) . op smtCheck : BooleanExpr Bool -&gt; SmtCheckResult [special ... )] . op simplifyFormula : BooleanExpr -&gt; BooleanExpr [special ... )] . op simplifyFormula : IntegerExpr -&gt; IntegerExpr [special ... )] . op simplifyFormula : RealExpr -&gt; RealExpr [special ... )] . Usage . To see the usages of these functions, see gcd.maude and robot.maude examples. ",
+    "url": "/docs/smt-interface.html#core-maude-interface",
+    "relUrl": "/docs/smt-interface.html#core-maude-interface"
+  }
+}
