@@ -49,7 +49,7 @@
   },"8": {
     "doc": "Home",
     "title": "How to Cite",
-    "content": "Use one of the followings to cite our paper. | Bibtex | EndNote | RefMan | RefWorks | . ",
+    "content": "To cite our paper, use the following bibtex format or refer to the google scholar. @article{yu2020maude, title={Maude-SE: A tight integration of Maude and SMT solvers}, author={Yu, Geunyeol and Bae, Kyungmin}, journal={Rewriting Logic and its Applications}, pages={220}, year={2020} } . ",
     "url": "/#how-to-cite",
     "relUrl": "/#how-to-cite"
   },"9": {
