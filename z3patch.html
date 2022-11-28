@@ -4,9 +4,8 @@ op qe2 : -&gt; Tactic [ctor] .
 op ctxSolverSimplify : -&gt; Tactic [ctor] .
 op propagateInEqs : -&gt; Tactic [ctor] .
 op purifyArith : -&gt; Tactic [ctor] .
-op then : Tactic Tactic -&gt; Tactic [ctor] .
-op _&amp;_ : Tactic Tactic -&gt; Tactic [ctor comm assoc] .
-</code></pre></div></div><h2 id="usage"> <a href="#usage" class="anchor-heading" aria-labelledby="usage"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Usage</h2><p>We can use <code class="language-plaintext highlighter-rouge">z3 tactic</code> by an operator <code class="language-plaintext highlighter-rouge">apply</code>, defined in a <code class="language-plaintext highlighter-rouge">SMT-CHECK</code> module.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>op apply : BooleanExpr Tactic -&gt; TacticResult [special ...] .
+op then : Tactic NeTacticList -&gt; Tactic [ctor] .
+</code></pre></div></div><h2 id="usage"> <a href="#usage" class="anchor-heading" aria-labelledby="usage"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Usage</h2><p>We can use <code class="language-plaintext highlighter-rouge">z3 tactic</code> by an operator <code class="language-plaintext highlighter-rouge">apply</code>, defined in a <code class="language-plaintext highlighter-rouge">SMT-CHECK</code> module.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>op apply : BooleanExpr Tactic -&gt; BooleanExpr [special ...] .
 </code></pre></div></div><h3 class="text-delta" id="simplify"> <a href="#simplify" class="anchor-heading" aria-labelledby="simplify"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Simplify</h3><p>For example, you can apply <code class="language-plaintext highlighter-rouge">simplify tactic</code> as follows:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>red apply(i("a") + 1 &lt; 1, simplify) .
 red apply(b("a") === true, simplify) .
 red apply(forall(i("a"), i("a") &gt; 1), simplify) .
@@ -48,9 +47,9 @@ reduce in TEST : apply(exists(i("a"), exists(i("a1"), i("a1") &gt; (1).Integer))
 rewrites: 1
 result Boolean: (true).Boolean
 </code></pre></div></div><h3 class="text-delta" id="and"> <a href="#and" class="anchor-heading" aria-labelledby="and"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> And</h3><p>You can combine multiple tactics using <code class="language-plaintext highlighter-rouge">&amp;</code> as follow:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>red apply(forall(i("a"), forall(i("a2"), i("a") + i("a2") + i("a3") &gt; 1)),
-    then(qe, ctxSolverSimplify &amp; qe &amp; qe2 &amp; ctxSolverSimplify &amp; propagateInEqs &amp; purifyArith)) .
+    then(qe, ctxSolverSimplify qe qe2 ctxSolverSimplify propagateInEqs purifyArith)) .
 </code></pre></div></div><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>reduce in TEST : apply(forall(i("a"), forall(i("a2"), i("a") + i("a2") + i("a3") &gt; (1).Integer)), 
-    then(qe, ctxSolverSimplify &amp; qe &amp; qe2 &amp; ctxSolverSimplify &amp; propagateInEqs &amp; purifyArith)) .
+    then(qe, ctxSolverSimplify qe qe2 ctxSolverSimplify propagateInEqs purifyArith)) .
 rewrites: 1
 result Boolean: (false).Boolean
 </code></pre></div></div><h2 id="bug-report"> <a href="#bug-report" class="anchor-heading" aria-labelledby="bug-report"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Bug Report</h2><p>To report bugs (or provide any suggestions), please contact <a href="mailto:rgyen@postech.ac.kr">rgyen@postech.ac.kr</a>.</p><hr><footer><p><a href="#top" id="back-to-top">Back to top</a></p><p class="text-small text-grey-dk-100 mb-0">Copyright &copy; 2022 Geunyeol Yu.</p><div class="d-flex mt-2"></div></footer></div></div><div class="search-overlay"></div></div><script> var config = {} ; mermaid.initialize(config); window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid')); </script>
