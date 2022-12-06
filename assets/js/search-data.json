@@ -13,7 +13,7 @@
   },"2": {
     "doc": "Download",
     "title": "Supported Version",
-    "content": "| # | Name | Files | . | 1 | maude-se-z3 | [MacOS (Intel)][Ubuntu] | . | 2 | maude-se-yices2 | [MacOS (Intel)][Ubuntu] | . | 3 | maude-se-cvc4 | [MacOS (Intel)][Ubuntu] | . | 4 | maude-se-dreal4 |   | . Currently, we support Maude-SE executables for Intel MacOS only. We will provide executables for the Apple silicon MacOS later. ",
+    "content": "| # | Name | Files | . | 1 | maude-se-z3 | [MacOS][Ubuntu] | . | 2 | maude-se-yices2 | [MacOS][Ubuntu] | . | 3 | maude-se-cvc4 | [MacOS][Ubuntu] | . | 4 | maude-se-dreal4 |   | . Currently, we support Maude-SE executables for Linux 64 bits only. We will provide executables for MacOS later. ",
     "url": "/download#supported-version",
     "relUrl": "/download#supported-version"
   },"3": {
