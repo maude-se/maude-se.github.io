@@ -13,7 +13,7 @@
   },"2": {
     "doc": "Download",
     "title": "Supported Version",
-    "content": "| # | Name | Files | . | 1 | maude-se-z3 | [MacOS][Ubuntu] | . | 2 | maude-se-yices2 | [MacOS][Ubuntu] | . | 3 | maude-se-cvc4 | [MacOS][Ubuntu] | . | 4 | maude-se-dreal4 |   | . Currently, we support Maude-SE executables for Linux 64 bits only. We will provide executables for MacOS later. ",
+    "content": "| # | Name | Files | . | 1 | maude-se-z3 | [MacOS][Ubuntu] | . | 2 | maude-se-yices2 | [MacOS][Ubuntu] | . | 3 | maude-se-yices2-mcsat | [MacOS][Ubuntu] | . | 4 | maude-se-cvc4 | [MacOS][Ubuntu] | . | 5 | maude-se-dreal4 |   | . Currently, we support Maude-SE executables for Linux 64 bits only. We will provide executables for MacOS later. ",
     "url": "/download#supported-version",
     "relUrl": "/download#supported-version"
   },"3": {
@@ -73,13 +73,13 @@
   },"12": {
     "doc": "Python Integration",
     "title": "Download",
-    "content": "We provide a zip file of Maude-SE (maude-se-linux.zip). The file contains Maude-SE executable, examples, and an installation script. The structure of the zip file is as follows. | File | Description | . | install.sh | An installation script | . | api-test.py | Example usages of the Maude-SE Python API | . | api-test.maude | A Maude file used by api-test.py | . | smt-check-ex.maude | A Maude file containing examples for metaSmtCheck function | . | smt-search-ex.maude | A Maude file containing examples for metaSmtSearch2 function | . | maude_se-0.0.1-cp38-cp38-linux_x86_64.whl | A Python wheel of Maude-SE | . Currently, we provide the Maude-SE executable for Linux only. We will provide executables for MacOS later. ",
+    "content": "We provide a zip file of Maude-SE (maude-se-linux.zip). The file contains Maude-SE executable, examples, and an installation script. The structure of the zip file is as follows. | File | Description | . | pre-requisite.sh | An installation script for prerequisite libraries | . | api-test.py | Example usages of the Maude-SE Python API | . | api-test.maude | A Maude file used by api-test.py | . | smt-check-ex.maude | A Maude file containing examples for metaSmtCheck function | . | smt-search-ex.maude | A Maude file containing examples for metaSmtSearch2 function | . | maude_se-0.0.1-cp38-cp38-linux_x86_64.whl | A Python 3.8 wheel of Maude-SE | . | maude_se-0.0.1-cp310-cp310-linux_x86_64.whl | A Python 3.10 wheel of Maude-SE | . Currently, we provide the Maude-SE executable for Linux only. We will provide executables for MacOS later. ",
     "url": "/py-integration#download",
     "relUrl": "/py-integration#download"
   },"13": {
     "doc": "Python Integration",
     "title": "Installation",
-    "content": "To install Maude-SE, unzip the maude-se-linux.zip file and go inside the unzipped directory. ~$ unzip maude-se-linux.zip &amp;&amp; cd maude-se-linux . Use the following command to install Maude-SE. ~/maude-se-linux$ ./install.sh . The script requires sudo priviledge to install some dependencies. Type the following command to test successful installation. ~/maude-se-linux$ maude-se -h . If the installation was successful, you can see the following message. usage: maude-se [-h] [-s [SOLVER]] [file] positional arguments: file input Maude file optional arguments: -h, --help show this help message and exit -s [SOLVER], -solver [SOLVER] set an underlying SMT solver * Supported solvers: {z3,yices,cvc5} * Usage: -s z3 * Default: -s z3 . We built and tested Maude-SE on Ubuntu 20.04. ",
+    "content": "To install Maude-SE, unzip the maude-se-linux.zip file and go inside the unzipped directory. ~$ unzip maude-se-linux.zip &amp;&amp; cd maude-se-linux . Use the following command to install prerequisites for Maude-SE. ~/maude-se-linux$ ./pre-requisite.sh . The script requires sudo priviledge to install some dependencies. Install one of the Maude-SE Python wheels. ~/maude-se-linux$ pip install maude_se-0.0.1-cp3xx-cp3xx-linux_x86_64.whl . Replace xx with the version you want . Type the following command to test successful installation. ~/maude-se-linux$ maude-se -h . If the installation was successful, you can see the following message. usage: maude-se [-h] [-s [SOLVER]] [file] positional arguments: file input Maude file optional arguments: -h, --help show this help message and exit -s [SOLVER], -solver [SOLVER] set an underlying SMT solver * Supported solvers: {z3,yices,cvc5} * Usage: -s z3 * Default: -s z3 . We built and tested Maude-SE on Ubuntu 20.04. ",
     "url": "/py-integration#installation",
     "relUrl": "/py-integration#installation"
   },"14": {
