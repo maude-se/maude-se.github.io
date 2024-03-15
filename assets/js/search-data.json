@@ -7,7 +7,7 @@
   },"1": {
     "doc": "Download",
     "title": "Table of contents",
-    "content": ". | Supported Version | . Maude-SE currently supports three major SMT solvers (i.e., Z3, Yices2, and CVC4). Every version of Maude-SE supports quantifier free nonlinear theories as well as linear theories. We will going to support dReal SMT solver (dReal3 and dReal4) in the future. ",
+    "content": ". | Supported Version | . Maude-SE currently supports three major SMT solvers: Z3, Yices2 (a variation of Yices solver Yices2-mcsat), and CVC4. Maude-SE with Z3, Yices2-mcsat, and CVC4 support quantifier free nonlinear theories as well as linear theories, while Yices only supports linear ones. We will going to support dReal SMT solver (dReal3 and dReal4) in the future. ",
     "url": "/download#table-of-contents",
     "relUrl": "/download#table-of-contents"
   },"2": {
