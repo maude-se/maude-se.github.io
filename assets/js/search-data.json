@@ -13,13 +13,13 @@
   },"2": {
     "doc": "Download",
     "title": "Prerequisite",
-    "content": "Maude-SE supports various SMT solvers such as Z3, CVC4, CVC5, and Yices. Maude-SE provides connections to their Python bindings. Among these solvers, Yices Python bindings requires the Yices executable to be installed. Please follow the instructions from https://github.com/SRI-CSL/yices2 to install Yices executable. ",
+    "content": "Maude-SE supports various SMT solvers such as Z3, CVC4, CVC5, and Yices. Maude-SE provides connections to their Python bindings. Among these solvers, The Yices Python binding requires the Yices executable to be installed. Please follow the instructions of https://github.com/SRI-CSL/yices2 to install the Yices executable. ",
     "url": "/download#prerequisite",
     "relUrl": "/download#prerequisite"
   },"3": {
     "doc": "Download",
     "title": "Installation",
-    "content": "To install Maude-SE, unzip the maude-se.zip file and go inside the unzipped directory. ~$ unzip maude-se.zip &amp;&amp; cd maude-se . Use the following command to install required Python packages for Maude-SE. ~/maude-se$ pip install -r requirements.txt . Install one of the Maude-SE Python wheels. ~/maude-se-zip$ pip install maude_se-0.0.1-cp&lt;YOUR-PYTHON-VERSION&gt;-cp&lt;YOUR-PYTHON-VERSION&gt;-&lt;YOUR-OS&gt;.whl . Type the following command to test successful installation. ~/maude-se$ maude-se -h . If the installation was successful, you can see the following message. usage: maude-se [-h] [-s [SOLVER]] [-no-meta] [file] positional arguments: file input Maude file options: -h, --help show this help message and exit -s [SOLVER], -solver [SOLVER] set an underlying SMT solver * Supported solvers: {z3,yices,cvc5} * Usage: -s cvc5 * Default: -s z3 -no-meta no metaInterpreter . We built and tested Maude-SE on Ubuntu 20.04 and M1 MacBook Pro. ",
+    "content": "To install Maude-SE, unzip the maude-se.zip file and go inside the unzipped directory. ~$ unzip maude-se.zip &amp;&amp; cd maude-se . Use the following command to install required Python packages for Maude-SE. ~/maude-se$ pip install -r requirements.txt . Install one of the Maude-SE Python wheels. ~/maude-se-zip$ pip install maude_se-0.0.1-cp&lt;YOUR-PYTHON-VERSION&gt;-cp&lt;YOUR-PYTHON-VERSION&gt;-&lt;YOUR-OS&gt;.whl . Type the following command to test successful installation. ~/maude-se$ maude-se -h . If the installation was successful, you can see the following message. usage: maude-se [-h] [-s [SOLVER]] [-no-meta] [file] positional arguments: file input Maude file options: -h, --help show this help message and exit -s [SOLVER], -solver [SOLVER] set an underlying SMT solver * Supported solvers: {z3,yices,cvc5} * Usage: -s cvc5 * Default: -s z3 -no-meta no metaInterpreter . We built and tested Maude-SE on Ubuntu 20.04 and on M1 MacBook Pro. ",
     "url": "/download#installation",
     "relUrl": "/download#installation"
   },"4": {
