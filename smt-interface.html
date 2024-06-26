@@ -7,7 +7,7 @@
   op _xor_ : Integer Integer-&gt; A [prec 30 special (id-hook SMT_Symbol (EUF))] .
   op _===_ : A A-&gt; Boolean [special (id-hook SMT_Symbol (===))] .
 endfm
-</code></pre></div></div><p>We can check the satisfiability using the command as follows:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MaudeSE&gt; check I:Integer &gt; 2 and I:Integer xor J:Integer &gt; 3 and f(X:A) === X:A .
+</code></pre></div></div><p>We can check the satisfiability using the command as follows:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MaudeSE&gt; check in EUF-EX : I:Integer &gt; 2 and I:Integer xor J:Integer &gt; 3 and f(X:A) === X:A .
 result: sat
 </code></pre></div></div><h3 id="show-model"> <a href="#show-model" class="anchor-heading" aria-labelledby="show-model"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> show model</h3><p>The show model command returns the satisfying assignment, if any, for the last <code class="language-plaintext highlighter-rouge">check</code> command. For example, we can get the assigment of the above check example as follows:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MaudeSE&gt; show model .
 assignment: I |--&gt; 3; J |--&gt; 2; X |--&gt; A!val!0; _xor_ |--&gt; [else-&gt; 4]; f |--&gt; [else-&gt; A!val!0]
@@ -56,7 +56,7 @@ assignment: I |--&gt; 3; J |--&gt; 2; X |--&gt; A!val!0; _xor_ |--&gt; [else-&gt
   eq nextOther(preparingcoffee, X, Y, P2, P3) = {cdone, 0/1, Y, 0/1 &lt;= 10/1 and Y === P3} .
   eq nextOther(cdone, X, Y, P2, P3) = {idle, X, Y, X === 10/1} .
 endm
-</code></pre></div></div><p>The following command finds the first solution of the PTA coffee machine that goes to <code class="language-plaintext highlighter-rouge">cdone</code> with all the clocks and parameters are greater than or equal to 0.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MaudeSE&gt; {fold} smt-search [1] :
+</code></pre></div></div><p>The following command finds the first solution of the PTA coffee machine that goes to <code class="language-plaintext highlighter-rouge">cdone</code> with all the clocks and parameters are greater than or equal to 0.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MaudeSE&gt; {fold} smt-search [1, 10000] :
             &lt; idle ; X:Real ; Y:Real &gt; &lt; P1:Real ; P2:Real ; P3:Real &gt; =&gt;*
             &lt; cdone ; X’:Real ; Y’:Real &gt; &lt; P1:Real ; P2:Real ; P3:Real &gt;
             such that X:Real === Y:Real and X:Real &gt;= 0/1 and Y:Real &gt;= 0/1 and

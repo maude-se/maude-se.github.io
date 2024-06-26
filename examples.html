@@ -35,6 +35,7 @@ red metaSmtCheck(upModule('ARRAY, false), upTerm(select(A1, X) === X and store(A
 red metaSmtCheck(upModule('ARRAY, false), upTerm(A1[X] === X and store(A1, X, Y) === A1), 'QF_AUFLIA) .
 red metaSmtCheck(upModule('EUF-XOR, false), upTerm(not(N === 0) and 0 &lt;= N and 0 &lt;= (N xor 255) and N &lt; 256 and not (0 &lt;= (N xor 255))), 'QF_UFLIA) .
 red metaSmtCheck(upModule('EUF-XOR, false), upTerm(0 &lt;= (N xor 255)), 'QF_UFLIA) .
+red metaSmtCheck(upModule('EUF-XOR, false), upTerm(0 &lt;= (N xor 255)), 'QF_UFLIA, true) . --- generating a satisfying assignment
 </code></pre></div></div><p>The usage of <code class="language-plaintext highlighter-rouge">metaSmtCheck</code> is similar to <code class="language-plaintext highlighter-rouge">metaCheck</code> except that it takes an SMT logic and a boolean flag as its arguments, where the flag decides whether to generate a satisfying assignment for the satisfiable case.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>op metaSmtCheck : Module Term Qid -&gt; SmtCheckResult .
 eq metaSmtCheck(M:Module, TERM:Term, LOGIC:Qid) = metaSmtCheck(M:Module, TERM:Term, LOGIC:Qid, false) .
 
@@ -62,62 +63,45 @@ sort SatAssignmentSet .
 subsort SatAssignment &lt; SatAssignmentSet .
 op empty : -&gt; SatAssignmentSet [ctor] .
 op _,_ : SatAssignmentSet SatAssignmentSet -&gt; SatAssignmentSet [ctor comm assoc id: empty] .
-</code></pre></div></div><p>We can run the <code class="language-plaintext highlighter-rouge">smt-check-ex.maude</code> file with Yices2 using the following command:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/maude-se-linux$ maude-se smt-check-ex.maude -s yices
+</code></pre></div></div><p>We can run the <code class="language-plaintext highlighter-rouge">smt-check-ex.maude</code> file with CVC5 using the following command:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/maude-se-linux$ maude-se smt-check-ex.maude -s cvc5
 </code></pre></div></div><p>The results are as follows.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>==========================================
 reduce in SIMPLE : metaSmtCheck(upModule('INTEGER, false), upTerm(X:Integer &gt; (4).Integer), 'QF_LRA, true) .
-rewrites: 1 in 4ms cpu (1ms real) (250 rewrites/second)
+rewrites: 1
 result SmtCheckResult: {'X:Integer |-&gt; '5.Integer}
 ==========================================
 reduce in SIMPLE : metaSmtCheck(upModule('REAL, false), upTerm(X:Real &gt; 4/3), 'QF_LRA, true) .
-rewrites: 1 in 0ms cpu (0ms real) (~ rewrites/second)
+rewrites: 1
 result SmtCheckResult: {'X:Real |-&gt; '7/3.Real}
 ==========================================
 reduce in SIMPLE : metaSmtCheck(upModule('BOOLEAN, false), upTerm(B:Boolean), 'QF_LRA, true) .
-rewrites: 1 in 0ms cpu (0ms real) (~ rewrites/second)
+rewrites: 1
 result SmtCheckResult: {'B:Boolean |-&gt; 'true.Boolean}
 ==========================================
 reduce in EUF-CHECK : metaSmtCheck(upModule('EUF, false), upTerm(f(f(X)) === X and f(X) === Y and not X === Y), 'QF_UF) .
-(= X const!1)
-(= Y const!2)
-(function f
- (type f)
- (= (f const!1) const!2)
- (default const!1))
-rewrites: 4 in 4ms cpu (1ms real) (1000 rewrites/second)
+rewrites: 4
 result Bool: (true).Bool
 ==========================================
 reduce in ARRAY-CHECK : metaSmtCheck(upModule('ARRAY, false), upTerm(select(A1, X) === X and store(A1, X, Y) === A1), 'QF_AUFLIA) .
-(= X 0)
-(= Y 0)
-(function A1
- (type Array)
- (= (A1 0) 0)
- (default 1))
-rewrites: 4 in 4ms cpu (1ms real) (1000 rewrites/second)
+rewrites: 4 in 1ms cpu (1ms real) (2619 rewrites/second)
 result Bool: (true).Bool
 ==========================================
 reduce in ARRAY-CHECK : metaSmtCheck(upModule('ARRAY, false), upTerm(A1[X] === X and store(A1, X, Y) === A1), 'QF_AUFLIA) .
-(= X 0)
-(= Y 0)
-(function A1
- (type Array)
- (= (A1 0) 0)
- (default 1))
-rewrites: 4 in 0ms cpu (1ms real) (~ rewrites/second)
+rewrites: 4
 result Bool: (true).Bool
 ==========================================
 reduce in EUF-XOR-CHECK : metaSmtCheck(upModule('EUF-XOR, false), upTerm(not N === (0).Integer and (0).Integer &lt;= N and (0).Integer &lt;= (N xor (255).Integer) and N &lt; (256).Integer and not (0).Integer &lt;= (N xor (255).Integer)), 'QF_UFLIA) .
-rewrites: 4 in 4ms cpu (1ms real) (1000 rewrites/second)
+rewrites: 4
 result Bool: (false).Bool
 ==========================================
 reduce in EUF-XOR-CHECK : metaSmtCheck(upModule('EUF-XOR, false), upTerm((0).Integer &lt;= (N xor (255).Integer)), 'QF_UFLIA) .
-(= N -579)
-(function _xor_
- (type _xor_)
- (default 0))
-rewrites: 4 in 0ms cpu (0ms real) (~ rewrites/second)
+rewrites: 4
 result Bool: (true).Bool
-</code></pre></div></div><p class="note">Currently, we do not generate an assignment for the formula with uninterpreted function. Instead, we print the result model.</p><h3 id="smt-search-exmaude"> <a href="#smt-search-exmaude" class="anchor-heading" aria-labelledby="smt-search-exmaude"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> smt-search-ex.maude</h3><p>This file provides examples of <code class="language-plaintext highlighter-rouge">metaSmtSearch2</code> using gcd and robot examples.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mod GCD is
+==========================================
+reduce in EUF-XOR-CHECK : metaSmtCheck(upModule('EUF-XOR, false), upTerm((0).Integer &lt;= (N xor (255).Integer)), 'QF_UFLIA, true) .
+rewrites: 1
+result SmtCheckResult: {('N:Integer |-&gt; '1.Integer),{"_xor_" |-&gt; "(lambda ((_arg_1 Int) (_arg_2 Int)) 0)"}}
+==========================================
+</code></pre></div></div><h3 id="smt-search-exmaude"> <a href="#smt-search-exmaude" class="anchor-heading" aria-labelledby="smt-search-exmaude"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> smt-search-ex.maude</h3><p>This file provides examples of <code class="language-plaintext highlighter-rouge">metaSmtSearch2</code> using gcd and robot examples.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mod GCD is
   pr INTEGER .
 
   sorts GcdResult .
@@ -170,14 +154,14 @@ omod ROBOT-DYNAMICS is
 endom
 </code></pre></div></div><p>To use <code class="language-plaintext highlighter-rouge">metaSmtSearch2</code>, we need to import <code class="language-plaintext highlighter-rouge">META-SMT-SEARCH2</code> module. The following commands show how to perform rewriting modulo SMT.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--- gcd(10, I) =&gt;* return(J) such that I &lt; 9 and I &gt; 0 = true .
 red metaSmtSearch2(upModule('GCD, false), upTerm(gcd(10, I)), upTerm(return(J)), 
-                   upTerm(I &lt; 9 and I &gt; 0) = upTerm((true).Bool), '=&gt;*, unbounded, 7, 'QF_LRA) .
+                   upTerm(I &lt; 9 and I &gt; 0) = upTerm((true).Bool), '=&gt;*, unbounded, 8, 'QF_LRA) .
 
 red metaSmtSearch2(upModule('ROBOT-DYNAMICS, false), 
 	upTerm(&lt; r : Robot | pos : [IPX, IPY], vel : [IVX, IVY], acc : [IAX, IAY], time : CLK &gt;), 
 	upTerm(&lt; r : Robot | pos : [NPX, NPY], ATTRSET &gt;), 
 	upTerm(NPX === 10/1 and NPY === 10/1 and IPX === 0/1 and IPY === 0/1 
 	    and IVX === 0/1 and IVY === 0/1 and IAX === 0/1 
-        and IAY === 0/1 and CLK === 0/1) = upTerm((true).Bool), '=&gt;*, unbounded, 0, 'QF_NRA) .
+        and IAY === 0/1 and CLK === 0/1) = upTerm((true).Bool), '=&gt;*, unbounded, 1, 'QF_NRA) .
 </code></pre></div></div><p>The first command searches for the 8-th solution term that matches <code class="language-plaintext highlighter-rouge">return(J)</code> and satisfies the consition <code class="language-plaintext highlighter-rouge">I &lt; 9 and I &gt; 0</code>, starting from an initial term <code class="language-plaintext highlighter-rouge">gcd(10, I)</code> without folding under the <code class="language-plaintext highlighter-rouge">QF_LRA</code> logic.</p><p>The second command searches for the first solution, with the <code class="language-plaintext highlighter-rouge">QF_NRA</code> logic, that matches the goal pattern <code class="language-plaintext highlighter-rouge">&lt; r : Robot | pos : [NPX, NPY], ATTRSET &gt;</code> and satisfies the consition <code class="language-plaintext highlighter-rouge">NPX === 10/1 and NPY === 10/1</code>, starting from an initial term, where all its attributes are zeros.</p><p>The <code class="language-plaintext highlighter-rouge">metaSmtSearch2</code> is similar to <code class="language-plaintext highlighter-rouge">metaSmtSearch</code> except that it takes a logic and a folding flag as its arguments.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>op metaSmtSearch2 : Module Term Term Condition Qid Bound Nat Qid Bool Bool -&gt; SmtResult? .
 eq metaSmtSearch2(M, T, T', COND, STEP, B, N, LOGIC, FOLD, MERGE)
   = metaSmtSearchInternal(transform(M), makeConstTerm(T), makeConstTerm(T'), COND, STEP, B, N, LOGIC, FOLD, MERGE) .
@@ -194,46 +178,49 @@ op metaSmtSearchInternal : Module Term Term Condition Qid Bound Nat Qid Bool Boo
   [special (id-hook SpecialHubSymbol      (SmtSearchSymbol)
             op-hook failureSymbol         (failure : ~&gt; SmtResult?)
             op-hook resultSymbol          ({_,_,_,_} : Term Substitution Term Nat ~&gt; SmtResult))].
-</code></pre></div></div><p>We can run the <code class="language-plaintext highlighter-rouge">smt-search-ex.maude</code> file with Z3 using the following command:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/maude-se-linux$ maude-se smt-search-ex.maude
+</code></pre></div></div><p>We can run the <code class="language-plaintext highlighter-rouge">smt-search-ex.maude</code> file with Yices using the following command:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/maude-se-linux$ maude-se smt-search-ex.maude -s yices
 </code></pre></div></div><p>The search results are as follows.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>==========================================
 reduce metaSmtSearch2(upModule('GCD, false), upTerm(gcd((10).Integer, I)), upTerm(return(J)), 
                       upTerm(I &lt; (9).Integer and I &gt; (0).Integer) = upTerm((true).Bool), 
-                      '=&gt;*, unbounded, 7, 'QF_LRA) .
-rewrites: 8
-result SmtResult: {'return['#ubVar$9:Integer],
-  '#newVar$0:Integer &lt;- '1.Integer ;
-  '#ubVar$1:Integer &lt;- '9.Integer ;
-  '#ubVar$2:Integer &lt;- '8.Integer ;
-  '#ubVar$3:Integer &lt;- '7.Integer ;
-  '#ubVar$4:Integer &lt;- '6.Integer ;
-  '#ubVar$5:Integer &lt;- '5.Integer ;
-  '#ubVar$6:Integer &lt;- '4.Integer ;
-  '#ubVar$7:Integer &lt;- '3.Integer ;
-  '#ubVar$8:Integer &lt;- '2.Integer ;
-  '#ubVar$9:Integer &lt;- '1.Integer ;
+                      '=&gt;*, unbounded, 8, 'QF_LRA) .
+result SmtResult2: {'return['%%ubVar$9:Integer],
+  '%%ubVar$1:Integer &lt;- '9.Integer ;
+  '%%ubVar$2:Integer &lt;- '8.Integer ;
+  '%%ubVar$3:Integer &lt;- '7.Integer ;
+  '%%ubVar$4:Integer &lt;- '6.Integer ;
+  '%%ubVar$5:Integer &lt;- '5.Integer ;
+  '%%ubVar$6:Integer &lt;- '4.Integer ;
+  '%%ubVar$7:Integer &lt;- '3.Integer ;
+  '%%ubVar$8:Integer &lt;- '2.Integer ;
+  '%%ubVar$9:Integer &lt;- '1.Integer ;
   'I:Integer &lt;- '1.Integer ;
-  'J:Integer &lt;- '1.Integer,'return['1.Integer],(26).NzNat}
+  'J:Integer &lt;- '1.Integer,
+  'return['1.Integer],
+  '_or_[...], 26}
 ==========================================
-result SmtResult: {'&lt;_:_|_&gt;['r.Oid,'Robot.Robot,'_`,_['pos`:_['`[_`,_`]['#ubVar$10:Real,'#ubVar$11:Real]],
-                    'vel`:_['`[_`,_`]['#ubVar$12:Real,'#ubVar$13:Real]],
-                    'acc`:_['`[_`,_`]['#ubVar$8:Real,'#ubVar$9:Real]],'time`:_['#ubVar$14:Real]]],
-  '#newVar$0:Real &lt;- '10/1.Real ;
-  '#newVar$1:Real &lt;- '10/1.Real ;
-  '#ubVar$10:Real &lt;- '10/1.Real ;
-  '#ubVar$11:Real &lt;- '10/1.Real ;
-  '#ubVar$12:Real &lt;- '8/1.Real ;
-  '#ubVar$13:Real &lt;- '80/3.Real ;
-  '#ubVar$14:Real &lt;- '7/4.Real ;
-  '#ubVar$15:Real &lt;- '3/4.Real ;
-  '#ubVar$1:Real &lt;- '8/1.Real ;
-  '#ubVar$2:Real &lt;- '4/1.Real ;
-  '#ubVar$3:Real &lt;- '0/1.Real ;
-  '#ubVar$4:Real &lt;- '8/1.Real ;
-  '#ubVar$5:Real &lt;- '0/1.Real ;
-  '#ubVar$6:Real &lt;- '1/1.Real ;
-  '#ubVar$7:Real &lt;- '1/1.Real ;
-  '#ubVar$8:Real &lt;- '0/1.Real ;
-  '#ubVar$9:Real &lt;- '320/9.Real ;
+red metaSmtSearch2(upModule('ROBOT-DYNAMICS, false), 
+		upTerm(&lt; r : Robot | pos : [IPX, IPY], vel : [IVX, IVY], acc : [IAX, IAY], time : CLK &gt;), 
+		upTerm(&lt; r : Robot | pos : [NPX, NPY], ATTRSET &gt;), 
+		upTerm(NPX === 10/1 and NPY === 10/1 and IPX === 0/1 and IPY === 0/1 
+				and IVX === 0/1 and IVY === 0/1 and IAX === 0/1 
+        and IAY === 0/1 and CLK === 0/1) = upTerm((true).Bool), 
+        '=&gt;*, unbounded, 1, 'QF_NRA) .
+result SmtResult2: {'&lt;_:_|_&gt;[...],
+  '%%ubVar$10:Real &lt;- '10/1.Real ;
+  '%%ubVar$11:Real &lt;- '10/1.Real ;
+  '%%ubVar$12:Real &lt;- '20/3.Real ;
+  '%%ubVar$13:Real &lt;- '20/1.Real ;
+  '%%ubVar$14:Real &lt;- '2/1.Real ;
+  '%%ubVar$15:Real &lt;- '1/1.Real ;
+  '%%ubVar$1:Real &lt;- '20/3.Real ;
+  '%%ubVar$2:Real &lt;- '10/3.Real ;
+  '%%ubVar$3:Real &lt;- '0/1.Real ;
+  '%%ubVar$4:Real &lt;- '20/3.Real ;
+  '%%ubVar$5:Real &lt;- '0/1.Real ;
+  '%%ubVar$6:Real &lt;- '1/1.Real ;
+  '%%ubVar$7:Real &lt;- '1/1.Real ;
+  '%%ubVar$8:Real &lt;- '0/1.Real ;
+  '%%ubVar$9:Real &lt;- '20/1.Real ;
   'CLK:Real &lt;- '0/1.Real ;
   'IAX:Real &lt;- '0/1.Real ;
   'IAY:Real &lt;- '0/1.Real ;
@@ -243,35 +230,31 @@ result SmtResult: {'&lt;_:_|_&gt;['r.Oid,'Robot.Robot,'_`,_['pos`:_['`[_`,_`]['#
   'IVY:Real &lt;- '0/1.Real ;
   'NPX:Real &lt;- '10/1.Real ;
   'NPY:Real &lt;- '10/1.Real,
-  '&lt;_:_|_&gt;['r.Oid,'Robot.Robot,'_`,_['pos`:_['`[_`,_`]['10/1.Real,'10/1.Real]],
-        'vel`:_['`[_`,_`]['8/1.Real,'80/3.Real]],'acc`:_['`[_`,_`]['0/1.Real,'320/9.Real]],
-        'time`:_['7/4.Real]]],180}
+  '&lt;_:_|_&gt;[...], 180}
 </code></pre></div></div><p class="note">In the current alpha version, the number of rewrites reported by <code class="language-plaintext highlighter-rouge">metaSmtSearch2</code> is incorrect.</p><p>As we need to explore 180 states to find reachable state for robot example, we can reduce the search space by enabling folding as follows.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>red metaSmtSearch2(upModule('ROBOT-DYNAMICS, false), 
 		upTerm(&lt; r : Robot | pos : [IPX, IPY], vel : [IVX, IVY], acc : [IAX, IAY], time : CLK &gt;), 
 		upTerm(&lt; r : Robot | pos : [NPX, NPY], ATTRSET &gt;), 
 		upTerm(NPX === 10/1 and NPY === 10/1 and IPX === 0/1 and IPY === 0/1 
 				and IVX === 0/1 and IVY === 0/1 and IAX === 0/1 
         and IAY === 0/1 and CLK === 0/1) = upTerm((true).Bool), 
-        '=&gt;*, unbounded, 0, 'QF_NRA, true) .
+        '=&gt;*, unbounded, 1, 'QF_NRA, true) .
 ==========================================
-result SmtResult: {...,
-  '#newVar$0:Real &lt;- '10/1.Real ;
-  '#newVar$1:Real &lt;- '10/1.Real ;
-  '#ubVar$10:Real &lt;- '10/1.Real ;
-  '#ubVar$11:Real &lt;- '10/1.Real ;
-  '#ubVar$12:Real &lt;- '20/3.Real ;
-  '#ubVar$13:Real &lt;- '20/1.Real ;
-  '#ubVar$14:Real &lt;- '2/1.Real ;
-  '#ubVar$15:Real &lt;- '1/1.Real ;
-  '#ubVar$1:Real &lt;- '20/3.Real ;
-  '#ubVar$2:Real &lt;- '10/3.Real ;
-  '#ubVar$3:Real &lt;- '0/1.Real ;
-  '#ubVar$4:Real &lt;- '20/3.Real ;
-  '#ubVar$5:Real &lt;- '0/1.Real ;
-  '#ubVar$6:Real &lt;- '1/1.Real ;
-  '#ubVar$7:Real &lt;- '1/1.Real ;
-  '#ubVar$8:Real &lt;- '0/1.Real ;
-  '#ubVar$9:Real &lt;- '20/1.Real ;
+result SmtResult2: {'&lt;_:_|_&gt;[...],
+  '%%ubVar$10:Real &lt;- '10/1.Real ;
+  '%%ubVar$11:Real &lt;- '10/1.Real ;
+  '%%ubVar$12:Real &lt;- '20/3.Real ;
+  '%%ubVar$13:Real &lt;- '20/1.Real ;
+  '%%ubVar$14:Real &lt;- '2/1.Real ;
+  '%%ubVar$15:Real &lt;- '1/1.Real ;
+  '%%ubVar$1:Real &lt;- '20/3.Real ;
+  '%%ubVar$2:Real &lt;- '10/3.Real ;
+  '%%ubVar$3:Real &lt;- '0/1.Real ;
+  '%%ubVar$4:Real &lt;- '20/3.Real ;
+  '%%ubVar$5:Real &lt;- '0/1.Real ;
+  '%%ubVar$6:Real &lt;- '1/1.Real ;
+  '%%ubVar$7:Real &lt;- '1/1.Real ;
+  '%%ubVar$8:Real &lt;- '0/1.Real ;
+  '%%ubVar$9:Real &lt;- '20/1.Real ;
   'CLK:Real &lt;- '0/1.Real ;
   'IAX:Real &lt;- '0/1.Real ;
   'IAY:Real &lt;- '0/1.Real ;
@@ -281,9 +264,7 @@ result SmtResult: {...,
   'IVY:Real &lt;- '0/1.Real ;
   'NPX:Real &lt;- '10/1.Real ;
   'NPY:Real &lt;- '10/1.Real,
-  '&lt;_:_|_&gt;['r.Oid,'Robot.Robot,'_`,_['pos`:_['`[_`,_`]['10/1.Real,'10/1.Real]],
-        'vel`:_['`[_`,_`]['20/3.Real,'20/1.Real]],'acc`:_['`[_`,_`]['0/1.Real,'20/1.Real]],
-        'time`:_['2/1.Real]]],37}
+  '&lt;_:_|_&gt;[...], 37}
 </code></pre></div></div><p>The result shows that we could find the solution by exploring only 37 states.</p><h3 id="python-api"> <a href="#python-api" class="anchor-heading" aria-labelledby="python-api"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Python API</h3><p>Since we use <code class="language-plaintext highlighter-rouge">Maude-as-a-library</code> to implement Maude-SE, we also provide the Python API for Maude-SE by using the Python implementation. For example, the <code class="language-plaintext highlighter-rouge">api-test.py</code> file shows how to perform SMT search for the gcd and robot examples using the Python API. See our <code class="language-plaintext highlighter-rouge">api-test.py</code> for more details.</p><div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">maude</span>
 <span class="p">...</span>
 <span class="kn">from</span> <span class="nn">maudeSE.api</span> <span class="kn">import</span> <span class="o">*</span> <span class="c1"># import our Python API
@@ -298,7 +279,7 @@ result SmtResult: {...,
 <span class="n">c</span> <span class="o">=</span> <span class="n">maude</span><span class="p">.</span><span class="n">EqualityCondition</span><span class="p">(</span><span class="n">gcd</span><span class="p">.</span><span class="n">parseTerm</span><span class="p">(</span><span class="s">'I:Integer &lt; 9 and I:Integer &gt; 0'</span><span class="p">),</span> 
 							<span class="n">gcd</span><span class="p">.</span><span class="n">parseTerm</span><span class="p">(</span><span class="s">'(true).Bool'</span><span class="p">))</span>
 
-<span class="n">gcd_result</span> <span class="o">=</span> <span class="n">smtSearch2</span><span class="p">(</span><span class="n">gcd</span><span class="p">,</span> <span class="n">init</span><span class="p">,</span> <span class="n">goal</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="s">"=&gt;*"</span><span class="p">,</span> <span class="s">"unbounded"</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+<span class="n">gcd_result</span> <span class="o">=</span> <span class="n">smtSearch2</span><span class="p">(</span><span class="n">gcd</span><span class="p">,</span> <span class="n">init</span><span class="p">,</span> <span class="n">goal</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="s">"=&gt;*"</span><span class="p">,</span> <span class="s">"unbounded"</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">gcd_result</span><span class="p">)</span>
 </code></pre></div></div><p class="note">The arguments of the <code class="language-plaintext highlighter-rouge">smtSearch2</code> function are not meta-level terms.</p><p>We can run the test file <code class="language-plaintext highlighter-rouge">api-test.py</code> using the following command:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 api-test.py
 </code></pre></div></div><p>The result are as follows.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'return['#ubVar$9:Integer],
@@ -313,61 +294,25 @@ result SmtResult: {...,
   '#ubVar$8:Integer &lt;- '2.Integer ;
   '#ubVar$9:Integer &lt;- '1.Integer ;
   'I:Integer &lt;- '1.Integer ;
-  'J:Integer &lt;- '1.Integer,'return['1.Integer],26}
-...
-
-{'&lt;_:_|_&gt;['r.Oid,'Robot.Robot,'_`,_['pos`:_['`[_`,_`]['#ubVar$10:Real,'#ubVar$11:Real]],
-    'vel`:_['`[_`,_`]['#ubVar$12:Real,'#ubVar$13:Real]],'acc`:_['`[_`,_`]['#ubVar$8:Real,'#ubVar$9:Real]],
-    'time`:_['#ubVar$14:Real]]],
-  '#newVar$0:Real &lt;- '10/1.Real ;
-  '#newVar$1:Real &lt;- '10/1.Real ;
-  '#ubVar$10:Real &lt;- '10/1.Real ;
-  '#ubVar$11:Real &lt;- '10/1.Real ;
-  '#ubVar$12:Real &lt;- '8/1.Real ;
-  '#ubVar$13:Real &lt;- '80/3.Real ;
-  '#ubVar$14:Real &lt;- '7/4.Real ;
-  '#ubVar$15:Real &lt;- '3/4.Real ;
-  '#ubVar$1:Real &lt;- '8/1.Real ;
-  '#ubVar$2:Real &lt;- '4/1.Real ;
-  '#ubVar$3:Real &lt;- '0/1.Real ;
-  '#ubVar$4:Real &lt;- '8/1.Real ;
-  '#ubVar$5:Real &lt;- '0/1.Real ;
-  '#ubVar$6:Real &lt;- '1/1.Real ;
-  '#ubVar$7:Real &lt;- '1/1.Real ;
-  '#ubVar$8:Real &lt;- '0/1.Real ;
-  '#ubVar$9:Real &lt;- '320/9.Real ;
-  'CLK:Real &lt;- '0/1.Real ;
-  'IAX:Real &lt;- '0/1.Real ;
-  'IAY:Real &lt;- '0/1.Real ;
-  'IPX:Real &lt;- '0/1.Real ;
-  'IPY:Real &lt;- '0/1.Real ;
-  'IVX:Real &lt;- '0/1.Real ;
-  'IVY:Real &lt;- '0/1.Real ;
-  'NPX:Real &lt;- '10/1.Real ;
-  'NPY:Real &lt;- '10/1.Real,'&lt;_:_|_&gt;['r.Oid,'Robot.Robot,'_`,_['pos`:_['`[_`,_`]['10/1.Real,'10/1.Real]],
-    'vel`:_['`[_`,_`]['8/1.Real,'80/3.Real]],'acc`:_['`[_`,_`]['0/1.Real,'320/9.Real]],
-    'time`:_['7/4.Real]]],180}
+  'J:Integer &lt;- '1.Integer,'return['1.Integer],
+  ..., 26}
 ==========================================
-{'&lt;_:_|_&gt;['r.Oid,'Robot.Robot,'_`,_['pos`:_['`[_`,_`]['#ubVar$10:Real,'#ubVar$11:Real]],
-    'vel`:_['`[_`,_`]['#ubVar$12:Real,'#ubVar$13:Real]],'acc`:_['`[_`,_`]['#ubVar$8:Real,'#ubVar$9:Real]],
-    'time`:_['#ubVar$14:Real]]],
-  '#newVar$0:Real &lt;- '10/1.Real ;
-  '#newVar$1:Real &lt;- '10/1.Real ;
-  '#ubVar$10:Real &lt;- '10/1.Real ;
-  '#ubVar$11:Real &lt;- '10/1.Real ;
-  '#ubVar$12:Real &lt;- '20/3.Real ;
-  '#ubVar$13:Real &lt;- '20/1.Real ;
-  '#ubVar$14:Real &lt;- '2/1.Real ;
-  '#ubVar$15:Real &lt;- '1/1.Real ;
-  '#ubVar$1:Real &lt;- '20/3.Real ;
-  '#ubVar$2:Real &lt;- '10/3.Real ;
-  '#ubVar$3:Real &lt;- '0/1.Real ;
-  '#ubVar$4:Real &lt;- '20/3.Real ;
-  '#ubVar$5:Real &lt;- '0/1.Real ;
-  '#ubVar$6:Real &lt;- '1/1.Real ;
-  '#ubVar$7:Real &lt;- '1/1.Real ;
-  '#ubVar$8:Real &lt;- '0/1.Real ;
-  '#ubVar$9:Real &lt;- '20/1.Real ;
+{'&lt;_:_|_&gt;[...],
+  '%%ubVar$10:Real &lt;- '10/1.Real ;
+  '%%ubVar$11:Real &lt;- '10/1.Real ;
+  '%%ubVar$12:Real &lt;- '20/3.Real ;
+  '%%ubVar$13:Real &lt;- '20/1.Real ;
+  '%%ubVar$14:Real &lt;- '2/1.Real ;
+  '%%ubVar$15:Real &lt;- '1/1.Real ;
+  '%%ubVar$1:Real &lt;- '20/3.Real ;
+  '%%ubVar$2:Real &lt;- '10/3.Real ;
+  '%%ubVar$3:Real &lt;- '0/1.Real ;
+  '%%ubVar$4:Real &lt;- '20/3.Real ;
+  '%%ubVar$5:Real &lt;- '0/1.Real ;
+  '%%ubVar$6:Real &lt;- '1/1.Real ;
+  '%%ubVar$7:Real &lt;- '1/1.Real ;
+  '%%ubVar$8:Real &lt;- '0/1.Real ;
+  '%%ubVar$9:Real &lt;- '20/1.Real ;
   'CLK:Real &lt;- '0/1.Real ;
   'IAX:Real &lt;- '0/1.Real ;
   'IAY:Real &lt;- '0/1.Real ;
@@ -376,8 +321,31 @@ result SmtResult: {...,
   'IVX:Real &lt;- '0/1.Real ;
   'IVY:Real &lt;- '0/1.Real ;
   'NPX:Real &lt;- '10/1.Real ;
-  'NPY:Real &lt;- '10/1.Real,'&lt;_:_|_&gt;['r.Oid,'Robot.Robot,'_`,_['pos`:_['`[_`,_`]['10/1.Real,'10/1.Real]],
-    'vel`:_['`[_`,_`]['20/3.Real,'20/1.Real]],
-    'acc`:_['`[_`,_`]['0/1.Real,'20/1.Real]],
-    'time`:_['2/1.Real]]],37}
+  'NPY:Real &lt;- '10/1.Real,'&lt;_:_|_&gt;[...],180}
+==========================================
+{'&lt;_:_|_&gt;[...],
+  '%%ubVar$10:Real &lt;- '10/1.Real ;
+  '%%ubVar$11:Real &lt;- '10/1.Real ;
+  '%%ubVar$12:Real &lt;- '20/3.Real ;
+  '%%ubVar$13:Real &lt;- '20/1.Real ;
+  '%%ubVar$14:Real &lt;- '2/1.Real ;
+  '%%ubVar$15:Real &lt;- '1/1.Real ;
+  '%%ubVar$1:Real &lt;- '20/3.Real ;
+  '%%ubVar$2:Real &lt;- '10/3.Real ;
+  '%%ubVar$3:Real &lt;- '0/1.Real ;
+  '%%ubVar$4:Real &lt;- '20/3.Real ;
+  '%%ubVar$5:Real &lt;- '0/1.Real ;
+  '%%ubVar$6:Real &lt;- '1/1.Real ;
+  '%%ubVar$7:Real &lt;- '1/1.Real ;
+  '%%ubVar$8:Real &lt;- '0/1.Real ;
+  '%%ubVar$9:Real &lt;- '20/1.Real ;
+  'CLK:Real &lt;- '0/1.Real ;
+  'IAX:Real &lt;- '0/1.Real ;
+  'IAY:Real &lt;- '0/1.Real ;
+  'IPX:Real &lt;- '0/1.Real ;
+  'IPY:Real &lt;- '0/1.Real ;
+  'IVX:Real &lt;- '0/1.Real ;
+  'IVY:Real &lt;- '0/1.Real ;
+  'NPX:Real &lt;- '10/1.Real ;
+  'NPY:Real &lt;- '10/1.Real,'&lt;_:_|_&gt;[...],37}
 </code></pre></div></div><h2 id="module-restrictions"> <a href="#module-restrictions" class="anchor-heading" aria-labelledby="module-restrictions"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Module restrictions</h2><p>Currently, we make several restrictions to rewrite rules and equations:</p><ul><li>Rewrite rules should not have non-SMT constraints in their conditions.<li>Equations should not contradict or conflict with SMT theories.<li>When defining and connecting SMT symbols using metadata, one should not use equational axiom attritues (e.g., assoc, comm, id) and the metadata attributes together.</ul><hr><footer><p><a href="#top" id="back-to-top">Back to top</a></p><p class="text-small text-grey-dk-100 mb-0">Copyright &copy; 2022 Geunyeol Yu.</p><div class="d-flex mt-2"></div></footer></div></div><div class="search-overlay"></div></div><script> var config = {} ; mermaid.initialize(config); window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid')); </script>
