@@ -31,7 +31,7 @@ result SmtCheckResult: {'X:Integer |-&gt; '5.Integer}
 ==========================================
 reduce in EUF-XOR-CHECK : metaSmtCheck(upModule('EUF-XOR, false), upTerm((0).Integer &lt;= (N xor (255).Integer)), 'QF_UFLIA, true) .
 result SmtCheckResult: 
-  {('N:Integer |-&gt; '1.Integer),{"_xor_" |-&gt; "(lambda ((_arg_1 Int) (_arg_2 Int)) 0)"}}
+  {'N:Integer |-&gt; '1.Integer}
 ==========================================
 ...
 </code></pre></div></div><h3 id="smt-search-exmaude"> <a href="#smt-search-exmaude" class="anchor-heading" aria-labelledby="smt-search-exmaude"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> smt-search-ex.maude</h3><p>This file provides examples for <code class="language-plaintext highlighter-rouge">metaSmtSearch</code> using <code class="language-plaintext highlighter-rouge">gcd</code> and <code class="language-plaintext highlighter-rouge">robot</code> examples.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mod GCD is
