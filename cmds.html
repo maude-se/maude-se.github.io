@@ -1,0 +1,232 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analysis Commands &mdash; MaudeSE v0.0.3 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=e09d5059" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=bc6a6d3b"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="SMT Interface" href="interface.html" />
+    <link rel="prev" title="Getting started" href="getting_started.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MaudeSE
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Analysis Commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#check">check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#show-model">show model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#smt-search">smt-search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#show-smt-path">show smt-path</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="interface.html">SMT Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">More examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MaudeSE</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Analysis Commands</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="analysis-commands">
+<h1>Analysis Commands<a class="headerlink" href="#analysis-commands" title="Link to this heading"></a></h1>
+<p>MaudeSE provides various analysis commands:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#check"><span class="std std-ref">check</span></a></p></li>
+<li><p><a class="reference internal" href="#show-model"><span class="std std-ref">show model</span></a></p></li>
+<li><p><a class="reference internal" href="#smt-search"><span class="std std-ref">smt-search</span></a></p></li>
+<li><p><a class="reference internal" href="#show-smt-path"><span class="std std-ref">show smt-path</span></a></p></li>
+</ul>
+<section id="check">
+<span id="id1"></span><h2>check<a class="headerlink" href="#check" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">check</span></code> command determines the satisfiability of boolean formulas. For a given module <code class="docutils literal notranslate"><span class="pre">M</span></code>, a boolean formula <code class="docutils literal notranslate"><span class="pre">f</span></code>, and an (optional) SMT theory <code class="docutils literal notranslate"><span class="pre">Th</span></code>,
+it determines the satisfiability of <code class="docutils literal notranslate"><span class="pre">f</span></code> under the theory <code class="docutils literal notranslate"><span class="pre">Th</span></code>.</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="k">check</span> <span class="n">in</span> <span class="n">M</span> <span class="o">:</span> <span class="n">f</span> <span class="k">using</span> <span class="n">Th</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>For example, consider a module <code class="docutils literal notranslate"><span class="pre">EUF-EX</span></code> (<a class="reference download internal" download="" href="_downloads/384288c0700c7b25381c5c824832d3c0/euf-ex.maude"><code class="xref download docutils literal notranslate"><span class="pre">euf-ex.maude</span></code></a>) that contains uninterpreted function symbols declared with <code class="docutils literal notranslate"><span class="pre">smt</span> <span class="pre">euf</span></code> using <code class="docutils literal notranslate"><span class="pre">metadata</span></code>.</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="k">fmod</span> <span class="n">EUF</span><span class="o">-</span><span class="n">EX</span> <span class="n">is</span>
+  <span class="k">protecting</span> <span class="n">INTEGER</span> <span class="o">.</span>
+  <span class="k">sort</span> <span class="n">A</span> <span class="o">.</span>
+
+  <span class="k">op</span> <span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="o">-&gt;</span> <span class="n">A</span> <span class="o">[</span><span class="n">metadata</span> <span class="s">&quot;</span><span class="n">smt</span> <span class="n">euf</span><span class="s">&quot;</span><span class="o">]</span> <span class="o">.</span>
+  <span class="k">op</span> <span class="n">_xor_</span> <span class="o">:</span> <span class="n">Integer</span> <span class="n">Integer</span> <span class="o">-&gt;</span> <span class="n">A</span> <span class="o">[</span><span class="n">prec</span> <span class="n">30</span> <span class="n">metadata</span> <span class="s">&quot;</span><span class="n">smt</span> <span class="n">euf</span><span class="s">&quot;</span><span class="o">]</span> <span class="o">.</span>
+  <span class="k">op</span> <span class="n">_</span><span class="o">===</span><span class="n">_</span> <span class="o">:</span> <span class="n">A</span> <span class="n">A</span> <span class="o">-&gt;</span> <span class="n">Boolean</span> <span class="o">.</span>
+<span class="k">endfm</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See <a class="reference internal" href="examples.html"><span class="doc">More examples</span></a> to how to declare SMT symbols using <code class="docutils literal notranslate"><span class="pre">metadata</span></code>.</p>
+</div>
+<p>We can check the satisfiability using the command as follows:</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="k">check</span> <span class="n">in</span> <span class="n">EUF</span><span class="o">-</span><span class="n">EX</span> <span class="o">:</span> <span class="n">I</span><span class="o">:</span><span class="n">Integer</span> <span class="o">&gt;</span> <span class="n">2</span> <span class="n">and</span> 
+            <span class="n">f</span><span class="o">(</span><span class="n">X</span><span class="o">:</span><span class="n">A</span><span class="o">)</span> <span class="o">===</span> <span class="o">(</span><span class="n">I</span><span class="o">:</span><span class="n">Integer</span> <span class="n">xor</span> <span class="n">J</span><span class="o">:</span><span class="n">Integer</span><span class="o">)</span> <span class="k">using</span> <span class="n">QF_UFLIA</span> <span class="o">.</span>
+<span class="n">result</span><span class="o">:</span> <span class="n">sat</span>
+</pre></div>
+</div>
+</section>
+<section id="show-model">
+<span id="id2"></span><h2>show model<a class="headerlink" href="#show-model" title="Link to this heading"></a></h2>
+<p>The show model command returns the satisfying assignment, if any, for the last <code class="docutils literal notranslate"><span class="pre">check</span></code> command.
+For example, we can get the assigment of the above check example as follows:</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="k">show model</span> <span class="o">.</span>
+
+  <span class="n">assignment</span><span class="o">:</span>
+    <span class="n">I</span><span class="o">:</span><span class="n">Integer</span> <span class="o">|--&gt;</span> <span class="n">3</span>
+    <span class="n">J</span><span class="o">:</span><span class="n">Integer</span> <span class="o">|--&gt;</span> <span class="n">2</span>
+</pre></div>
+</div>
+</section>
+<section id="smt-search">
+<span id="id3"></span><h2>smt-search<a class="headerlink" href="#smt-search" title="Link to this heading"></a></h2>
+<p>This command performs symbolic reachability analysis, along with folding. Given an initial term <code class="docutils literal notranslate"><span class="pre">t</span></code>, a goal pattern <code class="docutils literal notranslate"><span class="pre">u</span></code>, and a goal condition <code class="docutils literal notranslate"><span class="pre">c</span></code>, the following command searches for <code class="docutils literal notranslate"><span class="pre">n</span></code> solutions that are reachable within <code class="docutils literal notranslate"><span class="pre">m</span></code> rewrite steps from <code class="docutils literal notranslate"><span class="pre">t</span></code>, match the goal pattern <code class="docutils literal notranslate"><span class="pre">u</span></code>, and satisfy the goal condition <code class="docutils literal notranslate"><span class="pre">c</span></code> under the SMT theory <code class="docutils literal notranslate"><span class="pre">Th</span></code>:</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="o">{</span><span class="n">fold</span><span class="o">}</span> <span class="k">smt-search</span> <span class="o">[</span><span class="n">n</span><span class="o">,</span><span class="n">m</span><span class="o">]</span> <span class="n">in</span> <span class="n">M</span> <span class="o">:</span> <span class="n">t</span> <span class="o">=&gt;*</span> <span class="n">u</span> <span class="k">such that</span> <span class="n">c</span> <span class="k">using</span> <span class="n">Th</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>The arguments <code class="docutils literal notranslate"><span class="pre">{fold}</span></code>, <code class="docutils literal notranslate"><span class="pre">Th</span></code>, <code class="docutils literal notranslate"><span class="pre">n</span></code>, and <code class="docutils literal notranslate"><span class="pre">m</span></code> are optional. If <code class="docutils literal notranslate"><span class="pre">{fold}</span></code> is given, the command ignores constrained terms that are subsumed by other constrained terms.</p>
+<p>As an example, consider the coffee machine module, explained in <a class="reference internal" href="getting_started.html"><span class="doc">Getting started</span></a>.
+The following command finds the first solution that goes to the <code class="docutils literal notranslate"><span class="pre">cdone</span></code> state with all the clocks and parameters are greater than or equal to 0.</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="o">{</span><span class="n">fold</span><span class="o">}</span> <span class="k">smt-search</span> <span class="o">[</span><span class="n">1</span><span class="o">]</span> <span class="n">in</span> <span class="n">COFFEE</span><span class="o">-</span><span class="n">MACHINE</span> <span class="o">:</span> 
+            <span class="o">&lt;</span> <span class="n">idle</span> <span class="o">;</span> <span class="n">X</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">Y</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="n">P1</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P2</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P3</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> <span class="o">=&gt;*</span> 
+            <span class="o">&lt;</span> <span class="n">cdone</span> <span class="o">;</span> <span class="n">X&#39;</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">Y&#39;</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="n">P1</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P2</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P3</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> 
+            <span class="k">such that</span> <span class="n">X</span><span class="o">:</span><span class="n">Real</span> <span class="o">===</span> <span class="n">Y</span><span class="o">:</span><span class="n">Real</span> <span class="n">and</span> <span class="n">X</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> <span class="n">Y</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> 
+                      <span class="n">P1</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> <span class="n">P2</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> <span class="n">P3</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="k">using</span> <span class="n">QF_LRA</span> <span class="o">.</span>
+
+<span class="n">Solution</span> <span class="n">1</span> <span class="o">(</span><span class="n">state</span> <span class="n">12</span><span class="o">)</span>
+
+<span class="n">Symbolic</span> <span class="n">state</span><span class="o">:</span>
+ <span class="o">&lt;</span> <span class="n">cdone</span> <span class="o">;</span> <span class="o">#</span><span class="n">58</span><span class="o">-</span><span class="n">V35</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="o">#</span><span class="n">59</span><span class="o">-</span><span class="n">V36</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="o">#</span><span class="n">60</span><span class="o">-</span><span class="n">V37</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="o">#</span><span class="n">61</span><span class="o">-</span><span class="n">V38</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="o">#</span><span class="n">62</span><span class="o">-</span><span class="n">V39</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span>
+
+<span class="n">Constraint</span><span class="o">:</span>
+ <span class="n">not</span> <span class="o">(</span><span class="n">not</span> <span class="n">V0</span><span class="o">:</span><span class="n">Real</span> <span class="o">===</span> <span class="n">X</span><span class="o">:</span><span class="n">Real</span> <span class="n">or</span> <span class="o">...)</span>
+
+<span class="n">Substitution</span><span class="o">:</span>
+ <span class="n">V5</span><span class="o">:</span><span class="n">Real</span> <span class="o">&lt;--</span> <span class="o">#</span><span class="n">58</span><span class="o">-</span><span class="n">V35</span><span class="o">:</span><span class="n">Real</span>
+ <span class="n">V6</span><span class="o">:</span><span class="n">Real</span> <span class="o">&lt;--</span> <span class="o">#</span><span class="n">59</span><span class="o">-</span><span class="n">V36</span><span class="o">:</span><span class="n">Real</span>
+ <span class="n">V7</span><span class="o">:</span><span class="n">Real</span> <span class="o">&lt;--</span> <span class="o">#</span><span class="n">60</span><span class="o">-</span><span class="n">V37</span><span class="o">:</span><span class="n">Real</span>
+ <span class="n">V8</span><span class="o">:</span><span class="n">Real</span> <span class="o">&lt;--</span> <span class="o">#</span><span class="n">61</span><span class="o">-</span><span class="n">V38</span><span class="o">:</span><span class="n">Real</span>
+ <span class="n">V9</span><span class="o">:</span><span class="n">Real</span> <span class="o">&lt;--</span> <span class="o">#</span><span class="n">62</span><span class="o">-</span><span class="n">V39</span><span class="o">:</span><span class="n">Real</span>
+
+<span class="n">Assignment</span><span class="o">:</span>
+ <span class="o">#</span><span class="n">1</span><span class="o">-</span><span class="n">X</span><span class="o">:</span><span class="n">Real</span> <span class="o">&lt;--</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span>
+ <span class="o">#</span><span class="n">10</span><span class="o">-</span><span class="n">P3</span><span class="o">:</span><span class="n">Real</span> <span class="o">&lt;--</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span>
+ <span class="o">...</span>
+
+<span class="n">Concrete</span> <span class="n">state</span><span class="o">:</span>
+ <span class="o">&lt;</span> <span class="n">cdone</span> <span class="o">;</span> <span class="n">10</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">10</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="show-smt-path">
+<span id="id4"></span><h2>show smt-path<a class="headerlink" href="#show-smt-path" title="Link to this heading"></a></h2>
+<p>This command returns a symbolic/concrete path of the last <code class="docutils literal notranslate"><span class="pre">smt-search</span></code> result. It takes a path type (either symbolic or concrete). A symbolic path is given by a sequence of contracted terms and rewrite rules. The corresponding concrete path is an instance of the symbolic path with a satisfying assignment.</p>
+<p>For example, the following commands show the symbolic and concrete paths of the above <code class="docutils literal notranslate"><span class="pre">smt-search</span></code> command.</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="k">show smt-path</span> <span class="n">concrete</span> <span class="o">.</span>
+<span class="o">&lt;</span> <span class="n">idle</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span>
+<span class="o">=====[</span><span class="n">toAddsugar</span><span class="o">]=====&gt;</span>
+<span class="o">[</span><span class="n">addsugar</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span><span class="o">]&lt;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span>
+ <span class="o">...</span>
+
+<span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="k">show smt-path</span> <span class="n">symbolic</span> <span class="o">.</span>
+<span class="n">Constrained</span> <span class="n">Term</span><span class="o">:</span>
+ <span class="n">Term</span><span class="o">:</span> <span class="o">&lt;</span> <span class="n">idle</span> <span class="o">;</span> <span class="n">V0</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">V1</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="n">V2</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">V3</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">V4</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span>
+ <span class="n">Constraint</span><span class="o">:</span> <span class="n">not</span> <span class="o">(</span><span class="n">not</span> <span class="n">V0</span><span class="o">:</span><span class="n">Real</span> <span class="o">===</span> <span class="n">X</span><span class="o">:</span><span class="n">Real</span> <span class="n">or</span> <span class="o">...)</span>
+<span class="o">=====[</span><span class="n">toAddsugar</span><span class="o">]=====&gt;</span>
+<span class="n">Constrained</span> <span class="n">Term</span><span class="o">:</span>
+ <span class="n">Term</span><span class="o">:</span> <span class="o">[</span><span class="n">addsugar</span> <span class="o">;</span> <span class="o">#</span><span class="n">5</span><span class="o">-</span><span class="n">V15</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="o">#</span><span class="n">6</span><span class="o">-</span><span class="n">V16</span><span class="o">:</span><span class="n">Real</span><span class="o">]&lt;</span> <span class="o">#</span><span class="n">7</span><span class="o">-</span><span class="n">V17</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="o">#</span><span class="n">8</span><span class="o">-</span><span class="n">V18</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="o">#</span><span class="n">9</span><span class="o">-</span><span class="n">V19</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span>
+ <span class="n">Constraint</span><span class="o">:</span> <span class="n">not</span> <span class="o">(</span><span class="n">not</span> <span class="n">V0</span><span class="o">:</span><span class="n">Real</span> <span class="o">===</span> <span class="n">X</span><span class="o">:</span><span class="n">Real</span> <span class="n">or</span> <span class="o">...)</span>
+ <span class="o">...</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="getting_started.html" class="btn btn-neutral float-left" title="Getting started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="interface.html" class="btn btn-neutral float-right" title="SMT Interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Geunyeol Yu.
+      <span class="lastupdated">Last updated on Jun 08, 2025.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

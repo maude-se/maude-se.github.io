@@ -1,153 +1,406 @@
-<!DOCTYPE html><html lang="en-US"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"><link rel="stylesheet" href="/assets/css/just-the-docs-default.css"> <script async src="https://www.googletagmanager.com/gtag/js?id=G-VD0KHS06V0"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-VD0KHS06V0', { 'anonymize_ip': true }); </script> <script src="/assets/js/vendor/lunr.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/mermaid@9.1.6/dist/mermaid.min.js"></script> <script src="/assets/js/just-the-docs.js"></script><meta name="viewport" content="width=device-width, initial-scale=1"><title>Examples | Maude SE</title><meta name="generator" content="Jekyll v4.2.2" /><meta property="og:title" content="Examples" /><meta property="og:locale" content="en_US" /><meta name="description" content="Maude-SE Webpage" /><meta property="og:description" content="Maude-SE Webpage" /><link rel="canonical" href="http://localhost:4000/examples" /><meta property="og:url" content="http://localhost:4000/examples" /><meta property="og:site_name" content="Maude SE" /><meta property="og:type" content="website" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="Examples" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"WebPage","description":"Maude-SE Webpage","headline":"Examples","url":"http://localhost:4000/examples"}</script><body> <a class="skip-to-main" href="#main-content">Skip to main content</a> <svg xmlns="http://www.w3.org/2000/svg" style="display: none;"> <symbol id="svg-link" viewBox="0 0 24 24"><title>Link</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path> </svg> </symbol> <symbol id="svg-search" viewBox="0 0 24 24"><title>Search</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"> <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line> </svg> </symbol> <symbol id="svg-menu" viewBox="0 0 24 24"><title>Menu</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line> </svg> </symbol> <symbol id="svg-arrow-right" viewBox="0 0 24 24"><title>Expand</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline> </svg> </symbol> <symbol id="svg-doc" viewBox="0 0 24 24"><title>Document</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline> </svg> </symbol> <symbol id="svg-external-link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link"><title id="svg-external-link-title">(external link)</title><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line> </symbol> </svg><div class="side-bar"><div class="site-header"> <a href="/" class="site-title lh-tight"> Maude SE </a> <a href="#" id="menu-button" class="site-button"> <svg viewBox="0 0 24 24" class="icon"><use xlink:href="#svg-menu"></use></svg> </a></div><nav aria-label="Main" id="site-nav" class="site-nav"><ul class="nav-list"><li class="nav-list-item"><a href="/" class="nav-list-link">Home</a><li class="nav-list-item"><a href="/download" class="nav-list-link">Download</a><li class="nav-list-item"><a href="/smt-interface" class="nav-list-link">SMT Interface</a><li class="nav-list-item active"><a href="/examples" class="nav-list-link active">Examples</a><li class="nav-list-item"><a href="/old" class="nav-list-link">Previous Version</a></ul></nav><footer class="site-footer"> This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.</footer></div><div class="main" id="top"><div id="main-header" class="main-header"><div class="search"><div class="search-input-wrap"> <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search Maude SE" aria-label="Search Maude SE" autocomplete="off"> <label for="search-input" class="search-label"><svg viewBox="0 0 24 24" class="search-icon"><use xlink:href="#svg-search"></use></svg></label></div><div id="search-results" class="search-results"></div></div></div><div id="main-content-wrap" class="main-content-wrap"><div id="main-content" class="main-content" role="main"><h1 class="no_toc" id="examples"> <a href="#examples" class="anchor-heading" aria-labelledby="examples"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Examples</h1><h2 class="no_toc text-delta" id="table-of-contents"> <a href="#table-of-contents" class="anchor-heading" aria-labelledby="table-of-contents"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Table of contents</h2><ol id="markdown-toc"><li><a href="#examples-for-metalevel-functions" id="markdown-toc-examples-for-metalevel-functions">Examples for Metalevel Functions</a><ol><li><a href="#smt-check-exmaude" id="markdown-toc-smt-check-exmaude">smt-check-ex.maude</a><li><a href="#smt-search-exmaude" id="markdown-toc-smt-search-exmaude">smt-search-ex.maude</a></ol><li><a href="#module-restrictions" id="markdown-toc-module-restrictions">Module restrictions</a></ol><hr /><h2 id="examples-for-metalevel-functions"> <a href="#examples-for-metalevel-functions" class="anchor-heading" aria-labelledby="examples-for-metalevel-functions"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Examples for Metalevel Functions</h2><p>We provide a zip file (<a href="assets/maude-se-examples.zip">maude-se-examples.zip</a>), containing example files.</p><div class="table-wrapper"><table><thead><tr><th>File<th>Description<tbody><tr><td>smt-check-ex.maude<td>A Maude file containing examples for <code class="language-plaintext highlighter-rouge">metaSmtCheck</code> function<tr><td>smt-search-ex.maude<td>A Maude file containing examples for <code class="language-plaintext highlighter-rouge">metaSmtSearch</code> function</table></div><h3 id="smt-check-exmaude"> <a href="#smt-check-exmaude" class="anchor-heading" aria-labelledby="smt-check-exmaude"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> smt-check-ex.maude</h3><p>This file demonstrates the usage of <code class="language-plaintext highlighter-rouge">metaSmtCheck</code> using various theories and formulas including interpreted and uninterpreted symbols. The file contains four functional module:</p><ul><li><code class="language-plaintext highlighter-rouge">SIMPLE</code><li><code class="language-plaintext highlighter-rouge">EUF</code><li><code class="language-plaintext highlighter-rouge">EUF-ARRAY</code><li><code class="language-plaintext highlighter-rouge">EUF-XOR</code></ul><p><strong>1. <code class="language-plaintext highlighter-rouge">SIMPLE</code> Module</strong>: This module simply imports <code class="language-plaintext highlighter-rouge">INTEGER</code> module.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fmod SIMPLE is
-  pr INTEGER .
-  pr META-SMT-CHECK .
-endfm
-</code></pre></div></div><p><strong>2. <code class="language-plaintext highlighter-rouge">EUF</code> Module</strong>: This module defines a new sort <code class="language-plaintext highlighter-rouge">A</code> and an uninterpreted symbol <code class="language-plaintext highlighter-rouge">f</code>.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fmod EUF is
-  pr BOOLEAN .
 
-  sort A .
 
-  op _===_ : A A -&gt; Boolean .
-  op f : A -&gt; A [ctor metadata "smt euf"] .
-endfm
-</code></pre></div></div><p><strong>3. <code class="language-plaintext highlighter-rouge">EUF-ARRAY</code> Module</strong>: This module connects interpreted symbols from the <code class="language-plaintext highlighter-rouge">Array</code> theory to Maude operators.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fmod ARRAY is
-  pr REAL-INTEGER .
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  sort Array{Integer,Integer} .
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>More examples &mdash; MaudeSE v0.0.3 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=e09d5059" />
 
-  op _===_ : Array{Integer,Integer} Array{Integer,Integer} -&gt; Boolean .
-  op select : Array{Integer,Integer} Integer -&gt; Integer [metadata "smt array:select"] .
-  op _[_] : Array{Integer,Integer} Integer -&gt; Integer [metadata "smt array:select"] .
-  op store : Array{Integer,Integer} Integer Integer -&gt; Array{Integer,Integer} [metadata "smt array:store"] . 
-endfm
-</code></pre></div></div><p><strong>4. <code class="language-plaintext highlighter-rouge">EUF-XOR</code> Module</strong>: This module contains another example for uninterpreted symbol.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fmod EUF-XOR is
-  pr INTEGER .
-  op _xor_ : Integer Integer -&gt; Integer [metadata "smt euf"] .
-endfm
-</code></pre></div></div><p>As the modules <code class="language-plaintext highlighter-rouge">EUF</code> and <code class="language-plaintext highlighter-rouge">EUF-XOR</code> show, we can declare uninterpreted symbols by declaring operators and annotating them as uninterpreted symbols using the <code class="language-plaintext highlighter-rouge">metadata</code> attribute. For example, the uninterpreted symbol <code class="language-plaintext highlighter-rouge">f</code> of <code class="language-plaintext highlighter-rouge">EUF</code> is annotated with metadata <code class="language-plaintext highlighter-rouge">smt euf</code>, meaning that the operator is an SMT symbol (<code class="language-plaintext highlighter-rouge">smt</code>) and an uninterpreted symbol (<code class="language-plaintext highlighter-rouge">euf</code>).</p><p>Another module <code class="language-plaintext highlighter-rouge">ARRAY</code> show how to connect interpreted symbol to Maude. We also use the <code class="language-plaintext highlighter-rouge">metadata</code> attribute. For example, we use the metadata <code class="language-plaintext highlighter-rouge">smt array:select</code> to denote the interpreted symbol <code class="language-plaintext highlighter-rouge">select</code> of the <code class="language-plaintext highlighter-rouge">array</code> theory. In addition, we can connect a single interpreted symbol to different Maude operators. For example, we connect the <code class="language-plaintext highlighter-rouge">select</code> to <code class="language-plaintext highlighter-rouge">select</code> and <code class="language-plaintext highlighter-rouge">_[_]</code> in the <code class="language-plaintext highlighter-rouge">ARRAY</code> module.</p><p>To use <code class="language-plaintext highlighter-rouge">metaSmtCheck</code>, we need to import <code class="language-plaintext highlighter-rouge">META-SMT-CHECK</code> module. Then, we can check the satisfiability of various formulas under EUF and Array theories. For example, you can run the example with the CVC5 solver using the following command.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ maude-se ./smt-check-ex.maude -s cvc5 -no-meta
-</code></pre></div></div><p>Here’s some results:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>==========================================
-reduce in SIMPLE : metaSmtCheck(upModule('INTEGER, false), upTerm(X:Integer &gt; (4).Integer), 'QF_LRA, true) .
-result SmtCheckResult: {'X:Integer |-&gt; '5.Integer}
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=bc6a6d3b"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="SMT Interface" href="interface.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MaudeSE
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmds.html">Analysis Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interface.html">SMT Interface</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">More examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#smt-check-ex-maude">smt-check-ex.maude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#smt-check-meta-ex-maude">smt-check-meta-ex.maude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#smt-search-ex-maude">smt-search-ex.maude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#smt-search-meta-ex-maude">smt-search-meta-ex.maude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-restrictions">Module restrictions</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MaudeSE</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">More examples</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="more-examples">
+<h1>More examples<a class="headerlink" href="#more-examples" title="Link to this heading"></a></h1>
+<p>We provide a zip file (<a class="reference download internal" download="" href="_downloads/ceb8f4265deb68c3ced3bb3cc997583e/maude-se-examples.zip"><code class="xref download docutils literal notranslate"><span class="pre">maude-se-examples.zip</span></code></a>), containing example files.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>File</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>smt-check-ex.maude</p></td>
+<td><p>A Maude file containing examples for the <code class="docutils literal notranslate"><span class="pre">check</span></code> command</p></td>
+</tr>
+<tr class="row-odd"><td><p>smt-search-ex.maude</p></td>
+<td><p>A Maude file containing examples for the <code class="docutils literal notranslate"><span class="pre">smt-search</span></code> command</p></td>
+</tr>
+<tr class="row-even"><td><p>smt-check-meta-ex.maude</p></td>
+<td><p>A Maude file containing examples for the <code class="docutils literal notranslate"><span class="pre">metaSmtCheck</span></code> function</p></td>
+</tr>
+<tr class="row-odd"><td><p>smt-search-meta-ex.maude</p></td>
+<td><p>A Maude file containing examples for the <code class="docutils literal notranslate"><span class="pre">metaSmtSearch</span></code> function</p></td>
+</tr>
+</tbody>
+</table>
+<section id="smt-check-ex-maude">
+<h2>smt-check-ex.maude<a class="headerlink" href="#smt-check-ex-maude" title="Link to this heading"></a></h2>
+<p>This file demonstrates the usage of <code class="docutils literal notranslate"><span class="pre">check</span></code> using various theories and formulas including interpreted and uninterpreted symbols.
+The file contains four functional module:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">SIMPLE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">EUF</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">EUF-ARRAY</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">EUF-XOR</span></code></p></li>
+</ul>
+<p><strong>1. The <code class="docutils literal notranslate"><span class="pre">SIMPLE</span></code> module</strong>: This module simply imports <code class="docutils literal notranslate"><span class="pre">INTEGER</span></code> module.</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="k">fmod</span> <span class="n">SIMPLE</span> <span class="n">is</span>
+  <span class="n">pr</span> <span class="n">INTEGER</span> <span class="o">.</span>
+  <span class="n">pr</span> <span class="n">META</span><span class="o">-</span><span class="n">SMT</span><span class="o">-</span><span class="n">CHECK</span> <span class="o">.</span>
+<span class="k">endfm</span>
+</pre></div>
+</div>
+<p><strong>2. The <code class="docutils literal notranslate"><span class="pre">EUF</span></code> module</strong>: This module defines a new sort <code class="docutils literal notranslate"><span class="pre">A</span></code> and an uninterpreted symbol <code class="docutils literal notranslate"><span class="pre">f</span></code>.</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="k">fmod</span> <span class="n">EUF</span> <span class="n">is</span>
+  <span class="n">pr</span> <span class="n">BOOLEAN</span> <span class="o">.</span>
+
+  <span class="k">sort</span> <span class="n">A</span> <span class="o">.</span>
+
+  <span class="k">op</span> <span class="n">_</span><span class="o">===</span><span class="n">_</span> <span class="o">:</span> <span class="n">A</span> <span class="n">A</span> <span class="o">-&gt;</span> <span class="n">Boolean</span> <span class="o">.</span>
+  <span class="k">op</span> <span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="o">-&gt;</span> <span class="n">A</span> <span class="o">[</span><span class="k">ctor</span> <span class="n">metadata</span> <span class="s">&quot;</span><span class="n">smt</span> <span class="n">euf</span><span class="s">&quot;</span><span class="o">]</span> <span class="o">.</span>
+<span class="k">endfm</span>
+</pre></div>
+</div>
+<p><strong>3. The <code class="docutils literal notranslate"><span class="pre">EUF-ARRAY</span></code> module</strong>: This module connects interpreted symbols from the <code class="docutils literal notranslate"><span class="pre">Array</span></code> theory to Maude operators.</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="k">fmod</span> <span class="n">ARRAY</span> <span class="n">is</span>
+  <span class="n">pr</span> <span class="n">REAL</span><span class="o">-</span><span class="n">INTEGER</span> <span class="o">.</span>
+
+  <span class="k">sort</span> <span class="n">Array</span><span class="o">{</span><span class="n">Integer</span><span class="o">,</span><span class="n">Integer</span><span class="o">}</span> <span class="o">.</span>
+
+  <span class="k">op</span> <span class="n">_</span><span class="o">===</span><span class="n">_</span> <span class="o">:</span> <span class="n">Array</span><span class="o">{</span><span class="n">Integer</span><span class="o">,</span><span class="n">Integer</span><span class="o">}</span> <span class="n">Array</span><span class="o">{</span><span class="n">Integer</span><span class="o">,</span><span class="n">Integer</span><span class="o">}</span> <span class="o">-&gt;</span> <span class="n">Boolean</span> <span class="o">.</span>
+  <span class="k">op</span> <span class="k">select</span> <span class="o">:</span> <span class="n">Array</span><span class="o">{</span><span class="n">Integer</span><span class="o">,</span><span class="n">Integer</span><span class="o">}</span> <span class="n">Integer</span> <span class="o">-&gt;</span> <span class="n">Integer</span> <span class="o">[</span><span class="n">metadata</span> <span class="s">&quot;</span><span class="n">smt</span> <span class="n">array</span><span class="o">:</span><span class="k">select</span><span class="s">&quot;</span><span class="o">]</span> <span class="o">.</span>
+  <span class="k">op</span> <span class="n">_</span><span class="o">[</span><span class="n">_</span><span class="o">]</span> <span class="o">:</span> <span class="n">Array</span><span class="o">{</span><span class="n">Integer</span><span class="o">,</span><span class="n">Integer</span><span class="o">}</span> <span class="n">Integer</span> <span class="o">-&gt;</span> <span class="n">Integer</span> <span class="o">[</span><span class="n">metadata</span> <span class="s">&quot;</span><span class="n">smt</span> <span class="n">array</span><span class="o">:</span><span class="k">select</span><span class="s">&quot;</span><span class="o">]</span> <span class="o">.</span>
+  <span class="k">op</span> <span class="n">store</span> <span class="o">:</span> <span class="n">Array</span><span class="o">{</span><span class="n">Integer</span><span class="o">,</span><span class="n">Integer</span><span class="o">}</span> <span class="n">Integer</span> <span class="n">Integer</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="o">{</span><span class="n">Integer</span><span class="o">,</span><span class="n">Integer</span><span class="o">}</span> <span class="o">[</span><span class="n">metadata</span> <span class="s">&quot;</span><span class="n">smt</span> <span class="n">array</span><span class="o">:</span><span class="n">store</span><span class="s">&quot;</span><span class="o">]</span> <span class="o">.</span> 
+<span class="k">endfm</span>
+</pre></div>
+</div>
+<p><strong>4. The <code class="docutils literal notranslate"><span class="pre">EUF-XOR</span></code> module</strong>: This module contains a single uninterpreted symbol.</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="k">fmod</span> <span class="n">EUF</span><span class="o">-</span><span class="n">XOR</span> <span class="n">is</span>
+  <span class="n">pr</span> <span class="n">INTEGER</span> <span class="o">.</span>
+  <span class="k">op</span> <span class="n">_xor_</span> <span class="o">:</span> <span class="n">Integer</span> <span class="n">Integer</span> <span class="o">-&gt;</span> <span class="n">Integer</span> <span class="o">[</span><span class="n">metadata</span> <span class="s">&quot;</span><span class="n">smt</span> <span class="n">euf</span><span class="s">&quot;</span><span class="o">]</span> <span class="o">.</span>
+<span class="k">endfm</span>
+</pre></div>
+</div>
+<p>As the modules <code class="docutils literal notranslate"><span class="pre">EUF</span></code> and <code class="docutils literal notranslate"><span class="pre">EUF-XOR</span></code> show, we can declare uninterpreted symbols by declaring operators and annotating them as uninterpreted symbols
+using the <code class="docutils literal notranslate"><span class="pre">metadata</span></code> attribute. For example, the uninterpreted symbol <code class="docutils literal notranslate"><span class="pre">f</span></code> of <code class="docutils literal notranslate"><span class="pre">EUF</span></code> is annotated with metadata <code class="docutils literal notranslate"><span class="pre">smt</span> <span class="pre">euf</span></code>, meaning that
+the operator is an SMT symbol (<code class="docutils literal notranslate"><span class="pre">smt</span></code>) and an uninterpreted symbol (<code class="docutils literal notranslate"><span class="pre">euf</span></code>).</p>
+<p>Another module <code class="docutils literal notranslate"><span class="pre">ARRAY</span></code> show how to connect interpreted symbol to Maude. We also use the <code class="docutils literal notranslate"><span class="pre">metadata</span></code> attribute.
+For example, we use the metadata <code class="docutils literal notranslate"><span class="pre">smt</span> <span class="pre">array:select</span></code> to denote the interpreted symbol <code class="docutils literal notranslate"><span class="pre">select</span></code> of the <code class="docutils literal notranslate"><span class="pre">array</span></code> theory.
+In addition, we can connect a single interpreted symbol to different Maude operators. For example, we connect the <code class="docutils literal notranslate"><span class="pre">select</span></code> to <code class="docutils literal notranslate"><span class="pre">select</span></code> and <code class="docutils literal notranslate"><span class="pre">_[_]</span></code> in
+the <code class="docutils literal notranslate"><span class="pre">ARRAY</span></code> module.</p>
+<p>We can check the satisfiability of various formulas under EUF and Array theories.
+For example, we can check the satisfiability of the following formula using the QF_UF logic. More example commands can be found in the file.</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="k">check</span> <span class="n">in</span> <span class="n">EUF</span> <span class="o">:</span> <span class="n">f</span><span class="o">(</span><span class="n">f</span><span class="o">(</span><span class="n">X</span><span class="o">:</span><span class="n">A</span><span class="o">))</span> <span class="o">===</span> <span class="n">X</span><span class="o">:</span><span class="n">A</span> <span class="n">and</span> <span class="n">f</span><span class="o">(</span><span class="n">X</span><span class="o">:</span><span class="n">A</span><span class="o">)</span> <span class="o">===</span> <span class="n">Y</span><span class="o">:</span><span class="n">A</span> 
+                        <span class="n">and</span> <span class="n">not</span> <span class="o">(</span><span class="n">X</span><span class="o">:</span><span class="n">A</span> <span class="o">===</span> <span class="n">Y</span><span class="o">:</span><span class="n">A</span><span class="o">)</span> <span class="k">using</span> <span class="n">QF_UF</span> <span class="o">.</span>
+<span class="n">result</span><span class="o">:</span> <span class="n">sat</span>
+</pre></div>
+</div>
+<!-- ```
+red metaSmtCheck(upModule('INTEGER, false), upTerm(X:Integer > 4), 'QF_LRA, true) .
+red metaSmtCheck(upModule('REAL, false), upTerm(X:Real > 4/3), 'QF_LRA, true) .
+red metaSmtCheck(upModule('BOOLEAN, false), upTerm(B:Boolean), 'QF_LRA, true) .
+red metaSmtCheck(upModule('EUF, false), upTerm(f(f(X)) === X and f(X) === Y and not (X === Y)), 'QF_UF) .
+red metaSmtCheck(upModule('ARRAY, false), upTerm(select(A1, X) === X and store(A1, X, Y) === A1), 'QF_AUFLIA) .
+red metaSmtCheck(upModule('ARRAY, false), upTerm(A1[X] === X and store(A1, X, Y) === A1), 'QF_AUFLIA) .
+red metaSmtCheck(upModule('EUF-XOR, false), upTerm(not(N === 0) and 0 <= N and 0 <= (N xor 255) and N < 256 and not (0 <= (N xor 255))), 'QF_UFLIA) .
+red metaSmtCheck(upModule('EUF-XOR, false), upTerm(0 <= (N xor 255)), 'QF_UFLIA) .
+red metaSmtCheck(upModule('EUF-XOR, false), upTerm(0 <= (N xor 255)), 'QF_UFLIA, true) . --- generating a satisfying assignment
+``` -->
+</section>
+<hr class="docutils" />
+<section id="smt-check-meta-ex-maude">
+<h2>smt-check-meta-ex.maude<a class="headerlink" href="#smt-check-meta-ex-maude" title="Link to this heading"></a></h2>
+<p>This file contains the usage of <code class="docutils literal notranslate"><span class="pre">metaSmtCheck</span></code> with several usage examples.
+The satisfiability can be checked as explained in <a class="reference internal" href="cmds.html"><span class="doc">Analysis Commands</span></a>.</p>
+<!-- We can run the `smt-check-ex.maude` file with CVC5 using the following command:
+```
+~/maude-se-linux$ maude-se smt-check-ex.maude -s cvc5
+```
+
+The results are as follows.
+
+```
 ==========================================
-reduce in EUF-XOR-CHECK : metaSmtCheck(upModule('EUF-XOR, false), upTerm((0).Integer &lt;= (N xor (255).Integer)), 'QF_UFLIA, true) .
-result SmtCheckResult: 
-  {'N:Integer |-&gt; '1.Integer}
+reduce in SIMPLE : metaSmtCheck(upModule('INTEGER, false), upTerm(X:Integer > (4).Integer), 'QF_LRA, true) .
+rewrites: 1
+result SmtCheckResult: {'X:Integer |-> '5.Integer}
 ==========================================
-...
-</code></pre></div></div><h3 id="smt-search-exmaude"> <a href="#smt-search-exmaude" class="anchor-heading" aria-labelledby="smt-search-exmaude"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> smt-search-ex.maude</h3><p>This file provides examples for <code class="language-plaintext highlighter-rouge">metaSmtSearch</code> using <code class="language-plaintext highlighter-rouge">gcd</code> and <code class="language-plaintext highlighter-rouge">robot</code> examples.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mod GCD is
-  pr INTEGER .
-
-  sorts GcdResult .
-  op gcd : Integer Integer -&gt; GcdResult [ctor] .
-  op return : Integer -&gt; GcdResult [ctor] .
-
-  vars X Y : Integer .
-
-  crl [r1] : gcd(X, Y) =&gt; gcd(X - Y, Y) if X &gt; Y = true [nonexec] .
-  crl [r2] : gcd(X, Y) =&gt; gcd(X, Y - X) if X &lt; Y = true [nonexec] .
-  crl [r3] : gcd(X, Y) =&gt; return (X) if X === Y  = true [nonexec] .
-endm
-</code></pre></div></div><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>omod ROBOT is
-  pr REAL .
-
-  class Robot | pos : Vector, vel : Vector, acc : Vector, time : Real .
-
-  sort Vector .
-  op [_,_] : Real Real -&gt; Vector [ctor] .
-endom
-
-omod ROBOT-DYNAMICS is
-  pr ROBOT .
-
-  vars O : Oid .
-  vars CONST CONST' : Boolean .
-  vars PX VX AX PY VY AY PX' VX' AX' PY' VY' AY' T T' TAU : Real .
-
-  crl [move]:
-      &lt; O : Robot | pos  : [PX,  PY], vel  : [VX,  VY],
-                    acc  : [AX,  AY], time : T &gt;
-   =&gt; &lt; O : Robot | pos  : [PX', PY'], vel  : [VX', VY'],
-                    time : T + TAU &gt;
-   if TAU &gt;= 0/1 and VX' === VX + AX * TAU and VY' === VY + AY * TAU
-  and PX' === 1/2 * AX * TAU * TAU + VX * TAU + PX
-  and PY' === 1/2 * AY * TAU * TAU + VY * TAU + PY = true [nonexec] .
-
-  crl [accX]:
-      &lt; O : Robot | acc : [AX,  AY] &gt;
-   =&gt; &lt; O : Robot | acc : [AX', AY] &gt;
-   if AY === 0/1 = true [nonexec] .
-
-  crl [accY]:
-      &lt; O : Robot | acc : [AX, AY] &gt;
-   =&gt; &lt; O : Robot | acc : [AX, AY'] &gt;
-   if AX === 0/1 = true [nonexec] .
-
-  op r : -&gt; Oid [ctor] .
-endom
-</code></pre></div></div><p>To use <code class="language-plaintext highlighter-rouge">metaSmtSearch</code>, we need to import <code class="language-plaintext highlighter-rouge">META-SMT-SEARCH</code> module. The following commands show how to perform rewriting modulo SMT.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--- gcd(10, I) =&gt;* return(J) such that I &lt; 9 and I &gt; 0 = true .
-red metaSmtSearch(upModule('GCD, false), upTerm(gcd(10, I)), upTerm(return(J)), 
-                  upTerm(I &lt; 9 and I &gt; 0) = upTerm((true).Boolean), '*, unbounded, 0, 'QF_LRA) .
-
-red metaSmtSearch(upModule('ROBOT-DYNAMICS, false), 
-  upTerm(&lt; r : Robot | pos : [IPX, IPY], vel : [IVX, IVY], acc : [IAX, IAY], time : CLK &gt;), 
-  upTerm(&lt; r : Robot | pos : [NPX, NPY], ATTRSET &gt;), 
-  upTerm(NPX === 10/1 and NPY === 10/1 and IPX === 0/1 and IPY === 0/1 
-      and IVX === 0/1 and IVY === 0/1 and IAX === 0/1 
-      and IAY === 0/1 and CLK === 0/1) = upTerm((true).Boolean), '*, unbounded, 0, 'QF_NRA) .
-</code></pre></div></div><p>The first command searches for the first solution term that matches <code class="language-plaintext highlighter-rouge">return(J)</code> and satisfies the consition <code class="language-plaintext highlighter-rouge">I &lt; 9 and I &gt; 0</code>, starting from an initial term <code class="language-plaintext highlighter-rouge">gcd(10, I)</code> without folding under the <code class="language-plaintext highlighter-rouge">QF_LRA</code> logic.</p><p>The second command searches for the first solution, with the <code class="language-plaintext highlighter-rouge">QF_NRA</code> logic, that matches the goal pattern <code class="language-plaintext highlighter-rouge">&lt; r : Robot | pos : [NPX, NPY], ATTRSET &gt;</code> and satisfies the consition <code class="language-plaintext highlighter-rouge">NPX === 10/1 and NPY === 10/1</code>, starting from an initial term, where all its attributes are zeros.</p><p>We can run the both commands with Z3 using the following command:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ maude-se smt-search-ex.maude -no-meta
-</code></pre></div></div><p>The search results are as follows.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>==========================================
-reduce in GCD-ANALYSIS : metaSmtSearch(upModule('GCD, false), upTerm(gcd((10).Integer, I)), upTerm(return(J)), upTerm(I &lt; (9).Integer and I &gt; (0).Integer) = upTerm((true).Boolean), '*, unbounded, (0).Zero, 'QF_LRA) .
-rewrites: 310 in 5ms cpu (9ms real) (52837 rewrites/second)
-result SmtResult2: {'return['%%ubVar$5:Integer],...,
-  ...
-  '%%ubVar$1:Integer &lt;- '5.Integer ;
-  '%%ubVar$2:Integer &lt;- '5.Integer ;
-  '%%ubVar$3:Integer &lt;- '10.Integer ;
-  '%%ubVar$4:Integer &lt;- '5.Integer ;
-  '%%ubVar$5:Integer &lt;- '5.Integer ;
-  '%%ubVar$6:Integer &lt;- '5.Integer ;
-  'I:Integer &lt;- '5.Integer ;
-  'J:Integer &lt;- '5.Integer ;
-  'V0:Integer &lt;- '10.Integer ;
-  'V1:Integer &lt;- '5.Integer ;
-  'V2:Integer &lt;- '5.Integer, (6).NzNat, (3).NzNat}
+reduce in SIMPLE : metaSmtCheck(upModule('REAL, false), upTerm(X:Real > 4/3), 'QF_LRA, true) .
+rewrites: 1
+result SmtCheckResult: {'X:Real |-> '7/3.Real}
 ==========================================
-reduce in ROBOT-ANALYSIS : metaSmtSearch(upModule('ROBOT-DYNAMICS, false), upTerm(&lt; r : Robot | pos : [IPX, IPY], vel : [IVX, IVY], acc : [IAX, IAY], time : CLK &gt;), upTerm(&lt; r : Robot | ATTRSET, pos : [NPX, NPY] &gt;), upTerm(NPX === (10/1).Real and NPY === (10/1).Real and IPX === (0/1).Real and IPY === (0/1).Real and IVX === (0/1).Real and IVY === (0/1).Real and IAX === (0/1).Real and IAY === (0/1).Real and CLK === (0/1).Real) = upTerm((true).Boolean), '*, unbounded, (0).Zero, 'QF_NRA) .
-rewrites: 1181 in 386ms cpu (391ms real) (3055 rewrites/second)
-result SmtResult2: {'&lt;_:_|_&gt;['r.Oid, 'Robot.Robot ...
-  ...
-  '%%ubVar$9:Real &lt;- '20/3.Real ;
-  'CLK:Real &lt;- '0/1.Real ;
-  'IAX:Real &lt;- '0/1.Real ;
-  'IAY:Real &lt;- '0/1.Real ;
-  'IPX:Real &lt;- '0/1.Real ;
-  'IPY:Real &lt;- '0/1.Real ;
-  'IVX:Real &lt;- '0/1.Real ;
-  'IVY:Real &lt;- '0/1.Real ;
-  'NPX:Real &lt;- '10/1.Real ;
-  'NPY:Real &lt;- '10/1.Real ;
-  'V0:Real &lt;- '0/1.Real ;
-  'V1:Real &lt;- '0/1.Real ;
-  'V2:Real &lt;- '0/1.Real ;
-  'V3:Real &lt;- '0/1.Real ;
-  'V4:Real &lt;- '0/1.Real ;
-  'V5:Real &lt;- '0/1.Real ;
-  'V6:Real &lt;- '0/1.Real ;
-  'V7:Real &lt;- '10/1.Real ;
-  'V8:Real &lt;- '10/1.Real, (53).NzNat, (180).NzNat}
-</code></pre></div></div><p>As we need to explore 180 states to find reachable state for robot example, we can reduce the search space by enabling folding as follows.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>reduce in ROBOT-ANALYSIS : metaSmtSearch(upModule('ROBOT-DYNAMICS, false), upTerm(&lt; r : Robot | pos : [IPX, IPY], vel : [IVX, IVY], acc : [IAX, IAY], time : CLK &gt;), upTerm(&lt; r : Robot | ATTRSET, pos : [NPX, NPY] &gt;), upTerm(NPX === (10/1).Real and NPY === (10/1).Real and IPX === (0/1).Real and IPY === (0/1).Real and IVX === (0/1).Real and IVY === (0/1).Real and IAX === (0/1).Real and IAY === (0/1).Real and CLK === (0/1).Real) = upTerm((true).Boolean), '*, unbounded, 0, 'QF_NRA, true) .
-rewrites: 1145 in 11073ms cpu (11138ms real) (103 rewrites/second)
-result SmtResult2: {'&lt;_:_|_&gt;[...] ;
-  ...
-  '%%ubVar$11:Real &lt;- '20/3.Real ;
-  '%%ubVar$7:Real &lt;- '10/3.Real ;
-  '%%ubVar$8:Real &lt;- '0/1.Real ;
-  '%%ubVar$9:Real &lt;- '20/3.Real ;
-  'CLK:Real &lt;- '0/1.Real ;
-  'IAX:Real &lt;- '0/1.Real ;
-  'IAY:Real &lt;- '0/1.Real ;
-  'IPX:Real &lt;- '0/1.Real ;
-  'IPY:Real &lt;- '0/1.Real ;
-  ...
-  'V8:Real &lt;- '10/1.Real, (53).NzNat, (128).NzNat}
-</code></pre></div></div><p>The result shows that we could find the same solution by exploring 128 states.</p><h2 id="module-restrictions"> <a href="#module-restrictions" class="anchor-heading" aria-labelledby="module-restrictions"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Module restrictions</h2><p>Currently, we make several restrictions to rewrite rules and equations:</p><ul><li>Rewrite rules should not have non-SMT constraints in their conditions.<li>Equations should not contradict or conflict with SMT theories.<li>When defining and connecting SMT symbols using metadata, one should not use equational axiom attritues (e.g., assoc, comm, id) and the metadata attributes together.</ul><hr><footer><p><a href="#top" id="back-to-top">Back to top</a></p><p class="text-small text-grey-dk-100 mb-0">Copyright &copy; 2022 Geunyeol Yu.</p><div class="d-flex mt-2"></div></footer></div></div><div class="search-overlay"></div></div><script> var config = {} ; mermaid.initialize(config); window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid')); </script>
+reduce in SIMPLE : metaSmtCheck(upModule('BOOLEAN, false), upTerm(B:Boolean), 'QF_LRA, true) .
+rewrites: 1
+result SmtCheckResult: {'B:Boolean |-> 'true.Boolean}
+==========================================
+reduce in EUF-CHECK : metaSmtCheck(upModule('EUF, false), upTerm(f(f(X)) === X and f(X) === Y and not X === Y), 'QF_UF) .
+rewrites: 4
+result Bool: (true).Bool
+==========================================
+reduce in ARRAY-CHECK : metaSmtCheck(upModule('ARRAY, false), upTerm(select(A1, X) === X and store(A1, X, Y) === A1), 'QF_AUFLIA) .
+rewrites: 4 in 1ms cpu (1ms real) (2619 rewrites/second)
+result Bool: (true).Bool
+==========================================
+reduce in ARRAY-CHECK : metaSmtCheck(upModule('ARRAY, false), upTerm(A1[X] === X and store(A1, X, Y) === A1), 'QF_AUFLIA) .
+rewrites: 4
+result Bool: (true).Bool
+==========================================
+reduce in EUF-XOR-CHECK : metaSmtCheck(upModule('EUF-XOR, false), upTerm(not N === (0).Integer and (0).Integer <= N and (0).Integer <= (N xor (255).Integer) and N < (256).Integer and not (0).Integer <= (N xor (255).Integer)), 'QF_UFLIA) .
+rewrites: 4
+result Bool: (false).Bool
+==========================================
+reduce in EUF-XOR-CHECK : metaSmtCheck(upModule('EUF-XOR, false), upTerm((0).Integer <= (N xor (255).Integer)), 'QF_UFLIA) .
+rewrites: 4
+result Bool: (true).Bool
+==========================================
+reduce in EUF-XOR-CHECK : metaSmtCheck(upModule('EUF-XOR, false), upTerm((0).Integer <= (N xor (255).Integer)), 'QF_UFLIA, true) .
+rewrites: 1
+result SmtCheckResult: {('N:Integer |-> '1.Integer),{"_xor_" |-> "(lambda ((_arg_1 Int) (_arg_2 Int)) 0)"}}
+==========================================
+``` -->
+<hr class="docutils" />
+</section>
+<section id="smt-search-ex-maude">
+<span id="smt-search-ex"></span><h2>smt-search-ex.maude<a class="headerlink" href="#smt-search-ex-maude" title="Link to this heading"></a></h2>
+<p>This file provides examples for <code class="docutils literal notranslate"><span class="pre">smt-search</span></code> using <code class="docutils literal notranslate"><span class="pre">gcd</span></code> and <code class="docutils literal notranslate"><span class="pre">robot</span></code> examples.</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="k">mod</span> <span class="n">GCD</span> <span class="n">is</span>
+  <span class="n">pr</span> <span class="n">INTEGER</span> <span class="o">.</span>
+
+  <span class="k">sorts</span> <span class="n">GcdResult</span> <span class="o">.</span>
+  <span class="k">op</span> <span class="n">gcd</span> <span class="o">:</span> <span class="n">Integer</span> <span class="n">Integer</span> <span class="o">-&gt;</span> <span class="n">GcdResult</span> <span class="o">[</span><span class="k">ctor</span><span class="o">]</span> <span class="o">.</span>
+  <span class="k">op</span> <span class="n">return</span> <span class="o">:</span> <span class="n">Integer</span> <span class="o">-&gt;</span> <span class="n">GcdResult</span> <span class="o">[</span><span class="k">ctor</span><span class="o">]</span> <span class="o">.</span>
+
+  <span class="k">vars</span> <span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="n">Integer</span> <span class="o">.</span>
+
+  <span class="k">crl</span> <span class="o">[</span><span class="n">r1</span><span class="o">]</span> <span class="o">:</span> <span class="n">gcd</span><span class="o">(</span><span class="n">X</span><span class="o">,</span> <span class="n">Y</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">gcd</span><span class="o">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">Y</span><span class="o">,</span> <span class="n">Y</span><span class="o">)</span> <span class="k">if</span> <span class="n">X</span> <span class="o">&gt;</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">true</span> <span class="o">[</span><span class="k">nonexec</span><span class="o">]</span> <span class="o">.</span>
+  <span class="k">crl</span> <span class="o">[</span><span class="n">r2</span><span class="o">]</span> <span class="o">:</span> <span class="n">gcd</span><span class="o">(</span><span class="n">X</span><span class="o">,</span> <span class="n">Y</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">gcd</span><span class="o">(</span><span class="n">X</span><span class="o">,</span> <span class="n">Y</span> <span class="o">-</span> <span class="n">X</span><span class="o">)</span> <span class="k">if</span> <span class="n">X</span> <span class="o">&lt;</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">true</span> <span class="o">[</span><span class="k">nonexec</span><span class="o">]</span> <span class="o">.</span>
+  <span class="k">crl</span> <span class="o">[</span><span class="n">r3</span><span class="o">]</span> <span class="o">:</span> <span class="n">gcd</span><span class="o">(</span><span class="n">X</span><span class="o">,</span> <span class="n">Y</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">return</span> <span class="o">(</span><span class="n">X</span><span class="o">)</span> <span class="k">if</span> <span class="n">X</span> <span class="o">===</span> <span class="n">Y</span>  <span class="o">=</span> <span class="n">true</span> <span class="o">[</span><span class="k">nonexec</span><span class="o">]</span> <span class="o">.</span>
+<span class="k">endm</span>
+</pre></div>
+</div>
+<p>The following command searches for the first solution term that matches <code class="docutils literal notranslate"><span class="pre">return(J)</span></code> and satisfies
+the consition <code class="docutils literal notranslate"><span class="pre">I</span> <span class="pre">&lt;</span> <span class="pre">9</span> <span class="pre">and</span> <span class="pre">I</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>, starting from an initial term <code class="docutils literal notranslate"><span class="pre">gcd(10,</span> <span class="pre">I)</span></code> under the <code class="docutils literal notranslate"><span class="pre">QF_LRA</span></code> logic.</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="k">smt-search</span> <span class="o">[</span><span class="n">1</span><span class="o">]</span> <span class="n">in</span> <span class="n">GCD</span> <span class="o">:</span> <span class="n">gcd</span><span class="o">(</span><span class="n">10</span><span class="o">,</span> <span class="n">I</span><span class="o">:</span><span class="n">Integer</span><span class="o">)</span> <span class="o">=&gt;*</span> <span class="n">return</span><span class="o">(</span><span class="n">J</span><span class="o">:</span><span class="n">Integer</span><span class="o">)</span> 
+                <span class="k">such that</span> <span class="n">I</span><span class="o">:</span><span class="n">Integer</span> <span class="o">&gt;</span> <span class="n">0</span> <span class="n">and</span> <span class="n">I</span><span class="o">:</span><span class="n">Integer</span> <span class="o">&lt;</span> <span class="n">9</span> <span class="k">using</span> <span class="n">QF_LRA</span> <span class="o">.</span>
+
+<span class="n">Solution</span> <span class="n">1</span> <span class="o">(</span><span class="n">state</span> <span class="n">3</span><span class="o">)</span>
+
+<span class="n">Symbolic</span> <span class="n">state</span><span class="o">:</span>
+ <span class="n">return</span><span class="o">(#</span><span class="n">5</span><span class="o">-</span><span class="n">V5</span><span class="o">:</span><span class="n">Integer</span><span class="o">)</span>
+
+<span class="n">Constraint</span><span class="o">:</span>
+ <span class="n">V0</span><span class="o">:</span><span class="n">Integer</span> <span class="o">===</span> <span class="n">10</span> <span class="n">and</span> <span class="n">V1</span><span class="o">:</span><span class="n">Integer</span> <span class="o">===</span> <span class="n">I</span><span class="o">:</span><span class="n">Integer</span> <span class="n">and</span> <span class="o">...</span>
+
+<span class="n">Substitution</span><span class="o">:</span>
+ <span class="n">V2</span><span class="o">:</span><span class="n">Integer</span> <span class="o">&lt;--</span> <span class="o">#</span><span class="n">5</span><span class="o">-</span><span class="n">V5</span><span class="o">:</span><span class="n">Integer</span>
+
+<span class="n">Assignment</span><span class="o">:</span>
+ <span class="o">#</span><span class="n">1</span><span class="o">-</span><span class="n">V12</span><span class="o">:</span><span class="n">Integer</span> <span class="o">&lt;--</span> <span class="n">5</span>
+ <span class="o">#</span><span class="n">2</span><span class="o">-</span><span class="n">V13</span><span class="o">:</span><span class="n">Integer</span> <span class="o">&lt;--</span> <span class="n">5</span>
+ <span class="o">...</span>
+ <span class="n">I</span><span class="o">:</span><span class="n">Integer</span> <span class="o">&lt;--</span> <span class="n">5</span>
+ <span class="n">J</span><span class="o">:</span><span class="n">Integer</span> <span class="o">&lt;--</span> <span class="n">5</span>
+ <span class="n">V0</span><span class="o">:</span><span class="n">Integer</span> <span class="o">&lt;--</span> <span class="n">10</span>
+ <span class="n">V1</span><span class="o">:</span><span class="n">Integer</span> <span class="o">&lt;--</span> <span class="n">5</span>
+ <span class="n">V2</span><span class="o">:</span><span class="n">Integer</span> <span class="o">&lt;--</span> <span class="n">5</span>
+
+<span class="n">Concrete</span> <span class="n">state</span><span class="o">:</span>
+ <span class="n">return</span><span class="o">(</span><span class="n">5</span><span class="o">)</span>
+</pre></div>
+</div>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="k">omod</span> <span class="n">ROBOT</span> <span class="n">is</span>
+  <span class="n">pr</span> <span class="n">REAL</span> <span class="o">.</span>
+
+  <span class="n">class</span> <span class="n">Robot</span> <span class="o">|</span> <span class="n">pos</span> <span class="o">:</span> <span class="n">Vector</span><span class="o">,</span> <span class="n">vel</span> <span class="o">:</span> <span class="n">Vector</span><span class="o">,</span> <span class="n">acc</span> <span class="o">:</span> <span class="n">Vector</span><span class="o">,</span> <span class="n">time</span> <span class="o">:</span> <span class="n">Real</span> <span class="o">.</span>
+
+  <span class="k">sort</span> <span class="n">Vector</span> <span class="o">.</span>
+  <span class="k">op</span> <span class="o">[</span><span class="n">_</span><span class="o">,</span><span class="n">_</span><span class="o">]</span> <span class="o">:</span> <span class="n">Real</span> <span class="n">Real</span> <span class="o">-&gt;</span> <span class="n">Vector</span> <span class="o">[</span><span class="k">ctor</span><span class="o">]</span> <span class="o">.</span>
+<span class="k">endom</span>
+
+<span class="k">omod</span> <span class="n">ROBOT</span><span class="o">-</span><span class="n">DYNAMICS</span> <span class="n">is</span>
+  <span class="n">pr</span> <span class="n">ROBOT</span> <span class="o">.</span>
+
+  <span class="k">vars</span> <span class="n">O</span> <span class="o">:</span> <span class="n">Oid</span> <span class="o">.</span>
+  <span class="k">vars</span> <span class="n">CONST</span> <span class="n">CONST&#39;</span> <span class="o">:</span> <span class="n">Boolean</span> <span class="o">.</span>
+  <span class="k">vars</span> <span class="n">PX</span> <span class="n">VX</span> <span class="n">AX</span> <span class="n">PY</span> <span class="n">VY</span> <span class="n">AY</span> <span class="n">PX&#39;</span> <span class="n">VX&#39;</span> <span class="n">AX&#39;</span> <span class="n">PY&#39;</span> <span class="n">VY&#39;</span> <span class="n">AY&#39;</span> <span class="n">T</span> <span class="n">T&#39;</span> <span class="n">TAU</span> <span class="o">:</span> <span class="n">Real</span> <span class="o">.</span>
+
+  <span class="k">crl</span> <span class="o">[</span><span class="n">move</span><span class="o">]:</span>
+      <span class="o">&lt;</span> <span class="n">O</span> <span class="o">:</span> <span class="n">Robot</span> <span class="o">|</span> <span class="n">pos</span>  <span class="o">:</span> <span class="o">[</span><span class="n">PX</span><span class="o">,</span>  <span class="n">PY</span><span class="o">],</span> <span class="n">vel</span>  <span class="o">:</span> <span class="o">[</span><span class="n">VX</span><span class="o">,</span>  <span class="n">VY</span><span class="o">],</span>
+                    <span class="n">acc</span>  <span class="o">:</span> <span class="o">[</span><span class="n">AX</span><span class="o">,</span>  <span class="n">AY</span><span class="o">],</span> <span class="n">time</span> <span class="o">:</span> <span class="n">T</span> <span class="o">&gt;</span>
+   <span class="o">=&gt;</span> <span class="o">&lt;</span> <span class="n">O</span> <span class="o">:</span> <span class="n">Robot</span> <span class="o">|</span> <span class="n">pos</span>  <span class="o">:</span> <span class="o">[</span><span class="n">PX&#39;</span><span class="o">,</span> <span class="n">PY&#39;</span><span class="o">],</span> <span class="n">vel</span>  <span class="o">:</span> <span class="o">[</span><span class="n">VX&#39;</span><span class="o">,</span> <span class="n">VY&#39;</span><span class="o">],</span>
+                    <span class="n">time</span> <span class="o">:</span> <span class="n">T</span> <span class="o">+</span> <span class="n">TAU</span> <span class="o">&gt;</span>
+   <span class="k">if</span> <span class="n">TAU</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> <span class="n">VX&#39;</span> <span class="o">===</span> <span class="n">VX</span> <span class="o">+</span> <span class="n">AX</span> <span class="o">*</span> <span class="n">TAU</span> <span class="n">and</span> <span class="n">VY&#39;</span> <span class="o">===</span> <span class="n">VY</span> <span class="o">+</span> <span class="n">AY</span> <span class="o">*</span> <span class="n">TAU</span>
+  <span class="n">and</span> <span class="n">PX&#39;</span> <span class="o">===</span> <span class="n">1</span><span class="o">/</span><span class="n">2</span> <span class="o">*</span> <span class="n">AX</span> <span class="o">*</span> <span class="n">TAU</span> <span class="o">*</span> <span class="n">TAU</span> <span class="o">+</span> <span class="n">VX</span> <span class="o">*</span> <span class="n">TAU</span> <span class="o">+</span> <span class="n">PX</span>
+  <span class="n">and</span> <span class="n">PY&#39;</span> <span class="o">===</span> <span class="n">1</span><span class="o">/</span><span class="n">2</span> <span class="o">*</span> <span class="n">AY</span> <span class="o">*</span> <span class="n">TAU</span> <span class="o">*</span> <span class="n">TAU</span> <span class="o">+</span> <span class="n">VY</span> <span class="o">*</span> <span class="n">TAU</span> <span class="o">+</span> <span class="n">PY</span> <span class="o">=</span> <span class="n">true</span> <span class="o">[</span><span class="k">nonexec</span><span class="o">]</span> <span class="o">.</span>
+
+  <span class="k">crl</span> <span class="o">[</span><span class="n">accX</span><span class="o">]:</span>
+      <span class="o">&lt;</span> <span class="n">O</span> <span class="o">:</span> <span class="n">Robot</span> <span class="o">|</span> <span class="n">acc</span> <span class="o">:</span> <span class="o">[</span><span class="n">AX</span><span class="o">,</span>  <span class="n">AY</span><span class="o">]</span> <span class="o">&gt;</span>
+   <span class="o">=&gt;</span> <span class="o">&lt;</span> <span class="n">O</span> <span class="o">:</span> <span class="n">Robot</span> <span class="o">|</span> <span class="n">acc</span> <span class="o">:</span> <span class="o">[</span><span class="n">AX&#39;</span><span class="o">,</span> <span class="n">AY</span><span class="o">]</span> <span class="o">&gt;</span>
+   <span class="k">if</span> <span class="n">AY</span> <span class="o">===</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">=</span> <span class="n">true</span> <span class="o">[</span><span class="k">nonexec</span><span class="o">]</span> <span class="o">.</span>
+
+  <span class="k">crl</span> <span class="o">[</span><span class="n">accY</span><span class="o">]:</span>
+      <span class="o">&lt;</span> <span class="n">O</span> <span class="o">:</span> <span class="n">Robot</span> <span class="o">|</span> <span class="n">acc</span> <span class="o">:</span> <span class="o">[</span><span class="n">AX</span><span class="o">,</span> <span class="n">AY</span><span class="o">]</span> <span class="o">&gt;</span>
+   <span class="o">=&gt;</span> <span class="o">&lt;</span> <span class="n">O</span> <span class="o">:</span> <span class="n">Robot</span> <span class="o">|</span> <span class="n">acc</span> <span class="o">:</span> <span class="o">[</span><span class="n">AX</span><span class="o">,</span> <span class="n">AY&#39;</span><span class="o">]</span> <span class="o">&gt;</span>
+   <span class="k">if</span> <span class="n">AX</span> <span class="o">===</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">=</span> <span class="n">true</span> <span class="o">[</span><span class="k">nonexec</span><span class="o">]</span> <span class="o">.</span>
+
+  <span class="k">op</span> <span class="n">r</span> <span class="o">:</span> <span class="o">-&gt;</span> <span class="n">Oid</span> <span class="o">[</span><span class="k">ctor</span><span class="o">]</span> <span class="o">.</span>
+<span class="k">endom</span>
+</pre></div>
+</div>
+<p>This command searches for the first solution, with the <code class="docutils literal notranslate"><span class="pre">QF_NRA</span></code> logic, that matches the goal pattern <code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">r</span> <span class="pre">:</span> <span class="pre">Robot</span> <span class="pre">|</span> <span class="pre">pos</span> <span class="pre">:</span> <span class="pre">[NPX,</span> <span class="pre">NPY],</span> <span class="pre">ATTRSET</span> <span class="pre">&gt;</span></code>
+and satisfies the consition <code class="docutils literal notranslate"><span class="pre">NPX</span> <span class="pre">===</span> <span class="pre">10/1</span> <span class="pre">and</span> <span class="pre">NPY</span> <span class="pre">===</span> <span class="pre">10/1</span></code>, starting from an initial term, where all its attributes are zeros.</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="k">smt-search</span> <span class="o">[</span><span class="n">1</span><span class="o">]</span> <span class="n">in</span> <span class="n">ROBOT</span><span class="o">-</span><span class="n">DYNAMICS</span> <span class="o">:</span>
+              <span class="o">&lt;</span> <span class="n">r</span> <span class="o">:</span> <span class="n">Robot</span> <span class="o">|</span> <span class="n">pos</span> <span class="o">:</span> <span class="o">[</span><span class="n">IPX</span><span class="o">:</span><span class="n">Real</span><span class="o">,</span> <span class="n">IPY</span><span class="o">:</span><span class="n">Real</span><span class="o">],</span> <span class="n">vel</span> <span class="o">:</span> <span class="o">[</span><span class="n">IVX</span><span class="o">:</span><span class="n">Real</span><span class="o">,</span> <span class="n">IVY</span><span class="o">:</span><span class="n">Real</span><span class="o">],</span> 
+                            <span class="n">acc</span> <span class="o">:</span> <span class="o">[</span><span class="n">IAX</span><span class="o">:</span><span class="n">Real</span><span class="o">,</span> <span class="n">IAY</span><span class="o">:</span><span class="n">Real</span><span class="o">],</span> <span class="n">time</span> <span class="o">:</span> <span class="n">CLK</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span>
+          <span class="o">=&gt;*</span> <span class="o">&lt;</span> <span class="n">r</span> <span class="o">:</span> <span class="n">Robot</span> <span class="o">|</span> <span class="n">pos</span> <span class="o">:</span> <span class="o">[</span><span class="n">NPX</span><span class="o">:</span><span class="n">Real</span><span class="o">,</span> <span class="n">NPY</span><span class="o">:</span><span class="n">Real</span><span class="o">],</span> <span class="n">ATTRSET</span><span class="o">:</span><span class="n">AttributeSet</span> <span class="o">&gt;</span> 
+    <span class="k">such that</span> <span class="n">NPX</span><span class="o">:</span><span class="n">Real</span> <span class="o">===</span> <span class="n">10</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> <span class="n">NPY</span><span class="o">:</span><span class="n">Real</span> <span class="o">===</span> <span class="n">10</span><span class="o">/</span><span class="n">1</span> 
+          <span class="n">and</span> <span class="n">IPX</span><span class="o">:</span><span class="n">Real</span> <span class="o">===</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> <span class="n">IPY</span><span class="o">:</span><span class="n">Real</span> <span class="o">===</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> <span class="n">IVX</span><span class="o">:</span><span class="n">Real</span> <span class="o">===</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> <span class="n">IVY</span><span class="o">:</span><span class="n">Real</span> <span class="o">===</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> 
+          <span class="n">and</span> <span class="n">IAX</span><span class="o">:</span><span class="n">Real</span> <span class="o">===</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> <span class="n">IAY</span><span class="o">:</span><span class="n">Real</span> <span class="o">===</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> <span class="n">CLK</span><span class="o">:</span><span class="n">Real</span> <span class="o">===</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="k">using</span> <span class="n">QF_NRA</span> <span class="o">.</span>
+
+<span class="n">Solution</span> <span class="n">1</span> <span class="o">(</span><span class="n">state</span> <span class="n">180</span><span class="o">)</span>
+
+<span class="n">Symbolic</span> <span class="n">state</span><span class="o">:</span>
+ <span class="o">&lt;</span> <span class="n">r</span> <span class="o">:</span> <span class="n">Robot</span> <span class="o">|</span> <span class="n">pos</span> <span class="o">:</span> <span class="o">[#</span><span class="n">35</span><span class="o">-</span><span class="n">V24</span><span class="o">:</span><span class="n">Real</span><span class="o">,</span> <span class="o">#</span><span class="n">36</span><span class="o">-</span><span class="n">V25</span><span class="o">:</span><span class="n">Real</span><span class="o">],</span> <span class="n">vel</span> <span class="o">:</span> <span class="o">[#</span><span class="n">37</span><span class="o">-</span><span class="n">V26</span><span class="o">:</span><span class="n">Real</span><span class="o">,</span> <span class="o">#</span><span class="n">38</span><span class="o">-</span><span class="n">V27</span><span class="o">:</span><span class="n">Real</span><span class="o">],</span> 
+               <span class="n">acc</span> <span class="o">:</span> <span class="o">[#</span><span class="n">39</span><span class="o">-</span><span class="n">V28</span><span class="o">:</span><span class="n">Real</span><span class="o">,</span> <span class="o">#</span><span class="n">40</span><span class="o">-</span><span class="n">V29</span><span class="o">:</span><span class="n">Real</span><span class="o">],</span> <span class="n">time</span> <span class="o">:</span> <span class="o">#</span><span class="n">41</span><span class="o">-</span><span class="n">V30</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span>
+
+<span class="n">Constraint</span><span class="o">:</span>
+ <span class="n">V0</span><span class="o">:</span><span class="n">Real</span> <span class="o">===</span> <span class="n">IPX</span><span class="o">:</span><span class="n">Real</span> <span class="n">and</span> <span class="n">V1</span><span class="o">:</span><span class="n">Real</span> <span class="o">===</span> <span class="n">IPY</span><span class="o">:</span><span class="n">Real</span> <span class="n">and</span> <span class="o">...</span>
+
+<span class="n">Substitution</span><span class="o">:</span>
+ <span class="n">ATTRSET</span><span class="o">:</span><span class="n">AttributeSet</span> <span class="o">&lt;--</span> <span class="n">vel</span> <span class="o">:</span> <span class="o">[#</span><span class="n">37</span><span class="o">-</span><span class="n">V26</span><span class="o">:</span><span class="n">Real</span><span class="o">,</span> <span class="o">#</span><span class="n">38</span><span class="o">-</span><span class="n">V27</span><span class="o">:</span><span class="n">Real</span><span class="o">],</span> <span class="o">...</span>
+ <span class="n">V7</span><span class="o">:</span><span class="n">Real</span> <span class="o">&lt;--</span> <span class="o">#</span><span class="n">35</span><span class="o">-</span><span class="n">V24</span><span class="o">:</span><span class="n">Real</span>
+ <span class="n">V8</span><span class="o">:</span><span class="n">Real</span> <span class="o">&lt;--</span> <span class="o">#</span><span class="n">36</span><span class="o">-</span><span class="n">V25</span><span class="o">:</span><span class="n">Real</span>
+
+<span class="n">Assignment</span><span class="o">:</span>
+ <span class="o">#</span><span class="n">1</span><span class="o">-</span><span class="n">V15</span><span class="o">:</span><span class="n">Real</span> <span class="o">&lt;--</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span>
+ <span class="o">#</span><span class="n">10</span><span class="o">-</span><span class="n">V28</span><span class="o">:</span><span class="n">Real</span> <span class="o">&lt;--</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span>
+ <span class="o">...</span>
+
+<span class="n">Concrete</span> <span class="n">state</span><span class="o">:</span>
+ <span class="o">&lt;</span> <span class="n">r</span> <span class="o">:</span> <span class="n">Robot</span> <span class="o">|</span> <span class="n">pos</span> <span class="o">:</span> <span class="o">[</span><span class="n">10</span><span class="o">/</span><span class="n">1</span><span class="o">,</span> <span class="n">10</span><span class="o">/</span><span class="n">1</span><span class="o">],</span> <span class="n">vel</span> <span class="o">:</span> <span class="o">[</span><span class="n">20</span><span class="o">/</span><span class="n">1</span><span class="o">,</span> <span class="n">20</span><span class="o">/</span><span class="n">3</span><span class="o">],</span> <span class="n">acc</span> <span class="o">:</span> <span class="o">[</span><span class="n">20</span><span class="o">/</span><span class="n">1</span><span class="o">,</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span><span class="o">],</span> <span class="n">time</span> <span class="o">:</span> <span class="n">2</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="smt-search-meta-ex-maude">
+<h2>smt-search-meta-ex.maude<a class="headerlink" href="#smt-search-meta-ex-maude" title="Link to this heading"></a></h2>
+<p>This file contains the usage of <code class="docutils literal notranslate"><span class="pre">metaSmtSearch</span></code>, corresponding to the two commands explained in the previous <a class="reference internal" href="#smt-search-ex"><span class="std std-ref">section</span></a>.</p>
+</section>
+<hr class="docutils" />
+<section id="module-restrictions">
+<h2>Module restrictions<a class="headerlink" href="#module-restrictions" title="Link to this heading"></a></h2>
+<p>Currently, we make several restrictions to rewrite rules and equations:</p>
+<ul class="simple">
+<li><p>Rewrite rules should not have non-SMT constraints in their conditions.</p></li>
+<li><p>Equations should not contradict or conflict with SMT theories.</p></li>
+<li><p>When defining and connecting SMT symbols using metadata, one should not use equational axiom attritues (e.g., assoc, comm, id) and the metadata attributes together.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="interface.html" class="btn btn-neutral float-left" title="SMT Interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Geunyeol Yu.
+      <span class="lastupdated">Last updated on Jun 08, 2025.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,250 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SMT Interface &mdash; MaudeSE v0.0.3 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=e09d5059" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=bc6a6d3b"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="More examples" href="examples.html" />
+    <link rel="prev" title="Analysis Commands" href="cmds.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MaudeSE
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmds.html">Analysis Commands</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SMT Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#metalevel-functions">Metalevel Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#metasmtcheck">metaSmtCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metasmtsearch">metaSmtSearch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metasmtsearchpath">metaSmtSearchPath</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#core-maude-functions">Core Maude Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#smtcheck">smtCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#simplifyformula">simplifyFormula</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#generic-interface">Generic Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">More examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MaudeSE</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">SMT Interface</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="smt-interface">
+<h1>SMT Interface<a class="headerlink" href="#smt-interface" title="Link to this heading"></a></h1>
+<section id="metalevel-functions">
+<h2>Metalevel Functions<a class="headerlink" href="#metalevel-functions" title="Link to this heading"></a></h2>
+<p>MaudeSE provides three meta-level functions, defined in <a class="reference external" href="https://github.com/postechsv/maude-se/blob/main/src/smt-check.maude">smt.check</a>:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#metasmtcheck"><span class="std std-ref">metaSmtCheck</span></a></p></li>
+<li><p><a class="reference internal" href="#metasmtsearch"><span class="std std-ref">metaSmtSearch</span></a></p></li>
+<li><p><a class="reference internal" href="#metasmtsearchpath"><span class="std std-ref">metaSmtSearchPath</span></a></p></li>
+</ul>
+<section id="metasmtcheck">
+<span id="id1"></span><h3>metaSmtCheck<a class="headerlink" href="#metasmtcheck" title="Link to this heading"></a></h3>
+<p>This function checks the satisfiability of SMT queries, as similar to <code class="docutils literal notranslate"><span class="pre">metaCheck</span></code>, but it can handle various theories
+(with uninterpreted functions) and generate satisfying assignments.</p>
+<p>The usage of <code class="docutils literal notranslate"><span class="pre">metaSmtCheck</span></code> is similar to <code class="docutils literal notranslate"><span class="pre">metaCheck</span></code> except that it takes
+an SMT logic and a boolean flag as its arguments, where the flag decides whether to generate a satisfying assignment for the satisfiable case.</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="k">op</span> <span class="n">metaSmtCheck</span> <span class="o">:</span> <span class="n">Module</span> <span class="n">Term</span> <span class="n">Logic</span> <span class="o">-&gt;</span> <span class="n">SmtCheckResult</span> <span class="o">.</span>
+<span class="k">eq</span> <span class="n">metaSmtCheck</span><span class="o">(</span><span class="n">M</span><span class="o">:</span><span class="n">Module</span><span class="o">,</span> <span class="n">TERM</span><span class="o">:</span><span class="n">Term</span><span class="o">,</span> <span class="n">LOGIC</span><span class="o">:</span><span class="n">Logic</span><span class="o">)</span> 
+ <span class="o">=</span> <span class="n">metaSmtCheck</span><span class="o">(</span><span class="n">M</span><span class="o">:</span><span class="n">Module</span><span class="o">,</span> <span class="n">TERM</span><span class="o">:</span><span class="n">Term</span><span class="o">,</span> <span class="n">LOGIC</span><span class="o">:</span><span class="n">Logic</span><span class="o">,</span> <span class="n">false</span><span class="o">)</span> <span class="o">.</span>
+  
+<span class="k">op</span> <span class="n">metaSmtCheck</span> <span class="o">:</span> <span class="n">Module</span> <span class="n">Term</span> <span class="n">Bool</span> <span class="o">-&gt;</span> <span class="n">SmtCheckResult</span> <span class="o">.</span>
+<span class="k">eq</span> <span class="n">metaSmtCheck</span><span class="o">(</span><span class="n">M</span><span class="o">:</span><span class="n">Module</span><span class="o">,</span> <span class="n">TERM</span><span class="o">:</span><span class="n">Term</span><span class="o">,</span> <span class="n">FLAG</span><span class="o">:</span><span class="n">Bool</span><span class="o">)</span> 
+ <span class="o">=</span> <span class="n">metaSmtCheck</span><span class="o">(</span><span class="n">M</span><span class="o">:</span><span class="n">Module</span><span class="o">,</span> <span class="n">TERM</span><span class="o">:</span><span class="n">Term</span><span class="o">,</span> <span class="n">auto</span><span class="o">,</span> <span class="n">FLAG</span><span class="o">:</span><span class="n">Bool</span><span class="o">)</span> <span class="o">.</span>
+
+<span class="k">op</span> <span class="n">metaSmtCheck</span> <span class="o">:</span> <span class="n">Module</span> <span class="n">Term</span> <span class="n">Logic</span> <span class="n">Bool</span> <span class="o">-&gt;</span> <span class="n">SmtCheckResult</span>
+  <span class="o">[</span><span class="n">special</span> <span class="o">(</span><span class="n">id</span><span class="o">-</span><span class="n">hook</span> <span class="n">MetaLevelSmtOpSymbol</span>    <span class="o">(</span><span class="n">metaSmtCheck</span><span class="o">)</span>
+            <span class="o">...)]</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>The check result is given as a term of sort <code class="docutils literal notranslate"><span class="pre">SmtCheckResult</span></code>, which can be one of <code class="docutils literal notranslate"><span class="pre">unknown</span></code>, <code class="docutils literal notranslate"><span class="pre">true</span></code>, <code class="docutils literal notranslate"><span class="pre">false</span></code>, or <code class="docutils literal notranslate"><span class="pre">{_}</span></code>.
+The symbol <code class="docutils literal notranslate"><span class="pre">{_}</span></code> consists of a set of assignments, where each assignment is denoted as a term <code class="docutils literal notranslate"><span class="pre">_|-&gt;_</span></code>.</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="k">sort</span> <span class="n">SmtCheckResult</span> <span class="o">.</span>
+<span class="k">subsort</span> <span class="n">Bool</span> <span class="o">&lt;</span> <span class="n">SmtCheckResult</span> <span class="o">.</span>
+
+<span class="k">op</span> <span class="n">unknown</span> <span class="o">:</span> <span class="o">-&gt;</span> <span class="n">SmtCheckResult</span> <span class="o">[</span><span class="k">ctor</span><span class="o">]</span> <span class="o">.</span>
+<span class="k">op</span> <span class="o">{</span><span class="n">_</span><span class="o">}</span> <span class="o">:</span> <span class="n">SatAssignmentSet</span> <span class="o">-&gt;</span> <span class="n">SmtCheckResult</span> <span class="o">[</span><span class="k">ctor</span><span class="o">]</span> <span class="o">.</span>
+
+<span class="k">sort</span> <span class="n">SatAssignment</span> <span class="o">.</span>
+<span class="k">op</span> <span class="n">_</span><span class="o">|-&gt;</span><span class="n">_</span> <span class="o">:</span> <span class="n">Term</span> <span class="n">Term</span> <span class="o">-&gt;</span> <span class="n">SatAssignment</span> <span class="o">[</span><span class="k">ctor</span><span class="o">]</span> <span class="o">.</span>
+
+<span class="k">sort</span> <span class="n">SatAssignmentSet</span> <span class="o">.</span>
+<span class="k">subsort</span> <span class="n">SatAssignment</span> <span class="o">&lt;</span> <span class="n">SatAssignmentSet</span> <span class="o">.</span>
+<span class="k">op</span> <span class="n">empty</span> <span class="o">:</span> <span class="o">-&gt;</span> <span class="n">SatAssignmentSet</span> <span class="o">[</span><span class="k">ctor</span><span class="o">]</span> <span class="o">.</span>
+<span class="k">op</span> <span class="n">_</span><span class="o">,</span><span class="n">_</span> <span class="o">:</span> <span class="n">SatAssignmentSet</span> <span class="n">SatAssignmentSet</span> <span class="o">-&gt;</span> <span class="n">SatAssignmentSet</span> <span class="o">[</span><span class="k">ctor</span> <span class="k">comm</span> <span class="k">assoc</span> <span class="n">id</span><span class="o">:</span> <span class="n">empty</span><span class="o">]</span> <span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="metasmtsearch">
+<span id="id2"></span><h3>metaSmtSearch<a class="headerlink" href="#metasmtsearch" title="Link to this heading"></a></h3>
+<p>This function performs symbolic reachability analysis using rewriting modulo SMT, similar to <code class="docutils literal notranslate"><span class="pre">metaSmtSearch</span></code>, but also supports folding.</p>
+<p>The usage of <code class="docutils literal notranslate"><span class="pre">metaSmtSearch</span></code> is similar to <code class="docutils literal notranslate"><span class="pre">metaSmtSearch</span></code> except that it takes a logic, a folding flag, and a merging flag as its arguments.</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="k">op</span>  <span class="n">metaSmtSearch</span> <span class="o">:</span> <span class="n">Module</span> <span class="n">Term</span> <span class="n">Term</span> <span class="n">Condition</span> <span class="n">Qid</span> <span class="n">Bound</span> <span class="n">Nat</span> <span class="n">Qid</span> <span class="n">Bool</span> <span class="n">Bool</span> <span class="o">~&gt;</span> <span class="n">SmtResult2</span><span class="o">?</span> <span class="o">.</span>
+<span class="k">ceq</span> <span class="n">metaSmtSearch</span><span class="o">(</span><span class="n">M</span><span class="o">,</span> <span class="n">T</span><span class="o">,</span> <span class="n">T&#39;</span><span class="o">,</span> <span class="n">COND</span><span class="o">,</span> <span class="n">STEP</span><span class="o">,</span> <span class="n">B</span><span class="o">,</span> <span class="n">N</span><span class="o">,</span> <span class="n">LOGIC</span><span class="o">,</span> <span class="n">FOLD</span><span class="o">,</span> <span class="n">MERGE</span><span class="o">)</span>
+  <span class="o">=</span> <span class="n">metaSmtSearch</span><span class="o">(</span><span class="n">transform</span><span class="o">(</span><span class="n">M</span><span class="o">,</span> <span class="n">VN</span> <span class="o">+</span> <span class="n">N&#39;</span><span class="o">),</span> <span class="o">...)</span>
+<span class="k">if</span> <span class="o">{</span><span class="n">AT</span><span class="o">,</span> <span class="n">CD</span><span class="o">,</span> <span class="n">VN</span><span class="o">}</span> <span class="o">:=</span> <span class="n">abst</span><span class="o">(</span><span class="n">M</span><span class="o">,</span> <span class="n">T</span><span class="o">,</span> <span class="n">0</span><span class="o">)</span> <span class="o">/\</span> <span class="o">{</span><span class="n">AT&#39;</span><span class="o">,</span> <span class="n">CD&#39;</span><span class="o">,</span> <span class="n">N&#39;</span><span class="o">}</span> <span class="o">:=</span> <span class="n">abst</span><span class="o">(</span><span class="n">M</span><span class="o">,</span> <span class="n">T&#39;</span><span class="o">,</span> <span class="n">VN</span><span class="o">)</span>
+<span class="o">/\</span> <span class="o">{</span><span class="n">CND</span><span class="o">,</span> <span class="n">CND&#39;</span><span class="o">}</span> <span class="o">:=</span> <span class="n">sep</span><span class="o">(</span><span class="n">COND</span><span class="o">)</span> <span class="o">/\</span> <span class="n">SMT</span> <span class="o">:=</span> $<span class="n">getSmt</span><span class="o">(</span><span class="n">CND&#39;</span><span class="o">)</span> <span class="o">.</span>
+
+<span class="k">op</span> <span class="n">metaSmtSearch</span> <span class="o">:</span> <span class="n">Module</span> <span class="n">Term</span> <span class="n">Term</span> <span class="n">Condition</span> <span class="n">Qid</span> <span class="n">Bound</span> <span class="n">Nat</span> <span class="n">Qid</span> <span class="o">~&gt;</span> <span class="n">SmtResult2</span><span class="o">?</span> <span class="o">.</span>
+<span class="k">eq</span> <span class="n">metaSmtSearch</span><span class="o">(</span><span class="n">M</span><span class="o">,</span> <span class="n">T</span><span class="o">,</span> <span class="n">T&#39;</span><span class="o">,</span> <span class="n">COND</span><span class="o">,</span> <span class="n">STEP</span><span class="o">,</span> <span class="n">B</span><span class="o">,</span> <span class="n">N</span><span class="o">,</span> <span class="n">LOGIC</span><span class="o">)</span>
+ <span class="o">=</span> <span class="n">metaSmtSearch</span><span class="o">(</span><span class="n">M</span><span class="o">,</span> <span class="n">T</span><span class="o">,</span> <span class="n">T&#39;</span><span class="o">,</span> <span class="n">COND</span><span class="o">,</span> <span class="n">STEP</span><span class="o">,</span> <span class="n">B</span><span class="o">,</span> <span class="n">N</span><span class="o">,</span> <span class="n">LOGIC</span><span class="o">,</span> <span class="n">false</span><span class="o">,</span> <span class="n">false</span><span class="o">)</span> <span class="o">.</span>
+
+<span class="k">op</span> <span class="n">metaSmtSearch</span> <span class="o">:</span> <span class="n">Module</span> <span class="n">Term</span> <span class="n">Term</span> <span class="n">Condition</span> <span class="n">Qid</span> <span class="n">Bound</span> <span class="n">Nat</span> <span class="n">Qid</span> <span class="n">Bool</span> <span class="o">~&gt;</span> <span class="n">SmtResult2</span><span class="o">?</span> <span class="o">.</span>
+<span class="k">eq</span> <span class="n">metaSmtSearch</span><span class="o">(</span><span class="n">M</span><span class="o">,</span> <span class="n">T</span><span class="o">,</span> <span class="n">T&#39;</span><span class="o">,</span> <span class="n">COND</span><span class="o">,</span> <span class="n">STEP</span><span class="o">,</span> <span class="n">B</span><span class="o">,</span> <span class="n">N</span><span class="o">,</span> <span class="n">LOGIC</span><span class="o">,</span> <span class="n">FOLD</span><span class="o">)</span>
+ <span class="o">=</span> <span class="n">metaSmtSearch</span><span class="o">(</span><span class="n">M</span><span class="o">,</span> <span class="n">T</span><span class="o">,</span> <span class="n">T&#39;</span><span class="o">,</span> <span class="n">COND</span><span class="o">,</span> <span class="n">STEP</span><span class="o">,</span> <span class="n">B</span><span class="o">,</span> <span class="n">N</span><span class="o">,</span> <span class="n">LOGIC</span><span class="o">,</span> <span class="n">FOLD</span><span class="o">,</span> <span class="n">false</span><span class="o">)</span> <span class="o">.</span>
+
+<span class="k">op</span> <span class="n">metaSmtSearch</span> <span class="o">:</span> <span class="n">Module</span> <span class="n">Term</span> <span class="n">Term</span> <span class="n">Condition</span> <span class="n">Term</span> <span class="n">Qid</span> <span class="n">Nat</span> <span class="n">Bound</span> <span class="n">Nat</span> <span class="n">Qid</span> <span class="n">Bool</span> <span class="n">Bool</span> <span class="o">~&gt;</span> <span class="n">SmtResult2</span><span class="o">?</span>
+  <span class="o">[</span><span class="n">special</span> <span class="o">(</span><span class="n">id</span><span class="o">-</span><span class="n">hook</span> <span class="n">MetaLevelSmtOpSymbol</span>     <span class="o">(</span><span class="n">metaSmtSearch</span><span class="o">)</span>
+            <span class="o">...)]</span> <span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="metasmtsearchpath">
+<span id="id3"></span><h3>metaSmtSearchPath<a class="headerlink" href="#metasmtsearchpath" title="Link to this heading"></a></h3>
+<p>This function takes the same argument as <code class="docutils literal notranslate"><span class="pre">metaSmtSearch</span></code> and performs the same search, but returns a path to the solution state.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="core-maude-functions">
+<h2>Core Maude Functions<a class="headerlink" href="#core-maude-functions" title="Link to this heading"></a></h2>
+<p>MaudeSE provides two core Maude-level functions, which are also defined in <a class="reference external" href="https://github.com/postechsv/maude-se/blob/main/src/smt-check.maude">smt.check</a>:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#smtcheck"><span class="std std-ref">smtCheck</span></a></p></li>
+<li><p><a class="reference internal" href="#simplifyformula"><span class="std std-ref">simplifyFormula</span></a></p></li>
+</ul>
+<section id="smtcheck">
+<span id="id4"></span><h3>smtCheck<a class="headerlink" href="#smtcheck" title="Link to this heading"></a></h3>
+<p>This function checks the satisfiability of an SMT formula. The usage is similar to <code class="docutils literal notranslate"><span class="pre">metaSmtCheck</span></code>.</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="k">op</span> <span class="n">smtCheck</span> <span class="o">:</span> <span class="n">BooleanExpr</span> <span class="n">Logic</span> <span class="o">-&gt;</span> <span class="n">SmtCheckResult</span> <span class="o">.</span>
+<span class="k">eq</span> <span class="n">smtCheck</span><span class="o">(</span><span class="n">B</span><span class="o">:</span><span class="n">BooleanExpr</span><span class="o">,</span> <span class="n">LO</span><span class="o">:</span><span class="n">Logic</span><span class="o">)</span> 
+ <span class="o">=</span> <span class="n">smtCheck</span><span class="o">(</span><span class="n">B</span><span class="o">:</span><span class="n">BooleanExpr</span><span class="o">,</span> <span class="n">LO</span><span class="o">:</span><span class="n">Logic</span><span class="o">,</span> <span class="n">false</span><span class="o">)</span> <span class="o">.</span>
+
+<span class="k">op</span> <span class="n">smtCheck</span> <span class="o">:</span> <span class="n">BooleanExpr</span> <span class="n">Bool</span> <span class="o">-&gt;</span> <span class="n">SmtCheckResult</span> <span class="o">.</span>
+<span class="k">eq</span> <span class="n">smtCheck</span><span class="o">(</span><span class="n">B</span><span class="o">:</span><span class="n">BooleanExpr</span><span class="o">,</span> <span class="n">FLAG</span><span class="o">:</span><span class="n">Bool</span><span class="o">)</span> 
+ <span class="o">=</span> <span class="n">smtCheck</span><span class="o">(</span><span class="n">B</span><span class="o">:</span><span class="n">BooleanExpr</span><span class="o">,</span> <span class="n">auto</span><span class="o">,</span> <span class="n">FLAG</span><span class="o">:</span><span class="n">Bool</span><span class="o">)</span> <span class="o">.</span>
+
+<span class="k">op</span> <span class="n">smtCheck</span> <span class="o">:</span> <span class="n">BooleanExpr</span> <span class="o">-&gt;</span> <span class="n">SmtCheckResult</span> <span class="o">.</span>
+<span class="k">eq</span> <span class="n">smtCheck</span><span class="o">(</span><span class="n">B</span><span class="o">:</span><span class="n">BooleanExpr</span><span class="o">)</span> 
+ <span class="o">=</span> <span class="n">smtCheck</span><span class="o">(</span><span class="n">B</span><span class="o">:</span><span class="n">BooleanExpr</span><span class="o">,</span> <span class="n">false</span><span class="o">)</span> <span class="o">.</span>
+
+<span class="k">op</span> <span class="n">smtCheck</span> <span class="o">:</span> <span class="n">BooleanExpr</span> <span class="n">Logic</span> <span class="n">Bool</span> <span class="o">-&gt;</span> <span class="n">SmtCheckResult</span> 
+    <span class="o">[</span><span class="n">special</span> <span class="o">(</span><span class="n">id</span><span class="o">-</span><span class="n">hook</span> <span class="n">SmtOpSymbol</span> <span class="o">(</span><span class="n">smtCheck</span><span class="o">))]</span> <span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="simplifyformula">
+<span id="id5"></span><h3>simplifyFormula<a class="headerlink" href="#simplifyformula" title="Link to this heading"></a></h3>
+<p>This function obtains a simplified but equivalent SMT formula.</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="k">op</span> <span class="n">simplifyFormula</span> <span class="o">:</span> <span class="n">BooleanExpr</span> <span class="o">-&gt;</span> <span class="n">BooleanExpr</span> <span class="o">[</span><span class="n">special</span> <span class="o">(</span><span class="n">id</span><span class="o">-</span><span class="n">hook</span> <span class="n">SmtOpSymbol</span> <span class="o">(</span><span class="n">simplify</span><span class="o">))]</span> <span class="o">.</span>
+<span class="k">op</span> <span class="n">simplifyFormula</span> <span class="o">:</span> <span class="n">IntegerExpr</span> <span class="o">-&gt;</span> <span class="n">IntegerExpr</span> <span class="o">[</span><span class="n">special</span> <span class="o">(</span><span class="n">id</span><span class="o">-</span><span class="n">hook</span> <span class="n">SmtOpSymbol</span> <span class="o">(</span><span class="n">simplify</span><span class="o">))]</span> <span class="o">.</span>
+<span class="k">op</span> <span class="n">simplifyFormula</span> <span class="o">:</span> <span class="n">RealExpr</span> <span class="o">-&gt;</span> <span class="n">RealExpr</span> <span class="o">[</span><span class="n">special</span> <span class="o">(</span><span class="n">id</span><span class="o">-</span><span class="n">hook</span> <span class="n">SmtOpSymbol</span> <span class="o">(</span><span class="n">simplify</span><span class="o">))]</span> <span class="o">.</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+</section>
+</section>
+<section id="generic-interface">
+<span id="generic"></span><h2>Generic Interface<a class="headerlink" href="#generic-interface" title="Link to this heading"></a></h2>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This will be updated in the near future.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cmds.html" class="btn btn-neutral float-left" title="Analysis Commands" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="examples.html" class="btn btn-neutral float-right" title="More examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Geunyeol Yu.
+      <span class="lastupdated">Last updated on Jun 08, 2025.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

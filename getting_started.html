@@ -1,0 +1,327 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting started &mdash; MaudeSE v0.0.3 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=e09d5059" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=bc6a6d3b"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Analysis Commands" href="cmds.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MaudeSE
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#example-model">Example Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#symbolic-reachability-analysis">Symbolic Reachability Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#basic-usage">Basic Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#state-space-reduction">State Space Reduction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#satisfiability-checking">Satisfiability Checking</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmds.html">Analysis Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interface.html">SMT Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">More examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MaudeSE</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Getting started</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="getting-started">
+<h1>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h1>
+<section id="example-model">
+<h2>Example Model<a class="headerlink" href="#example-model" title="Link to this heading"></a></h2>
+<p>As an example model, consider the specification of coffee machine (<a class="reference download internal" download="" href="_downloads/8e7109745c97dab0d83db002545c2ee9/coffee.maude"><code class="xref download docutils literal notranslate"><span class="pre">coffee.maude</span></code></a>) adapted from <span id="id1">[<a class="reference internal" href="#id4" title="Jaime Arias, Kyungmin Bae, Carlos Olarte, Peter Csaba Ölveczky, Laure Petrucci, and Fredrik Rømming. Rewriting logic semantics and symbolic analysis for parametric timed automata. In International Workshop on Formal Techniques for Safety-Critical Systems, 3–15. ACM, 2022. URL: https://doi.org/10.1145/3563822.3569923.">ABO+22</a>]</span>. The system module <code class="docutils literal notranslate"><span class="pre">COFFEE-MACHINE</span></code> specifies the coffee machine parametric timed automaton (PTA). Its behavior is the same as in the original version <span id="id2">[<a class="reference internal" href="#id4" title="Jaime Arias, Kyungmin Bae, Carlos Olarte, Peter Csaba Ölveczky, Laure Petrucci, and Fredrik Rømming. Rewriting logic semantics and symbolic analysis for parametric timed automata. In International Workshop on Formal Techniques for Safety-Critical Systems, 3–15. ACM, 2022. URL: https://doi.org/10.1145/3563822.3569923.">ABO+22</a>]</span>, except that we use auxiliary functions and equations to separate each rule condition into a non-SMT condition and a pure SMT formula.</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="k">mod</span> <span class="n">COFFEE</span><span class="o">-</span><span class="n">MACHINE</span> <span class="n">is</span>
+  <span class="k">protecting</span> <span class="n">REAL</span> <span class="o">.</span>
+
+  <span class="k">sorts</span> <span class="n">State</span> <span class="n">Location</span> <span class="o">.</span>
+
+  <span class="k">vars</span> <span class="n">T</span> <span class="n">X</span> <span class="n">Y</span> <span class="n">X&#39;</span> <span class="n">Y&#39;</span> <span class="n">P1</span> <span class="n">P2</span> <span class="n">P3</span> <span class="o">:</span> <span class="n">Real</span> <span class="o">.</span>
+  <span class="k">vars</span> <span class="n">L</span> <span class="n">L&#39;</span> <span class="o">:</span> <span class="n">Location</span> <span class="o">.</span>
+  <span class="k">var</span> <span class="n">PHI</span> <span class="o">:</span> <span class="n">Boolean</span> <span class="o">.</span>
+
+  <span class="k">ops</span> <span class="n">idle</span> <span class="n">addsugar</span> <span class="n">preparingcoffee</span> <span class="n">cdone</span> <span class="o">:</span> <span class="o">-&gt;</span> <span class="n">Location</span> <span class="o">.</span>
+  <span class="k">op</span> <span class="o">&lt;</span><span class="n">_</span><span class="o">;</span><span class="n">_</span><span class="o">;</span><span class="n">_</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">_</span><span class="o">;</span><span class="n">_</span><span class="o">;</span><span class="n">_</span><span class="o">&gt;</span> <span class="o">:</span> <span class="n">Location</span> <span class="n">Real</span> <span class="n">Real</span> <span class="n">Real</span> <span class="n">Real</span> <span class="n">Real</span> <span class="o">-&gt;</span> <span class="n">State</span> <span class="o">.</span>
+  <span class="k">op</span> <span class="o">[</span><span class="n">_</span><span class="o">;</span><span class="n">_</span><span class="o">;</span><span class="n">_</span><span class="o">]</span> <span class="o">&lt;</span><span class="n">_</span><span class="o">;</span><span class="n">_</span><span class="o">;</span><span class="n">_</span><span class="o">&gt;</span> <span class="o">:</span> <span class="n">Location</span> <span class="n">Real</span> <span class="n">Real</span> <span class="n">Real</span> <span class="n">Real</span> <span class="n">Real</span> <span class="o">-&gt;</span> <span class="n">State</span> <span class="o">.</span>
+
+  <span class="k">sort</span> <span class="n">Tuple</span><span class="o">{</span><span class="n">Location</span><span class="o">,</span><span class="n">Real</span><span class="o">,</span><span class="n">Real</span><span class="o">,</span><span class="n">Boolean</span><span class="o">}</span> <span class="o">.</span>
+  <span class="k">op</span> <span class="o">{</span><span class="n">_</span><span class="o">,</span><span class="n">_</span><span class="o">,</span><span class="n">_</span><span class="o">,</span><span class="n">_</span><span class="o">}</span> <span class="o">:</span> <span class="n">Location</span> <span class="n">Real</span> <span class="n">Real</span> <span class="n">Boolean</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="o">{</span><span class="n">Location</span><span class="o">,</span><span class="n">Real</span><span class="o">,</span><span class="n">Real</span><span class="o">,</span><span class="n">Boolean</span><span class="o">}</span> <span class="o">[</span><span class="k">ctor</span><span class="o">]</span> <span class="o">.</span>
+
+  <span class="k">crl</span> <span class="o">[</span><span class="n">tick</span><span class="o">]</span> <span class="o">:</span> <span class="o">[</span> <span class="n">L</span> <span class="o">;</span> <span class="n">X</span> <span class="o">;</span> <span class="n">Y</span> <span class="o">]</span> <span class="o">&lt;</span> <span class="n">P1</span> <span class="o">;</span> <span class="n">P2</span> <span class="o">;</span> <span class="n">P3</span> <span class="o">&gt;</span>
+   <span class="o">=&gt;</span> <span class="o">&lt;</span> <span class="n">L</span> <span class="o">;</span> <span class="n">X</span> <span class="o">+</span> <span class="n">T</span> <span class="o">;</span> <span class="n">Y</span> <span class="o">+</span> <span class="n">T</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="n">P1</span> <span class="o">;</span> <span class="n">P2</span> <span class="o">;</span> <span class="n">P3</span> <span class="o">&gt;</span>
+  <span class="k">if</span> <span class="n">PHI</span> <span class="o">:=</span> <span class="n">tickCond</span><span class="o">(</span><span class="n">L</span><span class="o">,</span> <span class="n">T</span><span class="o">,</span> <span class="n">X</span><span class="o">,</span> <span class="n">Y</span><span class="o">,</span> <span class="n">P2</span><span class="o">,</span> <span class="n">P3</span><span class="o">)</span> <span class="o">/\</span> <span class="o">(</span><span class="n">T</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> <span class="n">PHI</span><span class="o">)</span> <span class="o">=</span> <span class="n">true</span> <span class="o">[</span><span class="k">nonexec</span><span class="o">]</span> <span class="o">.</span>
+
+  <span class="k">op</span> <span class="n">tickCond</span> <span class="o">:</span> <span class="n">Location</span> <span class="n">Real</span> <span class="n">Real</span> <span class="n">Real</span> <span class="n">Real</span> <span class="n">Real</span> <span class="o">-&gt;</span> <span class="n">Boolean</span> <span class="o">.</span>
+  <span class="k">eq</span> <span class="n">tickCond</span><span class="o">(</span><span class="n">idle</span><span class="o">,</span> <span class="n">T</span><span class="o">,</span> <span class="n">X</span><span class="o">,</span> <span class="n">Y</span><span class="o">,</span> <span class="n">P2</span><span class="o">,</span> <span class="n">P3</span><span class="o">)</span> <span class="o">=</span> <span class="n">true</span> <span class="o">.</span>
+  <span class="k">eq</span> <span class="n">tickCond</span><span class="o">(</span><span class="n">addsugar</span><span class="o">,</span> <span class="n">T</span><span class="o">,</span> <span class="n">X</span><span class="o">,</span> <span class="n">Y</span><span class="o">,</span> <span class="n">P2</span><span class="o">,</span> <span class="n">P3</span><span class="o">)</span> <span class="o">=</span> <span class="n">Y</span> <span class="o">+</span> <span class="n">T</span> <span class="o">&lt;=</span> <span class="n">P2</span> <span class="o">.</span>
+  <span class="k">eq</span> <span class="n">tickCond</span><span class="o">(</span><span class="n">preparingcoffee</span><span class="o">,</span> <span class="n">T</span><span class="o">,</span> <span class="n">X</span><span class="o">,</span> <span class="n">Y</span><span class="o">,</span> <span class="n">P2</span><span class="o">,</span> <span class="n">P3</span><span class="o">)</span> <span class="o">=</span> <span class="n">Y</span> <span class="o">+</span> <span class="n">T</span> <span class="o">&lt;=</span> <span class="n">P3</span> <span class="o">.</span>
+  <span class="k">eq</span> <span class="n">tickCond</span><span class="o">(</span><span class="n">cdone</span><span class="o">,</span> <span class="n">T</span><span class="o">,</span> <span class="n">X</span><span class="o">,</span> <span class="n">Y</span><span class="o">,</span> <span class="n">P2</span><span class="o">,</span> <span class="n">P3</span><span class="o">)</span> <span class="o">=</span> <span class="n">X</span> <span class="o">+</span> <span class="n">T</span> <span class="o">&lt;=</span> <span class="n">10</span><span class="o">/</span><span class="n">1</span> <span class="o">.</span>
+
+  <span class="k">crl</span> <span class="o">[</span><span class="n">toAddsugar</span><span class="o">]</span> <span class="o">:</span> <span class="o">&lt;</span> <span class="n">L</span> <span class="o">;</span> <span class="n">X</span> <span class="o">;</span> <span class="n">Y</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="n">P1</span> <span class="o">;</span> <span class="n">P2</span> <span class="o">;</span> <span class="n">P3</span> <span class="o">&gt;</span>
+   <span class="o">=&gt;</span> <span class="o">[</span> <span class="n">L&#39;</span> <span class="o">;</span> <span class="n">X&#39;</span> <span class="o">;</span> <span class="n">Y&#39;</span> <span class="o">]</span> <span class="o">&lt;</span> <span class="n">P1</span> <span class="o">;</span> <span class="n">P2</span> <span class="o">;</span> <span class="n">P3</span> <span class="o">&gt;</span>
+  <span class="k">if</span> <span class="o">{</span><span class="n">L&#39;</span><span class="o">,</span> <span class="n">X&#39;</span><span class="o">,</span> <span class="n">Y&#39;</span><span class="o">,</span> <span class="n">PHI</span><span class="o">}</span> <span class="o">:=</span> <span class="n">nextAddSugar</span><span class="o">(</span><span class="n">L</span><span class="o">,</span> <span class="n">X</span><span class="o">,</span> <span class="n">Y</span><span class="o">,</span> <span class="n">P1</span><span class="o">,</span> <span class="n">P2</span><span class="o">)</span> <span class="o">/\</span> <span class="n">PHI</span> <span class="o">=</span> <span class="n">true</span> <span class="o">.</span>
+
+  <span class="k">op</span> <span class="n">nextAddSugar</span> <span class="o">:</span> <span class="n">Location</span> <span class="n">Real</span> <span class="n">Real</span> <span class="n">Real</span> <span class="n">Real</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="o">{</span><span class="n">Location</span><span class="o">,</span><span class="n">Real</span><span class="o">,</span><span class="n">Real</span><span class="o">,</span><span class="n">Boolean</span><span class="o">}</span> <span class="o">.</span>
+  <span class="k">eq</span> <span class="n">nextAddSugar</span><span class="o">(</span><span class="n">idle</span><span class="o">,</span> <span class="n">X</span><span class="o">,</span> <span class="n">Y</span><span class="o">,</span> <span class="n">P1</span><span class="o">,</span> <span class="n">P2</span><span class="o">)</span> <span class="o">=</span> <span class="o">{</span><span class="n">addsugar</span><span class="o">,</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span><span class="o">,</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span><span class="o">,</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">&lt;=</span> <span class="n">P2</span><span class="o">}</span> <span class="o">.</span>
+  <span class="k">eq</span> <span class="n">nextAddSugar</span><span class="o">(</span><span class="n">addsugar</span><span class="o">,</span> <span class="n">X</span><span class="o">,</span> <span class="n">Y</span><span class="o">,</span> <span class="n">P1</span><span class="o">,</span> <span class="n">P2</span><span class="o">)</span> <span class="o">=</span> <span class="o">{</span><span class="n">addsugar</span><span class="o">,</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span><span class="o">,</span> <span class="n">Y</span><span class="o">,</span> <span class="n">Y</span> <span class="o">&lt;=</span> <span class="n">P2</span> <span class="n">and</span> <span class="n">X</span> <span class="o">&gt;=</span> <span class="n">P1</span><span class="o">}</span> <span class="o">.</span>
+  <span class="k">eq</span> <span class="n">nextAddSugar</span><span class="o">(</span><span class="n">cdone</span><span class="o">,</span> <span class="n">X</span><span class="o">,</span> <span class="n">Y</span><span class="o">,</span> <span class="n">P1</span><span class="o">,</span> <span class="n">P2</span><span class="o">)</span> <span class="o">=</span> <span class="o">{</span><span class="n">addsugar</span><span class="o">,</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span><span class="o">,</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span><span class="o">,</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">&lt;=</span> <span class="n">P2</span><span class="o">}</span> <span class="o">.</span>
+
+  <span class="k">crl</span> <span class="o">[</span><span class="n">toOther</span><span class="o">]</span> <span class="o">:</span> <span class="o">&lt;</span> <span class="n">L</span> <span class="o">;</span> <span class="n">X</span> <span class="o">;</span> <span class="n">Y</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="n">P1</span> <span class="o">;</span> <span class="n">P2</span> <span class="o">;</span> <span class="n">P3</span> <span class="o">&gt;</span>
+  <span class="o">=&gt;</span> <span class="o">[</span> <span class="n">L&#39;</span> <span class="o">;</span> <span class="n">X&#39;</span> <span class="o">;</span> <span class="n">Y&#39;</span> <span class="o">]</span> <span class="o">&lt;</span> <span class="n">P1</span> <span class="o">;</span> <span class="n">P2</span> <span class="o">;</span> <span class="n">P3</span> <span class="o">&gt;</span>
+  <span class="k">if</span> <span class="o">{</span><span class="n">L&#39;</span><span class="o">,</span> <span class="n">X&#39;</span><span class="o">,</span> <span class="n">Y&#39;</span><span class="o">,</span> <span class="n">PHI</span><span class="o">}</span> <span class="o">:=</span> <span class="n">nextOther</span><span class="o">(</span><span class="n">L</span><span class="o">,</span> <span class="n">X</span><span class="o">,</span> <span class="n">Y</span><span class="o">,</span> <span class="n">P2</span><span class="o">,</span> <span class="n">P3</span><span class="o">)</span> <span class="o">/\</span> <span class="n">PHI</span> <span class="o">=</span> <span class="n">true</span> <span class="o">.</span>
+
+  <span class="k">op</span> <span class="n">nextOther</span> <span class="o">:</span> <span class="n">Location</span> <span class="n">Real</span> <span class="n">Real</span> <span class="n">Real</span> <span class="n">Real</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="o">{</span><span class="n">Location</span><span class="o">,</span><span class="n">Real</span><span class="o">,</span><span class="n">Real</span><span class="o">,</span><span class="n">Boolean</span><span class="o">}</span> <span class="o">.</span>
+  <span class="k">eq</span> <span class="n">nextOther</span><span class="o">(</span><span class="n">addsugar</span><span class="o">,</span> <span class="n">X</span><span class="o">,</span> <span class="n">Y</span><span class="o">,</span> <span class="n">P2</span><span class="o">,</span> <span class="n">P3</span><span class="o">)</span> <span class="o">=</span> <span class="o">{</span><span class="n">preparingcoffee</span><span class="o">,</span> <span class="n">X</span><span class="o">,</span> <span class="n">Y</span><span class="o">,</span> <span class="n">Y</span> <span class="o">&lt;=</span> <span class="n">P3</span> <span class="n">and</span> <span class="n">Y</span> <span class="o">===</span> <span class="n">P2</span><span class="o">}</span> <span class="o">.</span>
+  <span class="k">eq</span> <span class="n">nextOther</span><span class="o">(</span><span class="n">preparingcoffee</span><span class="o">,</span> <span class="n">X</span><span class="o">,</span> <span class="n">Y</span><span class="o">,</span> <span class="n">P2</span><span class="o">,</span> <span class="n">P3</span><span class="o">)</span> <span class="o">=</span> <span class="o">{</span><span class="n">cdone</span><span class="o">,</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span><span class="o">,</span> <span class="n">Y</span><span class="o">,</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">&lt;=</span> <span class="n">10</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> <span class="n">Y</span> <span class="o">===</span> <span class="n">P3</span><span class="o">}</span> <span class="o">.</span>
+  <span class="k">eq</span> <span class="n">nextOther</span><span class="o">(</span><span class="n">cdone</span><span class="o">,</span> <span class="n">X</span><span class="o">,</span> <span class="n">Y</span><span class="o">,</span> <span class="n">P2</span><span class="o">,</span> <span class="n">P3</span><span class="o">)</span> <span class="o">=</span> <span class="o">{</span><span class="n">idle</span><span class="o">,</span> <span class="n">X</span><span class="o">,</span> <span class="n">Y</span><span class="o">,</span> <span class="n">X</span> <span class="o">===</span> <span class="n">10</span><span class="o">/</span><span class="n">1</span><span class="o">}</span> <span class="o">.</span>
+<span class="k">endm</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="symbolic-reachability-analysis">
+<h2>Symbolic Reachability Analysis<a class="headerlink" href="#symbolic-reachability-analysis" title="Link to this heading"></a></h2>
+<section id="basic-usage">
+<h3>Basic Usage<a class="headerlink" href="#basic-usage" title="Link to this heading"></a></h3>
+<p>Use the following commmand to load the coffee machine maude file and set SMT solver to Yices2.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>maude-se<span class="w"> </span>coffee.maude<span class="w"> </span>-s<span class="w"> </span>yices
+</pre></div>
+</div>
+<p>If successful, you can see the MaudeSE interpreter as follows.</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span>          <span class="o">===================================</span>
+                        <span class="n">MaudeSE</span>
+               <span class="o">(</span><span class="n">0</span><span class="o">.</span><span class="n">0</span><span class="o">.</span><span class="n">3</span> <span class="n">built</span><span class="o">:</span> <span class="n">June</span> <span class="n">6</span> <span class="n">2025</span><span class="o">)</span>
+          <span class="o">===================================</span>
+
+
+<span class="n">MaudeSE</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Load the COFFEE-MACHINE module with <code class="docutils literal notranslate"><span class="pre">select</span></code>.</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="k">select</span> <span class="n">COFFEE</span><span class="o">-</span><span class="n">MACHINE</span> <span class="o">.</span>
+<span class="n">Successfully</span> <span class="n">load</span> <span class="n">module</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">smt-search</span></code> command to perform symbolic reachability analysis.
+For example, you can find the first solution where the coffee machine is in the <code class="docutils literal notranslate"><span class="pre">cdone</span></code> state
+and <code class="docutils literal notranslate"><span class="pre">P1</span></code>, <code class="docutils literal notranslate"><span class="pre">P2</span></code>, and <code class="docutils literal notranslate"><span class="pre">P3</span></code> are all positive real numbers,
+starting from the <code class="docutils literal notranslate"><span class="pre">idle</span></code> state with a positive real number <code class="docutils literal notranslate"><span class="pre">X1</span></code> is equal to <code class="docutils literal notranslate"><span class="pre">X2</span></code>.</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="k">smt-search</span> <span class="o">[</span><span class="n">1</span><span class="o">]</span> <span class="o">[</span> <span class="n">idle</span> <span class="o">;</span> <span class="n">X1</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">X2</span><span class="o">:</span><span class="n">Real</span> <span class="o">]</span> <span class="o">&lt;</span> <span class="n">P1</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P2</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P3</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> 
+                 <span class="o">=&gt;*</span> <span class="o">&lt;</span> <span class="n">cdone</span> <span class="o">;</span> <span class="n">X1&#39;</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">X2&#39;</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="n">P1</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P2</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P3</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span>
+      <span class="k">such that</span> <span class="n">X1</span><span class="o">:</span><span class="n">Real</span> <span class="o">===</span> <span class="n">X2</span><span class="o">:</span><span class="n">Real</span> <span class="n">and</span> <span class="n">X1</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> 
+                <span class="n">P1</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> <span class="n">P2</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> <span class="n">P3</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="k">using</span> <span class="n">QF_LRA</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>The command finds the first solution as follows.</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">Solution</span> <span class="n">1</span> <span class="o">(</span><span class="n">state</span> <span class="n">13</span><span class="o">)</span>
+
+<span class="n">Symbolic</span> <span class="n">state</span><span class="o">:</span>
+ <span class="o">&lt;</span> <span class="n">cdone</span> <span class="o">;</span> <span class="o">#</span><span class="n">69</span><span class="o">-</span><span class="n">V35</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="o">#</span><span class="n">70</span><span class="o">-</span><span class="n">V36</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="o">#</span><span class="n">71</span><span class="o">-</span><span class="n">V37</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="o">#</span><span class="n">72</span><span class="o">-</span><span class="n">V38</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="o">#</span><span class="n">73</span><span class="o">-</span><span class="n">V39</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span>
+
+<span class="n">Constraint</span><span class="o">:</span>
+ <span class="n">not</span> <span class="n">not</span> <span class="n">V0</span><span class="o">:</span><span class="n">Real</span> <span class="o">===</span> <span class="n">X1</span><span class="o">:</span><span class="n">Real</span> <span class="n">or</span> <span class="o">...</span> <span class="o">#</span><span class="n">71</span><span class="o">-</span><span class="n">V37</span><span class="o">:</span><span class="n">Real</span> <span class="o">...</span>
+
+<span class="n">Substitution</span><span class="o">:</span>
+ <span class="n">V5</span><span class="o">:</span><span class="n">Real</span> <span class="o">&lt;--</span> <span class="o">#</span><span class="n">69</span><span class="o">-</span><span class="n">V35</span><span class="o">:</span><span class="n">Real</span>
+ <span class="n">V6</span><span class="o">:</span><span class="n">Real</span> <span class="o">&lt;--</span> <span class="o">#</span><span class="n">70</span><span class="o">-</span><span class="n">V36</span><span class="o">:</span><span class="n">Real</span>
+ <span class="n">V7</span><span class="o">:</span><span class="n">Real</span> <span class="o">&lt;--</span> <span class="o">#</span><span class="n">71</span><span class="o">-</span><span class="n">V37</span><span class="o">:</span><span class="n">Real</span>
+ <span class="n">V8</span><span class="o">:</span><span class="n">Real</span> <span class="o">&lt;--</span> <span class="o">#</span><span class="n">72</span><span class="o">-</span><span class="n">V38</span><span class="o">:</span><span class="n">Real</span>
+ <span class="n">V9</span><span class="o">:</span><span class="n">Real</span> <span class="o">&lt;--</span> <span class="o">#</span><span class="n">73</span><span class="o">-</span><span class="n">V39</span><span class="o">:</span><span class="n">Real</span>
+
+<span class="n">Assignment</span><span class="o">:</span>
+ <span class="o">#</span><span class="n">1</span><span class="o">-</span><span class="n">T</span><span class="o">:</span><span class="n">Real</span> <span class="o">&lt;--</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span>
+ <span class="o">#</span><span class="n">10</span><span class="o">-</span><span class="n">V39</span><span class="o">:</span><span class="n">Real</span> <span class="o">&lt;--</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span>
+ <span class="o">#</span><span class="n">11</span><span class="o">-</span><span class="n">P1</span><span class="o">:</span><span class="n">Real</span> <span class="o">&lt;--</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span>
+ <span class="o">...</span>
+ <span class="n">P1</span><span class="o">:</span><span class="n">Real</span> <span class="o">&lt;--</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span>
+ <span class="n">P2</span><span class="o">:</span><span class="n">Real</span> <span class="o">&lt;--</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span>
+ <span class="n">P3</span><span class="o">:</span><span class="n">Real</span> <span class="o">&lt;--</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span>
+ <span class="n">X1&#39;</span><span class="o">:</span><span class="n">Real</span> <span class="o">&lt;--</span> <span class="n">10</span><span class="o">/</span><span class="n">1</span>
+ <span class="n">X1</span><span class="o">:</span><span class="n">Real</span> <span class="o">&lt;--</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span>
+ <span class="n">X2&#39;</span><span class="o">:</span><span class="n">Real</span> <span class="o">&lt;--</span> <span class="n">10</span><span class="o">/</span><span class="n">1</span>
+ <span class="n">X2</span><span class="o">:</span><span class="n">Real</span> <span class="o">&lt;--</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span>
+
+<span class="n">Concrete</span> <span class="n">state</span><span class="o">:</span>
+ <span class="o">&lt;</span> <span class="n">cdone</span> <span class="o">;</span> <span class="n">10</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">10</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>To get the concrete path of the analysis, use the <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">smt-path</span></code> command.</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="k">show smt-path</span> <span class="n">concrete</span> <span class="o">.</span>
+
+<span class="o">[</span><span class="n">idle</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span><span class="o">]&lt;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span>
+<span class="o">=====[</span><span class="n">tick</span><span class="o">]=====&gt;</span>
+<span class="o">&lt;</span> <span class="n">idle</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span>
+<span class="o">=====[</span><span class="n">toAddsugar</span><span class="o">]=====&gt;</span>
+<span class="o">[</span><span class="n">addsugar</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span><span class="o">]&lt;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span>
+<span class="o">=====[</span><span class="n">tick</span><span class="o">]=====&gt;</span>
+<span class="o">&lt;</span> <span class="n">addsugar</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span>
+<span class="o">=====[</span><span class="n">toOther</span><span class="o">]=====&gt;</span>
+<span class="o">[</span><span class="n">preparingcoffee</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span><span class="o">]&lt;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span>
+<span class="o">=====[</span><span class="n">tick</span><span class="o">]=====&gt;</span>
+<span class="o">&lt;</span> <span class="n">preparingcoffee</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span>
+<span class="o">=====[</span><span class="n">toOther</span><span class="o">]=====&gt;</span>
+<span class="o">[</span><span class="n">cdone</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span><span class="o">]&lt;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span>
+<span class="o">=====[</span><span class="n">tick</span><span class="o">]=====&gt;</span>
+<span class="o">&lt;</span> <span class="n">cdone</span> <span class="o">;</span> <span class="n">10</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">10</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Otherwise, to get the symbolic path, use the following command.</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="k">show smt-path</span> <span class="n">symbolic</span> <span class="o">.</span>
+
+<span class="n">Constrained</span> <span class="n">Term</span><span class="o">:</span>
+ <span class="n">Term</span><span class="o">:</span> <span class="o">[</span><span class="n">idle</span> <span class="o">;</span> <span class="n">V0</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">V1</span><span class="o">:</span><span class="n">Real</span><span class="o">]&lt;</span> <span class="n">V2</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">V3</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">V4</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span>
+ <span class="n">Constraint</span><span class="o">:</span> <span class="n">not</span> <span class="o">(</span><span class="n">not</span> <span class="n">V0</span><span class="o">:</span><span class="n">Real</span> <span class="o">===</span> <span class="n">X1</span><span class="o">:</span><span class="n">Real</span> <span class="n">or</span> <span class="o">...)</span>
+<span class="o">=====[</span><span class="n">tick</span><span class="o">]=====&gt;</span>
+<span class="n">Constrained</span> <span class="n">Term</span><span class="o">:</span>
+ <span class="n">Term</span><span class="o">:</span> <span class="o">&lt;</span> <span class="n">idle</span> <span class="o">;</span> <span class="o">#</span><span class="n">6</span><span class="o">-</span><span class="n">V35</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="o">#</span><span class="n">7</span><span class="o">-</span><span class="n">V36</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="o">#</span><span class="n">8</span><span class="o">-</span><span class="n">V37</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="o">#</span><span class="n">9</span><span class="o">-</span><span class="n">V38</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="o">#</span><span class="n">10</span><span class="o">-</span><span class="n">V39</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span>
+ <span class="n">Constraint</span><span class="o">:</span> <span class="n">not</span> <span class="o">(</span><span class="n">not</span> <span class="n">V0</span><span class="o">:</span><span class="n">Real</span> <span class="o">===</span> <span class="n">X1</span><span class="o">:</span><span class="n">Real</span> <span class="n">or</span> <span class="o">...)</span>
+<span class="o">=====[</span><span class="n">toAddsugar</span><span class="o">]=====&gt;</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</section>
+<section id="state-space-reduction">
+<h3>State Space Reduction<a class="headerlink" href="#state-space-reduction" title="Link to this heading"></a></h3>
+<p>MaudeSE supports a well-known state space reduction technique for symbolic reachability analysis: folding.
+To illustrate this method, consider the following search command, which does not terminate due to an infinite number of states.</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="k">smt-search</span> <span class="o">[</span><span class="n">1</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">idle</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="n">P1</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P2</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P3</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> 
+                    <span class="o">=&gt;*</span> <span class="o">&lt;</span> <span class="n">L</span><span class="o">:</span><span class="n">Location</span> <span class="o">;</span> <span class="n">X&#39;</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">Y&#39;</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="n">P1</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P2</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P3</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> 
+  <span class="k">such that</span> <span class="n">X&#39;</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> <span class="n">Y&#39;</span><span class="o">:</span><span class="n">Real</span> <span class="n">and</span> <span class="n">P1</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> <span class="n">P2</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> <span class="n">P3</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> 
+            <span class="n">2</span><span class="o">/</span><span class="n">1</span> <span class="o">*</span> <span class="n">P1</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> <span class="n">P2</span><span class="o">:</span><span class="n">Real</span> <span class="k">using</span> <span class="n">QF_LRA</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>To reduce the number of symbolic states, use the <code class="docutils literal notranslate"><span class="pre">{fold}</span></code> option with the <code class="docutils literal notranslate"><span class="pre">smt-search</span></code> command.
+For example, the following command makes the state space finite, allowing it to exhaustively search the entire state space
+and report that no such solution exists.</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="o">{</span><span class="n">fold</span><span class="o">}</span> <span class="k">smt-search</span> <span class="o">[</span><span class="n">1</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">idle</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="n">P1</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P2</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P3</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> 
+             <span class="o">=&gt;*</span> <span class="o">&lt;</span> <span class="n">L</span><span class="o">:</span><span class="n">Location</span> <span class="o">;</span> <span class="n">X&#39;</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">Y&#39;</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="n">P1</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P2</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P3</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> 
+  <span class="k">such that</span> <span class="n">X&#39;</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> <span class="n">Y&#39;</span><span class="o">:</span><span class="n">Real</span> <span class="n">and</span> <span class="n">P1</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> <span class="n">P2</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> <span class="n">P3</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> 
+            <span class="n">2</span><span class="o">/</span><span class="n">1</span> <span class="o">*</span> <span class="n">P1</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> <span class="n">P2</span><span class="o">:</span><span class="n">Real</span> <span class="k">using</span> <span class="n">QF_LRA</span> <span class="o">.</span>
+
+<span class="n">No</span> <span class="n">more</span> <span class="n">solutions</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="satisfiability-checking">
+<h2>Satisfiability Checking<a class="headerlink" href="#satisfiability-checking" title="Link to this heading"></a></h2>
+<p>MaudeSE supports satisfiability checking under various SMT theories.
+For example, you can check whether the following formula is satisfiable under the theory of nonlinear arithmetic.</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="k">check</span> <span class="n">X</span><span class="o">:</span><span class="n">Real</span> <span class="o">*</span> <span class="n">X</span><span class="o">:</span><span class="n">Real</span> <span class="o">+</span> <span class="n">X</span><span class="o">:</span><span class="n">Real</span> <span class="o">*</span> <span class="n">Y</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> <span class="n">12</span><span class="o">/</span><span class="n">5</span> <span class="k">using</span> <span class="n">QF_NRA</span> <span class="o">.</span>
+<span class="n">result</span><span class="o">:</span> <span class="n">sat</span>
+</pre></div>
+</div>
+<p>You can also get the model using the <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">model</span></code> command.</p>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="k">show model</span> <span class="o">.</span>
+
+  <span class="n">assignment</span><span class="o">:</span>
+    <span class="n">X</span><span class="o">:</span><span class="n">Real</span> <span class="o">|--&gt;</span> <span class="o">-</span><span class="n">1</span><span class="o">/</span><span class="n">1</span>
+    <span class="n">Y</span><span class="o">:</span><span class="n">Real</span> <span class="o">|--&gt;</span> <span class="o">-</span><span class="n">3</span><span class="o">/</span><span class="n">1</span>
+</pre></div>
+</div>
+<div class="docutils container" id="id3">
+<div role="list" class="citation-list">
+<div class="citation" id="id4" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>ABO+22<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id2">2</a>)</span>
+<p>Jaime Arias, Kyungmin Bae, Carlos Olarte, Peter Csaba Ölveczky, Laure Petrucci, and Fredrik Rømming. Rewriting logic semantics and symbolic analysis for parametric timed automata. In <em>International Workshop on Formal Techniques for Safety-Critical Systems</em>, 3–15. ACM, 2022. URL: <a class="reference external" href="https://doi.org/10.1145/3563822.3569923">https://doi.org/10.1145/3563822.3569923</a>.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cmds.html" class="btn btn-neutral float-right" title="Analysis Commands" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Geunyeol Yu.
+      <span class="lastupdated">Last updated on Jun 08, 2025.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
