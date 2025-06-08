@@ -52,10 +52,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#symbolic-reachability-analysis">Symbolic Reachability Analysis</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#basic-usage">Basic Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#state-space-reduction">State Space Reduction</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#standalone-executable-usage-notes">Standalone Executable Usage Notes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#satisfiability-checking">Satisfiability Checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#standalone-executable-usage-notes">Standalone Executable Usage Notes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cmds.html">Analysis Commands</a></li>
@@ -266,14 +266,6 @@ reports the absence of such a solution.</p>
 </pre></div>
 </div>
 </section>
-<section id="standalone-executable-usage-notes">
-<span id="standalone-usage-notes"></span><h3>Standalone Executable Usage Notes<a class="headerlink" href="#standalone-executable-usage-notes" title="Link to this heading"></a></h3>
-<p>If you are using the MaudeSE standalone executable, you need to manually load the MaudeSE meta-interpreter file <a class="reference external" href="https://github.com/postechsv/maude-se/blob/main/src/maude-se-meta.maude">maude-se-meta.maude</a>, which depends on <a class="reference external" href="https://github.com/postechsv/maude-se/blob/main/src/smt-check.maude">smt-check.maude</a>.</p>
-<p>For example, to load the coffee machine example, load the following Maude files:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>./maude-se-z3<span class="w"> </span>smt.maude<span class="w"> </span>coffee.maude<span class="w"> </span>smt-check.maude<span class="w"> </span>maude-se-meta.maude
-</pre></div>
-</div>
-</section>
 </section>
 <hr class="docutils" />
 <section id="satisfiability-checking">
@@ -292,6 +284,20 @@ For example, you can check whether the following formula is satisfiable under th
     <span class="n">Y</span><span class="o">:</span><span class="n">Real</span> <span class="o">|--&gt;</span> <span class="o">-</span><span class="n">3</span><span class="o">/</span><span class="n">1</span>
 </pre></div>
 </div>
+<hr class="docutils" />
+</section>
+<section id="standalone-executable-usage-notes">
+<span id="standalone-usage-notes"></span><h2>Standalone Executable Usage Notes<a class="headerlink" href="#standalone-executable-usage-notes" title="Link to this heading"></a></h2>
+<p>If you are using the MaudeSE standalone executable, you need to manually load the MaudeSE meta-interpreter file <a class="reference external" href="https://github.com/postechsv/maude-se/blob/main/src/maude-se-meta.maude">maude-se-meta.maude</a>, which depends on <a class="reference external" href="https://github.com/postechsv/maude-se/blob/main/src/smt-check.maude">smt-check.maude</a>.</p>
+<p>For example, to load the coffee machine example, load the following Maude files:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>./maude-se-z3<span class="w"> </span>coffee.maude<span class="w"> </span>smt-check.maude<span class="w"> </span>maude-se-meta.maude
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The standalone version currently supports quantifier-free Boolean, Integer, and Real theories. Therefore, some examples that include SMT symbols from other theories (e.g., Array), or uninterpreted symbols used in the <a class="reference internal" href="cmds.html"><span class="doc">Analysis Commands</span></a>, <a class="reference internal" href="interface.html"><span class="doc">SMT Interface</span></a>, and <a class="reference internal" href="examples.html"><span class="doc">More examples</span></a> sections, are not supported.</p>
+</div>
+<hr class="docutils" />
 <div class="docutils container" id="id3">
 <div role="list" class="citation-list">
 <div class="citation" id="id4" role="doc-biblioentry">

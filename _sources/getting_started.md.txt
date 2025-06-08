@@ -196,18 +196,6 @@ MaudeSE> {fold} smt-search [1] < idle ; 0/1 ; 0/1 > < P1:Real ; P2:Real ; P3:Rea
 No more solutions.
 ```
 
-(standalone-usage-notes)=
-### Standalone Executable Usage Notes
-
-If you are using the MaudeSE standalone executable, you need to manually load the MaudeSE meta-interpreter file [maude-se-meta.maude](https://github.com/postechsv/maude-se/blob/main/src/maude-se-meta.maude), which depends on [smt-check.maude](https://github.com/postechsv/maude-se/blob/main/src/smt-check.maude).
-
-For example, to load the coffee machine example, load the following Maude files:
-
-```console
-$ ./maude-se-z3 smt.maude coffee.maude smt-check.maude maude-se-meta.maude
-```
-
-
 ---
 
 ## Satisfiability Checking
@@ -229,6 +217,25 @@ MaudeSE> show model .
     X:Real |--> -1/1
     Y:Real |--> -3/1
 ```
+
+---
+
+(standalone-usage-notes)=
+## Standalone Executable Usage Notes
+
+If you are using the MaudeSE standalone executable, you need to manually load the MaudeSE meta-interpreter file [maude-se-meta.maude](https://github.com/postechsv/maude-se/blob/main/src/maude-se-meta.maude), which depends on [smt-check.maude](https://github.com/postechsv/maude-se/blob/main/src/smt-check.maude).
+
+For example, to load the coffee machine example, load the following Maude files:
+
+```console
+$ ./maude-se-z3 coffee.maude smt-check.maude maude-se-meta.maude
+```
+
+```{warning}
+The standalone version currently supports quantifier-free Boolean, Integer, and Real theories. Therefore, some examples that include SMT symbols from other theories (e.g., Array), or uninterpreted symbols used in the {doc}`cmds`, {doc}`interface`, and {doc}`examples` sections, are not supported.
+```
+
+---
 
 ```{bibliography}
 ```
