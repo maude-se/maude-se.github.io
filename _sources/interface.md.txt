@@ -2,7 +2,7 @@
 
 ## Metalevel Functions
 
-MaudeSE provides three meta-level functions, defined in [smt.check](https://github.com/postechsv/maude-se/blob/main/src/smt-check.maude): 
+MaudeSE provides three meta-level functions defined in [smt-check.maude](https://github.com/postechsv/maude-se/blob/main/src/smt-check.maude): 
 
 * {ref}`metaSmtCheck`
 * {ref}`metaSmtSearch`
@@ -11,11 +11,12 @@ MaudeSE provides three meta-level functions, defined in [smt.check](https://gith
 (metaSmtCheck)=
 ### metaSmtCheck
 
-This function checks the satisfiability of SMT queries, as similar to `metaCheck`, but it can handle various theories 
-(with uninterpreted functions) and generate satisfying assignments.
+This function checks the satisfiability of SMT formulas, similar to `metaCheck`, but supports various theories 
+(including uninterpreted functions) and can generate satisfying assignments.
 
-The usage of `metaSmtCheck` is similar to `metaCheck` except that it takes 
-an SMT logic and a boolean flag as its arguments, where the flag decides whether to generate a satisfying assignment for the satisfiable case.
+The usage of `metaSmtCheck` is similar to that of `metaCheck`, except that it takes an SMT logic and a Boolean flag as additional arguments. 
+The flag determines whether to generate a satisfying assignment when the formula is satisfiable.
+
 ```maude
 op metaSmtCheck : Module Term Logic -> SmtCheckResult .
 eq metaSmtCheck(M:Module, TERM:Term, LOGIC:Logic) 
@@ -30,8 +31,8 @@ op metaSmtCheck : Module Term Logic Bool -> SmtCheckResult
             ...)] .
 ```
 
-The check result is given as a term of sort `SmtCheckResult`, which can be one of `unknown`, `true`, `false`, or `{_}`.
-The symbol `{_}` consists of a set of assignments, where each assignment is denoted as a term `_|->_`.
+The check result is returned as a term of sort `SmtCheckResult`, which can be one of `unknown`, `true`, `false`, or `{_}`.
+The `{_}` symbol represents a set of assignments, where each assignment is expressed as a term of the form `_|->_`.
 
 ```maude
 sort SmtCheckResult .
@@ -52,9 +53,9 @@ op _,_ : SatAssignmentSet SatAssignmentSet -> SatAssignmentSet [ctor comm assoc 
 (metaSmtSearch)=
 ### metaSmtSearch
 
-This function performs symbolic reachability analysis using rewriting modulo SMT, similar to `metaSmtSearch`, but also supports folding.
+This function performs symbolic reachability analysis using rewriting modulo SMT, similar to Maude's `metaSmtSearch`, but with additional support for folding.
 
-The usage of `metaSmtSearch` is similar to `metaSmtSearch` except that it takes a logic, a folding flag, and a merging flag as its arguments.
+The usage of `metaSmtSearch` is similar to the original, except that it takes an SMT logic, a folding flag, and a merging flag as additional arguments.
 
 ```maude
 op  metaSmtSearch : Module Term Term Condition Qid Bound Nat Qid Bool Bool ~> SmtResult2? .
@@ -85,7 +86,7 @@ This function takes the same argument as `metaSmtSearch` and performs the same s
 
 ## Core Maude Functions
 
-MaudeSE provides two core Maude-level functions, which are also defined in [smt.check](https://github.com/postechsv/maude-se/blob/main/src/smt-check.maude):
+MaudeSE provides two core Maude-level functions, both defined in [smt-check.maude](https://github.com/postechsv/maude-se/blob/main/src/smt-check.maude):
 
 * {ref}`smtCheck`
 * {ref}`simplifyFormula`
@@ -93,7 +94,7 @@ MaudeSE provides two core Maude-level functions, which are also defined in [smt.
 (smtCheck)=
 ### smtCheck
 
-This function checks the satisfiability of an SMT formula. The usage is similar to `metaSmtCheck`. 
+This function determines the satisfiability of an SMT formula. Its usage is similar to that of `metaSmtCheck`.
 
 
 ```maude
@@ -116,7 +117,7 @@ op smtCheck : BooleanExpr Logic Bool -> SmtCheckResult
 (simplifyFormula)=
 ### simplifyFormula
 
-This function obtains a simplified but equivalent SMT formula.
+This function returns a simplified yet equivalent SMT formula.
 
 ```maude
 op simplifyFormula : BooleanExpr -> BooleanExpr [special (id-hook SmtOpSymbol (simplify))] .
@@ -130,5 +131,5 @@ op simplifyFormula : RealExpr -> RealExpr [special (id-hook SmtOpSymbol (simplif
 ## Generic Interface
 
 ```{important}
-This will be updated in the near future.
+This section will be updated shortly.
 ```

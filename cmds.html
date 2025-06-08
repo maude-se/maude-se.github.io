@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Analysis Commands &mdash; MaudeSE v0.0.3 documentation</title>
+  <title>Analysis Commands &mdash; MaudeSE  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
@@ -15,7 +15,7 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=bc6a6d3b"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="_static/design-tabs.js?v=f930bc37"></script>
@@ -93,12 +93,13 @@
 </ul>
 <section id="check">
 <span id="id1"></span><h2>check<a class="headerlink" href="#check" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">check</span></code> command determines the satisfiability of boolean formulas. For a given module <code class="docutils literal notranslate"><span class="pre">M</span></code>, a boolean formula <code class="docutils literal notranslate"><span class="pre">f</span></code>, and an (optional) SMT theory <code class="docutils literal notranslate"><span class="pre">Th</span></code>,
-it determines the satisfiability of <code class="docutils literal notranslate"><span class="pre">f</span></code> under the theory <code class="docutils literal notranslate"><span class="pre">Th</span></code>.</p>
+<p>This command determines the satisfiability of Boolean formulas. Given a module <code class="docutils literal notranslate"><span class="pre">M</span></code>, a Boolean formula <code class="docutils literal notranslate"><span class="pre">f</span></code>, and an SMT theory <code class="docutils literal notranslate"><span class="pre">Th</span></code>,
+it checks whether <code class="docutils literal notranslate"><span class="pre">f</span></code> is satisfiable under <code class="docutils literal notranslate"><span class="pre">Th</span></code>.</p>
 <div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="k">check</span> <span class="n">in</span> <span class="n">M</span> <span class="o">:</span> <span class="n">f</span> <span class="k">using</span> <span class="n">Th</span> <span class="o">.</span>
 </pre></div>
 </div>
-<p>For example, consider a module <code class="docutils literal notranslate"><span class="pre">EUF-EX</span></code> (<a class="reference download internal" download="" href="_downloads/384288c0700c7b25381c5c824832d3c0/euf-ex.maude"><code class="xref download docutils literal notranslate"><span class="pre">euf-ex.maude</span></code></a>) that contains uninterpreted function symbols declared with <code class="docutils literal notranslate"><span class="pre">smt</span> <span class="pre">euf</span></code> using <code class="docutils literal notranslate"><span class="pre">metadata</span></code>.</p>
+<p>For example, consider the module <code class="docutils literal notranslate"><span class="pre">EUF-EX</span></code> (<a class="reference download internal" download="" href="_downloads/384288c0700c7b25381c5c824832d3c0/euf-ex.maude"><code class="xref download docutils literal notranslate"><span class="pre">euf-ex.maude</span></code></a>) which contains uninterpreted function symbols
+declared using <code class="docutils literal notranslate"><span class="pre">metadata</span></code> with <code class="docutils literal notranslate"><span class="pre">smt</span> <span class="pre">euf</span></code>.</p>
 <div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="k">fmod</span> <span class="n">EUF</span><span class="o">-</span><span class="n">EX</span> <span class="n">is</span>
   <span class="k">protecting</span> <span class="n">INTEGER</span> <span class="o">.</span>
   <span class="k">sort</span> <span class="n">A</span> <span class="o">.</span>
@@ -111,9 +112,9 @@ it determines the satisfiability of <code class="docutils literal notranslate"><
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>See <a class="reference internal" href="examples.html"><span class="doc">More examples</span></a> to how to declare SMT symbols using <code class="docutils literal notranslate"><span class="pre">metadata</span></code>.</p>
+<p>See <a class="reference internal" href="examples.html"><span class="doc">More examples</span></a> to learn how to declare SMT symbols using <code class="docutils literal notranslate"><span class="pre">metadata</span></code>.</p>
 </div>
-<p>We can check the satisfiability using the command as follows:</p>
+<p>You can check satisfiability using the following command:</p>
 <div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="k">check</span> <span class="n">in</span> <span class="n">EUF</span><span class="o">-</span><span class="n">EX</span> <span class="o">:</span> <span class="n">I</span><span class="o">:</span><span class="n">Integer</span> <span class="o">&gt;</span> <span class="n">2</span> <span class="n">and</span> 
             <span class="n">f</span><span class="o">(</span><span class="n">X</span><span class="o">:</span><span class="n">A</span><span class="o">)</span> <span class="o">===</span> <span class="o">(</span><span class="n">I</span><span class="o">:</span><span class="n">Integer</span> <span class="n">xor</span> <span class="n">J</span><span class="o">:</span><span class="n">Integer</span><span class="o">)</span> <span class="k">using</span> <span class="n">QF_UFLIA</span> <span class="o">.</span>
 <span class="n">result</span><span class="o">:</span> <span class="n">sat</span>
@@ -122,8 +123,8 @@ it determines the satisfiability of <code class="docutils literal notranslate"><
 </section>
 <section id="show-model">
 <span id="id2"></span><h2>show model<a class="headerlink" href="#show-model" title="Link to this heading"></a></h2>
-<p>The show model command returns the satisfying assignment, if any, for the last <code class="docutils literal notranslate"><span class="pre">check</span></code> command.
-For example, we can get the assigment of the above check example as follows:</p>
+<p>The show model command returns the satisfying assignment, if any, for the most recent <code class="docutils literal notranslate"><span class="pre">check</span></code> command.
+For example, you can obtain the assignment for the above check example as follows:</p>
 <div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="k">show model</span> <span class="o">.</span>
 
   <span class="n">assignment</span><span class="o">:</span>
@@ -134,13 +135,13 @@ For example, we can get the assigment of the above check example as follows:</p>
 </section>
 <section id="smt-search">
 <span id="id3"></span><h2>smt-search<a class="headerlink" href="#smt-search" title="Link to this heading"></a></h2>
-<p>This command performs symbolic reachability analysis, along with folding. Given an initial term <code class="docutils literal notranslate"><span class="pre">t</span></code>, a goal pattern <code class="docutils literal notranslate"><span class="pre">u</span></code>, and a goal condition <code class="docutils literal notranslate"><span class="pre">c</span></code>, the following command searches for <code class="docutils literal notranslate"><span class="pre">n</span></code> solutions that are reachable within <code class="docutils literal notranslate"><span class="pre">m</span></code> rewrite steps from <code class="docutils literal notranslate"><span class="pre">t</span></code>, match the goal pattern <code class="docutils literal notranslate"><span class="pre">u</span></code>, and satisfy the goal condition <code class="docutils literal notranslate"><span class="pre">c</span></code> under the SMT theory <code class="docutils literal notranslate"><span class="pre">Th</span></code>:</p>
+<p>This command performs symbolic reachability analysis with folding. Given an initial term <code class="docutils literal notranslate"><span class="pre">t</span></code>, a goal pattern <code class="docutils literal notranslate"><span class="pre">u</span></code>, and a goal condition <code class="docutils literal notranslate"><span class="pre">c</span></code>, it searches for the <code class="docutils literal notranslate"><span class="pre">n</span></code>-th solution that is reachable from <code class="docutils literal notranslate"><span class="pre">t</span></code> within <code class="docutils literal notranslate"><span class="pre">m</span></code> rewrite steps, matches the goal pattern <code class="docutils literal notranslate"><span class="pre">u</span></code>, and satisfies the condition <code class="docutils literal notranslate"><span class="pre">c</span></code> under the SMT theory <code class="docutils literal notranslate"><span class="pre">Th</span></code>:</p>
 <div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="o">{</span><span class="n">fold</span><span class="o">}</span> <span class="k">smt-search</span> <span class="o">[</span><span class="n">n</span><span class="o">,</span><span class="n">m</span><span class="o">]</span> <span class="n">in</span> <span class="n">M</span> <span class="o">:</span> <span class="n">t</span> <span class="o">=&gt;*</span> <span class="n">u</span> <span class="k">such that</span> <span class="n">c</span> <span class="k">using</span> <span class="n">Th</span> <span class="o">.</span>
 </pre></div>
 </div>
-<p>The arguments <code class="docutils literal notranslate"><span class="pre">{fold}</span></code>, <code class="docutils literal notranslate"><span class="pre">Th</span></code>, <code class="docutils literal notranslate"><span class="pre">n</span></code>, and <code class="docutils literal notranslate"><span class="pre">m</span></code> are optional. If <code class="docutils literal notranslate"><span class="pre">{fold}</span></code> is given, the command ignores constrained terms that are subsumed by other constrained terms.</p>
-<p>As an example, consider the coffee machine module, explained in <a class="reference internal" href="getting_started.html"><span class="doc">Getting started</span></a>.
-The following command finds the first solution that goes to the <code class="docutils literal notranslate"><span class="pre">cdone</span></code> state with all the clocks and parameters are greater than or equal to 0.</p>
+<p>The arguments <code class="docutils literal notranslate"><span class="pre">{fold}</span></code>, <code class="docutils literal notranslate"><span class="pre">n</span></code>, and <code class="docutils literal notranslate"><span class="pre">m</span></code> are optional. If <code class="docutils literal notranslate"><span class="pre">{fold}</span></code> is specified, the command ignores constrained terms that are subsumed by others.</p>
+<p>As an example, consider the coffee machine module, introduced in <a class="reference internal" href="getting_started.html"><span class="doc">Getting started</span></a>.
+The following command finds the first solution that reaches the <code class="docutils literal notranslate"><span class="pre">cdone</span></code> state, where all clocks and parameters are greater than or equal to 0.</p>
 <div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="o">{</span><span class="n">fold</span><span class="o">}</span> <span class="k">smt-search</span> <span class="o">[</span><span class="n">1</span><span class="o">]</span> <span class="n">in</span> <span class="n">COFFEE</span><span class="o">-</span><span class="n">MACHINE</span> <span class="o">:</span> 
             <span class="o">&lt;</span> <span class="n">idle</span> <span class="o">;</span> <span class="n">X</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">Y</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="n">P1</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P2</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P3</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> <span class="o">=&gt;*</span> 
             <span class="o">&lt;</span> <span class="n">cdone</span> <span class="o">;</span> <span class="n">X&#39;</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">Y&#39;</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="n">P1</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P2</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P3</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> 
@@ -174,8 +175,8 @@ The following command finds the first solution that goes to the <code class="doc
 </section>
 <section id="show-smt-path">
 <span id="id4"></span><h2>show smt-path<a class="headerlink" href="#show-smt-path" title="Link to this heading"></a></h2>
-<p>This command returns a symbolic/concrete path of the last <code class="docutils literal notranslate"><span class="pre">smt-search</span></code> result. It takes a path type (either symbolic or concrete). A symbolic path is given by a sequence of contracted terms and rewrite rules. The corresponding concrete path is an instance of the symbolic path with a satisfying assignment.</p>
-<p>For example, the following commands show the symbolic and concrete paths of the above <code class="docutils literal notranslate"><span class="pre">smt-search</span></code> command.</p>
+<p>This command returns either a symbolic or concrete path for the most recent <code class="docutils literal notranslate"><span class="pre">smt-search</span></code> result. It takes a path type as an argument (symbolic or concrete).</p>
+<p>A symbolic path consists of a sequence of contracted terms and rewrite rules. The corresponding concrete path is an instance of the symbolic path instantiated with a satisfying assignment. For example, the following show the symbolic and concrete paths of the above search command.</p>
 <div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="k">show smt-path</span> <span class="n">concrete</span> <span class="o">.</span>
 <span class="o">&lt;</span> <span class="n">idle</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span>
 <span class="o">=====[</span><span class="n">toAddsugar</span><span class="o">]=====&gt;</span>
@@ -207,8 +208,8 @@ The following command finds the first solution that goes to the <code class="doc
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024-2025, Geunyeol Yu.
-      <span class="lastupdated">Last updated on Jun 08, 2025.
+    <p>&#169; Copyright 2019-2025, Geunyeol Yu.
+      <span class="lastupdated">Last updated on Jun 09, 2025.
       </span></p>
   </div>
 

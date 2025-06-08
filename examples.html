@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>More examples &mdash; MaudeSE v0.0.3 documentation</title>
+  <title>More examples &mdash; MaudeSE  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
@@ -15,7 +15,7 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=bc6a6d3b"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="_static/design-tabs.js?v=f930bc37"></script>
@@ -108,22 +108,22 @@
 </table>
 <section id="smt-check-ex-maude">
 <h2>smt-check-ex.maude<a class="headerlink" href="#smt-check-ex-maude" title="Link to this heading"></a></h2>
-<p>This file demonstrates the usage of <code class="docutils literal notranslate"><span class="pre">check</span></code> using various theories and formulas including interpreted and uninterpreted symbols.
-The file contains four functional module:</p>
+<p>This file demonstrates the usage of <code class="docutils literal notranslate"><span class="pre">check</span></code> with various theories and formulas, including both interpreted and uninterpreted symbols.
+It contains four functional modules:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">SIMPLE</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">EUF</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">EUF-ARRAY</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">EUF-XOR</span></code></p></li>
 </ul>
-<p><strong>1. The <code class="docutils literal notranslate"><span class="pre">SIMPLE</span></code> module</strong>: This module simply imports <code class="docutils literal notranslate"><span class="pre">INTEGER</span></code> module.</p>
+<p><strong>1. The <code class="docutils literal notranslate"><span class="pre">SIMPLE</span></code> module</strong>: A minimal example that imports the INTEGER module.</p>
 <div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="k">fmod</span> <span class="n">SIMPLE</span> <span class="n">is</span>
   <span class="n">pr</span> <span class="n">INTEGER</span> <span class="o">.</span>
   <span class="n">pr</span> <span class="n">META</span><span class="o">-</span><span class="n">SMT</span><span class="o">-</span><span class="n">CHECK</span> <span class="o">.</span>
 <span class="k">endfm</span>
 </pre></div>
 </div>
-<p><strong>2. The <code class="docutils literal notranslate"><span class="pre">EUF</span></code> module</strong>: This module defines a new sort <code class="docutils literal notranslate"><span class="pre">A</span></code> and an uninterpreted symbol <code class="docutils literal notranslate"><span class="pre">f</span></code>.</p>
+<p><strong>2. The <code class="docutils literal notranslate"><span class="pre">EUF</span></code> module</strong>: Defines a new sort <code class="docutils literal notranslate"><span class="pre">A</span></code> and declares <code class="docutils literal notranslate"><span class="pre">f</span></code> as an uninterpreted function symbol.</p>
 <div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="k">fmod</span> <span class="n">EUF</span> <span class="n">is</span>
   <span class="n">pr</span> <span class="n">BOOLEAN</span> <span class="o">.</span>
 
@@ -134,7 +134,7 @@ The file contains four functional module:</p>
 <span class="k">endfm</span>
 </pre></div>
 </div>
-<p><strong>3. The <code class="docutils literal notranslate"><span class="pre">EUF-ARRAY</span></code> module</strong>: This module connects interpreted symbols from the <code class="docutils literal notranslate"><span class="pre">Array</span></code> theory to Maude operators.</p>
+<p><strong>3. The <code class="docutils literal notranslate"><span class="pre">EUF-ARRAY</span></code> module</strong>: Connects interpreted symbols from the SMT theory to Maude operators.</p>
 <div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="k">fmod</span> <span class="n">ARRAY</span> <span class="n">is</span>
   <span class="n">pr</span> <span class="n">REAL</span><span class="o">-</span><span class="n">INTEGER</span> <span class="o">.</span>
 
@@ -147,22 +147,26 @@ The file contains four functional module:</p>
 <span class="k">endfm</span>
 </pre></div>
 </div>
-<p><strong>4. The <code class="docutils literal notranslate"><span class="pre">EUF-XOR</span></code> module</strong>: This module contains a single uninterpreted symbol.</p>
+<p><strong>4. The <code class="docutils literal notranslate"><span class="pre">EUF-XOR</span></code> module</strong>: Contains a single uninterpreted symbol.</p>
 <div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="k">fmod</span> <span class="n">EUF</span><span class="o">-</span><span class="n">XOR</span> <span class="n">is</span>
   <span class="n">pr</span> <span class="n">INTEGER</span> <span class="o">.</span>
   <span class="k">op</span> <span class="n">_xor_</span> <span class="o">:</span> <span class="n">Integer</span> <span class="n">Integer</span> <span class="o">-&gt;</span> <span class="n">Integer</span> <span class="o">[</span><span class="n">metadata</span> <span class="s">&quot;</span><span class="n">smt</span> <span class="n">euf</span><span class="s">&quot;</span><span class="o">]</span> <span class="o">.</span>
 <span class="k">endfm</span>
 </pre></div>
 </div>
-<p>As the modules <code class="docutils literal notranslate"><span class="pre">EUF</span></code> and <code class="docutils literal notranslate"><span class="pre">EUF-XOR</span></code> show, we can declare uninterpreted symbols by declaring operators and annotating them as uninterpreted symbols
-using the <code class="docutils literal notranslate"><span class="pre">metadata</span></code> attribute. For example, the uninterpreted symbol <code class="docutils literal notranslate"><span class="pre">f</span></code> of <code class="docutils literal notranslate"><span class="pre">EUF</span></code> is annotated with metadata <code class="docutils literal notranslate"><span class="pre">smt</span> <span class="pre">euf</span></code>, meaning that
-the operator is an SMT symbol (<code class="docutils literal notranslate"><span class="pre">smt</span></code>) and an uninterpreted symbol (<code class="docutils literal notranslate"><span class="pre">euf</span></code>).</p>
-<p>Another module <code class="docutils literal notranslate"><span class="pre">ARRAY</span></code> show how to connect interpreted symbol to Maude. We also use the <code class="docutils literal notranslate"><span class="pre">metadata</span></code> attribute.
-For example, we use the metadata <code class="docutils literal notranslate"><span class="pre">smt</span> <span class="pre">array:select</span></code> to denote the interpreted symbol <code class="docutils literal notranslate"><span class="pre">select</span></code> of the <code class="docutils literal notranslate"><span class="pre">array</span></code> theory.
-In addition, we can connect a single interpreted symbol to different Maude operators. For example, we connect the <code class="docutils literal notranslate"><span class="pre">select</span></code> to <code class="docutils literal notranslate"><span class="pre">select</span></code> and <code class="docutils literal notranslate"><span class="pre">_[_]</span></code> in
-the <code class="docutils literal notranslate"><span class="pre">ARRAY</span></code> module.</p>
-<p>We can check the satisfiability of various formulas under EUF and Array theories.
-For example, we can check the satisfiability of the following formula using the QF_UF logic. More example commands can be found in the file.</p>
+<p>As shown in the <code class="docutils literal notranslate"><span class="pre">EUF</span></code> and <code class="docutils literal notranslate"><span class="pre">EUF-XOR</span></code> modules, uninterpreted symbols can be declared by defining operators and annotating them with the <code class="docutils literal notranslate"><span class="pre">metadata</span></code> attribute.
+For example, the uninterpreted symbol <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">EUF</span></code> is annotated with metadata <code class="docutils literal notranslate"><span class="pre">smt</span> <span class="pre">euf</span></code>, indicating that the operator is both an SMT symbol (<code class="docutils literal notranslate"><span class="pre">smt</span></code>)
+and an uninterpreted function (<code class="docutils literal notranslate"><span class="pre">euf</span></code>).</p>
+<p>Another module, <code class="docutils literal notranslate"><span class="pre">ARRAY</span></code>, shows how to connect interpreted symbols to Maude using the <code class="docutils literal notranslate"><span class="pre">metadata</span></code> attribute.
+For example, the metadata <code class="docutils literal notranslate"><span class="pre">smt</span> <span class="pre">array:select</span></code> is used to denote the interpreted symbol <code class="docutils literal notranslate"><span class="pre">select</span></code> from the <code class="docutils literal notranslate"><span class="pre">array</span></code> theory.
+Additionally, a single interpreted symbol can be connected to multiple Maude operators.
+In the ARRAY module, for instance, <code class="docutils literal notranslate"><span class="pre">select</span></code> is associated with both <code class="docutils literal notranslate"><span class="pre">select</span></code> and <code class="docutils literal notranslate"><span class="pre">_[_]</span></code>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>To connect interpreted symbols to Maude, you need to extend or implement an SMT <a class="reference external" href="https://github.com/postechsv/maude-se/tree/main/src/pysmt/converter">converter</a>.</p>
+</div>
+<p>As usual, we can check the satisfiability of various formulas under the EUF and Array theories.
+For example, the following formula can be checked using the QF_UF logic. Additional example commands are available in the file.</p>
 <div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="k">check</span> <span class="n">in</span> <span class="n">EUF</span> <span class="o">:</span> <span class="n">f</span><span class="o">(</span><span class="n">f</span><span class="o">(</span><span class="n">X</span><span class="o">:</span><span class="n">A</span><span class="o">))</span> <span class="o">===</span> <span class="n">X</span><span class="o">:</span><span class="n">A</span> <span class="n">and</span> <span class="n">f</span><span class="o">(</span><span class="n">X</span><span class="o">:</span><span class="n">A</span><span class="o">)</span> <span class="o">===</span> <span class="n">Y</span><span class="o">:</span><span class="n">A</span> 
                         <span class="n">and</span> <span class="n">not</span> <span class="o">(</span><span class="n">X</span><span class="o">:</span><span class="n">A</span> <span class="o">===</span> <span class="n">Y</span><span class="o">:</span><span class="n">A</span><span class="o">)</span> <span class="k">using</span> <span class="n">QF_UF</span> <span class="o">.</span>
 <span class="n">result</span><span class="o">:</span> <span class="n">sat</span>
@@ -183,8 +187,8 @@ red metaSmtCheck(upModule('EUF-XOR, false), upTerm(0 <= (N xor 255)), 'QF_UFLIA,
 <hr class="docutils" />
 <section id="smt-check-meta-ex-maude">
 <h2>smt-check-meta-ex.maude<a class="headerlink" href="#smt-check-meta-ex-maude" title="Link to this heading"></a></h2>
-<p>This file contains the usage of <code class="docutils literal notranslate"><span class="pre">metaSmtCheck</span></code> with several usage examples.
-The satisfiability can be checked as explained in <a class="reference internal" href="cmds.html"><span class="doc">Analysis Commands</span></a>.</p>
+<p>This file demonstrates the usage of <code class="docutils literal notranslate"><span class="pre">metaSmtCheck</span></code> with several usage examples.
+Satisfiability checking can be performed as explained in <a class="reference internal" href="interface.html"><span class="doc">SMT Interface</span></a>.</p>
 <!-- We can run the `smt-check-ex.maude` file with CVC5 using the following command:
 ```
 ~/maude-se-linux$ maude-se smt-check-ex.maude -s cvc5
@@ -235,7 +239,7 @@ result SmtCheckResult: {('N:Integer |-> '1.Integer),{"_xor_" |-> "(lambda ((_arg
 </section>
 <section id="smt-search-ex-maude">
 <span id="smt-search-ex"></span><h2>smt-search-ex.maude<a class="headerlink" href="#smt-search-ex-maude" title="Link to this heading"></a></h2>
-<p>This file provides examples for <code class="docutils literal notranslate"><span class="pre">smt-search</span></code> using <code class="docutils literal notranslate"><span class="pre">gcd</span></code> and <code class="docutils literal notranslate"><span class="pre">robot</span></code> examples.</p>
+<p>This file includes examples demonstrating the use of <code class="docutils literal notranslate"><span class="pre">smt-search</span></code> with the <code class="docutils literal notranslate"><span class="pre">gcd</span></code> and <code class="docutils literal notranslate"><span class="pre">robot</span></code> modules.</p>
 <div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="k">mod</span> <span class="n">GCD</span> <span class="n">is</span>
   <span class="n">pr</span> <span class="n">INTEGER</span> <span class="o">.</span>
 
@@ -247,12 +251,12 @@ result SmtCheckResult: {('N:Integer |-> '1.Integer),{"_xor_" |-> "(lambda ((_arg
 
   <span class="k">crl</span> <span class="o">[</span><span class="n">r1</span><span class="o">]</span> <span class="o">:</span> <span class="n">gcd</span><span class="o">(</span><span class="n">X</span><span class="o">,</span> <span class="n">Y</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">gcd</span><span class="o">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">Y</span><span class="o">,</span> <span class="n">Y</span><span class="o">)</span> <span class="k">if</span> <span class="n">X</span> <span class="o">&gt;</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">true</span> <span class="o">[</span><span class="k">nonexec</span><span class="o">]</span> <span class="o">.</span>
   <span class="k">crl</span> <span class="o">[</span><span class="n">r2</span><span class="o">]</span> <span class="o">:</span> <span class="n">gcd</span><span class="o">(</span><span class="n">X</span><span class="o">,</span> <span class="n">Y</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">gcd</span><span class="o">(</span><span class="n">X</span><span class="o">,</span> <span class="n">Y</span> <span class="o">-</span> <span class="n">X</span><span class="o">)</span> <span class="k">if</span> <span class="n">X</span> <span class="o">&lt;</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">true</span> <span class="o">[</span><span class="k">nonexec</span><span class="o">]</span> <span class="o">.</span>
-  <span class="k">crl</span> <span class="o">[</span><span class="n">r3</span><span class="o">]</span> <span class="o">:</span> <span class="n">gcd</span><span class="o">(</span><span class="n">X</span><span class="o">,</span> <span class="n">Y</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">return</span> <span class="o">(</span><span class="n">X</span><span class="o">)</span> <span class="k">if</span> <span class="n">X</span> <span class="o">===</span> <span class="n">Y</span>  <span class="o">=</span> <span class="n">true</span> <span class="o">[</span><span class="k">nonexec</span><span class="o">]</span> <span class="o">.</span>
+   <span class="k">rl</span> <span class="o">[</span><span class="n">r3</span><span class="o">]</span> <span class="o">:</span> <span class="n">gcd</span><span class="o">(</span><span class="n">X</span><span class="o">,</span> <span class="n">X</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">return</span> <span class="o">(</span><span class="n">X</span><span class="o">)</span> <span class="o">.</span>
 <span class="k">endm</span>
 </pre></div>
 </div>
 <p>The following command searches for the first solution term that matches <code class="docutils literal notranslate"><span class="pre">return(J)</span></code> and satisfies
-the consition <code class="docutils literal notranslate"><span class="pre">I</span> <span class="pre">&lt;</span> <span class="pre">9</span> <span class="pre">and</span> <span class="pre">I</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>, starting from an initial term <code class="docutils literal notranslate"><span class="pre">gcd(10,</span> <span class="pre">I)</span></code> under the <code class="docutils literal notranslate"><span class="pre">QF_LRA</span></code> logic.</p>
+the consition <code class="docutils literal notranslate"><span class="pre">I</span> <span class="pre">&lt;</span> <span class="pre">9</span> <span class="pre">and</span> <span class="pre">I</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>, starting from the initial term <code class="docutils literal notranslate"><span class="pre">gcd(10,</span> <span class="pre">I)</span></code> under the <code class="docutils literal notranslate"><span class="pre">QF_LRA</span></code> logic.</p>
 <div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="k">smt-search</span> <span class="o">[</span><span class="n">1</span><span class="o">]</span> <span class="n">in</span> <span class="n">GCD</span> <span class="o">:</span> <span class="n">gcd</span><span class="o">(</span><span class="n">10</span><span class="o">,</span> <span class="n">I</span><span class="o">:</span><span class="n">Integer</span><span class="o">)</span> <span class="o">=&gt;*</span> <span class="n">return</span><span class="o">(</span><span class="n">J</span><span class="o">:</span><span class="n">Integer</span><span class="o">)</span> 
                 <span class="k">such that</span> <span class="n">I</span><span class="o">:</span><span class="n">Integer</span> <span class="o">&gt;</span> <span class="n">0</span> <span class="n">and</span> <span class="n">I</span><span class="o">:</span><span class="n">Integer</span> <span class="o">&lt;</span> <span class="n">9</span> <span class="k">using</span> <span class="n">QF_LRA</span> <span class="o">.</span>
 
@@ -320,8 +324,8 @@ the consition <code class="docutils literal notranslate"><span class="pre">I</sp
 <span class="k">endom</span>
 </pre></div>
 </div>
-<p>This command searches for the first solution, with the <code class="docutils literal notranslate"><span class="pre">QF_NRA</span></code> logic, that matches the goal pattern <code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">r</span> <span class="pre">:</span> <span class="pre">Robot</span> <span class="pre">|</span> <span class="pre">pos</span> <span class="pre">:</span> <span class="pre">[NPX,</span> <span class="pre">NPY],</span> <span class="pre">ATTRSET</span> <span class="pre">&gt;</span></code>
-and satisfies the consition <code class="docutils literal notranslate"><span class="pre">NPX</span> <span class="pre">===</span> <span class="pre">10/1</span> <span class="pre">and</span> <span class="pre">NPY</span> <span class="pre">===</span> <span class="pre">10/1</span></code>, starting from an initial term, where all its attributes are zeros.</p>
+<p>This command searches for the first solution, using the <code class="docutils literal notranslate"><span class="pre">QF_NRA</span></code> logic, that matches the goal pattern <code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">r</span> <span class="pre">:</span> <span class="pre">Robot</span> <span class="pre">|</span> <span class="pre">pos</span> <span class="pre">:</span> <span class="pre">[NPX,</span> <span class="pre">NPY],</span> <span class="pre">ATTRSET</span> <span class="pre">&gt;</span></code>
+and satisfies the consition <code class="docutils literal notranslate"><span class="pre">NPX</span> <span class="pre">===</span> <span class="pre">10/1</span> <span class="pre">and</span> <span class="pre">NPY</span> <span class="pre">===</span> <span class="pre">10/1</span></code>, starting from an initial term where all its attributes are set to zeros.</p>
 <div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="k">smt-search</span> <span class="o">[</span><span class="n">1</span><span class="o">]</span> <span class="n">in</span> <span class="n">ROBOT</span><span class="o">-</span><span class="n">DYNAMICS</span> <span class="o">:</span>
               <span class="o">&lt;</span> <span class="n">r</span> <span class="o">:</span> <span class="n">Robot</span> <span class="o">|</span> <span class="n">pos</span> <span class="o">:</span> <span class="o">[</span><span class="n">IPX</span><span class="o">:</span><span class="n">Real</span><span class="o">,</span> <span class="n">IPY</span><span class="o">:</span><span class="n">Real</span><span class="o">],</span> <span class="n">vel</span> <span class="o">:</span> <span class="o">[</span><span class="n">IVX</span><span class="o">:</span><span class="n">Real</span><span class="o">,</span> <span class="n">IVY</span><span class="o">:</span><span class="n">Real</span><span class="o">],</span> 
                             <span class="n">acc</span> <span class="o">:</span> <span class="o">[</span><span class="n">IAX</span><span class="o">:</span><span class="n">Real</span><span class="o">,</span> <span class="n">IAY</span><span class="o">:</span><span class="n">Real</span><span class="o">],</span> <span class="n">time</span> <span class="o">:</span> <span class="n">CLK</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span>
@@ -357,16 +361,16 @@ and satisfies the consition <code class="docutils literal notranslate"><span cla
 <hr class="docutils" />
 <section id="smt-search-meta-ex-maude">
 <h2>smt-search-meta-ex.maude<a class="headerlink" href="#smt-search-meta-ex-maude" title="Link to this heading"></a></h2>
-<p>This file contains the usage of <code class="docutils literal notranslate"><span class="pre">metaSmtSearch</span></code>, corresponding to the two commands explained in the previous <a class="reference internal" href="#smt-search-ex"><span class="std std-ref">section</span></a>.</p>
+<p>This file demonstrates the usage of <code class="docutils literal notranslate"><span class="pre">metaSmtSearch</span></code>, corresponding to the two commands described in the previous <a class="reference internal" href="#smt-search-ex"><span class="std std-ref">section</span></a>.</p>
 </section>
 <hr class="docutils" />
 <section id="module-restrictions">
 <h2>Module restrictions<a class="headerlink" href="#module-restrictions" title="Link to this heading"></a></h2>
-<p>Currently, we make several restrictions to rewrite rules and equations:</p>
+<p>Currently, we impose several restrictions on rewrite rules and equations:</p>
 <ul class="simple">
-<li><p>Rewrite rules should not have non-SMT constraints in their conditions.</p></li>
-<li><p>Equations should not contradict or conflict with SMT theories.</p></li>
-<li><p>When defining and connecting SMT symbols using metadata, one should not use equational axiom attritues (e.g., assoc, comm, id) and the metadata attributes together.</p></li>
+<li><p>The condition of a rewrite rule must be decomposed into pure SMT and non-SMT conditions.</p></li>
+<li><p>Equations must not contradict or conflict with SMT theories.</p></li>
+<li><p>When defining and connecting SMT symbols using metadata, equational axiom attributes (e.g., assoc, comm, id) must not be used together with metadata attributes.</p></li>
 </ul>
 </section>
 </section>
@@ -381,8 +385,8 @@ and satisfies the consition <code class="docutils literal notranslate"><span cla
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024-2025, Geunyeol Yu.
-      <span class="lastupdated">Last updated on Jun 08, 2025.
+    <p>&#169; Copyright 2019-2025, Geunyeol Yu.
+      <span class="lastupdated">Last updated on Jun 09, 2025.
       </span></p>
   </div>
 

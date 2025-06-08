@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Getting started &mdash; MaudeSE v0.0.3 documentation</title>
+  <title>Getting started &mdash; MaudeSE  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
@@ -15,7 +15,7 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=bc6a6d3b"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="_static/design-tabs.js?v=f930bc37"></script>
@@ -52,6 +52,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#symbolic-reachability-analysis">Symbolic Reachability Analysis</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#basic-usage">Basic Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#state-space-reduction">State Space Reduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#standalone-executable-usage-notes">Standalone Executable Usage Notes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#satisfiability-checking">Satisfiability Checking</a></li>
@@ -142,11 +143,15 @@
 <h2>Symbolic Reachability Analysis<a class="headerlink" href="#symbolic-reachability-analysis" title="Link to this heading"></a></h2>
 <section id="basic-usage">
 <h3>Basic Usage<a class="headerlink" href="#basic-usage" title="Link to this heading"></a></h3>
-<p>Use the following commmand to load the coffee machine maude file and set SMT solver to Yices2.</p>
+<p>Use the following commmand to load the example Maude file and set the SMT solver to Yices2.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>maude-se<span class="w"> </span>coffee.maude<span class="w"> </span>-s<span class="w"> </span>yices
 </pre></div>
 </div>
-<p>If successful, you can see the MaudeSE interpreter as follows.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Refer to the section below (<a class="reference internal" href="#standalone-usage-notes"><span class="std std-ref">Standalone Executable Usage Notes</span></a>) to learn how to use the MaudeSE standalone executable, which differs slightly.</p>
+</div>
+<p>If successful, the MaudeSE interpreter will appear as follows.</p>
 <div class="highlight-maude notranslate"><div class="highlight"><pre><span></span>          <span class="o">===================================</span>
                         <span class="n">MaudeSE</span>
                <span class="o">(</span><span class="n">0</span><span class="o">.</span><span class="n">0</span><span class="o">.</span><span class="n">3</span> <span class="n">built</span><span class="o">:</span> <span class="n">June</span> <span class="n">6</span> <span class="n">2025</span><span class="o">)</span>
@@ -164,14 +169,14 @@
 <p>Use the <code class="docutils literal notranslate"><span class="pre">smt-search</span></code> command to perform symbolic reachability analysis.
 For example, you can find the first solution where the coffee machine is in the <code class="docutils literal notranslate"><span class="pre">cdone</span></code> state
 and <code class="docutils literal notranslate"><span class="pre">P1</span></code>, <code class="docutils literal notranslate"><span class="pre">P2</span></code>, and <code class="docutils literal notranslate"><span class="pre">P3</span></code> are all positive real numbers,
-starting from the <code class="docutils literal notranslate"><span class="pre">idle</span></code> state with a positive real number <code class="docutils literal notranslate"><span class="pre">X1</span></code> is equal to <code class="docutils literal notranslate"><span class="pre">X2</span></code>.</p>
+starting from the <code class="docutils literal notranslate"><span class="pre">idle</span></code> state with a positive real number <code class="docutils literal notranslate"><span class="pre">X1</span></code> equal to <code class="docutils literal notranslate"><span class="pre">X2</span></code>.</p>
 <div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="k">smt-search</span> <span class="o">[</span><span class="n">1</span><span class="o">]</span> <span class="o">[</span> <span class="n">idle</span> <span class="o">;</span> <span class="n">X1</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">X2</span><span class="o">:</span><span class="n">Real</span> <span class="o">]</span> <span class="o">&lt;</span> <span class="n">P1</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P2</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P3</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> 
                  <span class="o">=&gt;*</span> <span class="o">&lt;</span> <span class="n">cdone</span> <span class="o">;</span> <span class="n">X1&#39;</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">X2&#39;</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="n">P1</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P2</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P3</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span>
       <span class="k">such that</span> <span class="n">X1</span><span class="o">:</span><span class="n">Real</span> <span class="o">===</span> <span class="n">X2</span><span class="o">:</span><span class="n">Real</span> <span class="n">and</span> <span class="n">X1</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> 
                 <span class="n">P1</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> <span class="n">P2</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> <span class="n">P3</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="k">using</span> <span class="n">QF_LRA</span> <span class="o">.</span>
 </pre></div>
 </div>
-<p>The command finds the first solution as follows.</p>
+<p>The command returns the first solution as follows.</p>
 <div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">Solution</span> <span class="n">1</span> <span class="o">(</span><span class="n">state</span> <span class="n">13</span><span class="o">)</span>
 
 <span class="n">Symbolic</span> <span class="n">state</span><span class="o">:</span>
@@ -204,7 +209,7 @@ starting from the <code class="docutils literal notranslate"><span class="pre">i
  <span class="o">&lt;</span> <span class="n">cdone</span> <span class="o">;</span> <span class="n">10</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">10</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span>
 </pre></div>
 </div>
-<p>To get the concrete path of the analysis, use the <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">smt-path</span></code> command.</p>
+<p>To display the concrete path of the analysis, use the <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">smt-path</span></code> command.</p>
 <div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="k">show smt-path</span> <span class="n">concrete</span> <span class="o">.</span>
 
 <span class="o">[</span><span class="n">idle</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span><span class="o">]&lt;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span>
@@ -224,7 +229,7 @@ starting from the <code class="docutils literal notranslate"><span class="pre">i
 <span class="o">&lt;</span> <span class="n">cdone</span> <span class="o">;</span> <span class="n">10</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">10</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span>
 </pre></div>
 </div>
-<p>Otherwise, to get the symbolic path, use the following command.</p>
+<p>Alternatively, to obtain the symbolic path, use the following command.</p>
 <div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="k">show smt-path</span> <span class="n">symbolic</span> <span class="o">.</span>
 
 <span class="n">Constrained</span> <span class="n">Term</span><span class="o">:</span>
@@ -242,7 +247,7 @@ starting from the <code class="docutils literal notranslate"><span class="pre">i
 <section id="state-space-reduction">
 <h3>State Space Reduction<a class="headerlink" href="#state-space-reduction" title="Link to this heading"></a></h3>
 <p>MaudeSE supports a well-known state space reduction technique for symbolic reachability analysis: folding.
-To illustrate this method, consider the following search command, which does not terminate due to an infinite number of states.</p>
+To illustrate this method, consider the following search command, which fails to terminate due to an infinite number of states.</p>
 <div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="k">smt-search</span> <span class="o">[</span><span class="n">1</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">idle</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="n">P1</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P2</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P3</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> 
                     <span class="o">=&gt;*</span> <span class="o">&lt;</span> <span class="n">L</span><span class="o">:</span><span class="n">Location</span> <span class="o">;</span> <span class="n">X&#39;</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">Y&#39;</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="n">P1</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P2</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P3</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> 
   <span class="k">such that</span> <span class="n">X&#39;</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> <span class="n">Y&#39;</span><span class="o">:</span><span class="n">Real</span> <span class="n">and</span> <span class="n">P1</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> <span class="n">P2</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> <span class="n">P3</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> 
@@ -250,14 +255,22 @@ To illustrate this method, consider the following search command, which does not
 </pre></div>
 </div>
 <p>To reduce the number of symbolic states, use the <code class="docutils literal notranslate"><span class="pre">{fold}</span></code> option with the <code class="docutils literal notranslate"><span class="pre">smt-search</span></code> command.
-For example, the following command makes the state space finite, allowing it to exhaustively search the entire state space
-and report that no such solution exists.</p>
+For example, the following command makes the state space finite, enabling an exhaustive search that correctly
+reports the absence of such a solution.</p>
 <div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="n">MaudeSE</span><span class="o">&gt;</span> <span class="o">{</span><span class="n">fold</span><span class="o">}</span> <span class="k">smt-search</span> <span class="o">[</span><span class="n">1</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">idle</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">;</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="n">P1</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P2</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P3</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> 
              <span class="o">=&gt;*</span> <span class="o">&lt;</span> <span class="n">L</span><span class="o">:</span><span class="n">Location</span> <span class="o">;</span> <span class="n">X&#39;</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">Y&#39;</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="n">P1</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P2</span><span class="o">:</span><span class="n">Real</span> <span class="o">;</span> <span class="n">P3</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> 
   <span class="k">such that</span> <span class="n">X&#39;</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> <span class="n">Y&#39;</span><span class="o">:</span><span class="n">Real</span> <span class="n">and</span> <span class="n">P1</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> <span class="n">P2</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> <span class="n">P3</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">/</span><span class="n">1</span> <span class="n">and</span> 
             <span class="n">2</span><span class="o">/</span><span class="n">1</span> <span class="o">*</span> <span class="n">P1</span><span class="o">:</span><span class="n">Real</span> <span class="o">&gt;</span> <span class="n">P2</span><span class="o">:</span><span class="n">Real</span> <span class="k">using</span> <span class="n">QF_LRA</span> <span class="o">.</span>
 
 <span class="n">No</span> <span class="n">more</span> <span class="n">solutions</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="standalone-executable-usage-notes">
+<span id="standalone-usage-notes"></span><h3>Standalone Executable Usage Notes<a class="headerlink" href="#standalone-executable-usage-notes" title="Link to this heading"></a></h3>
+<p>If you are using the MaudeSE standalone executable, you need to manually load the MaudeSE meta-interpreter file <a class="reference external" href="https://github.com/postechsv/maude-se/blob/main/src/maude-se-meta.maude">maude-se-meta.maude</a>, which depends on <a class="reference external" href="https://github.com/postechsv/maude-se/blob/main/src/smt-check.maude">smt-check.maude</a>.</p>
+<p>For example, to load the coffee machine example, load the following Maude files:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>./maude-se-z3<span class="w"> </span>smt.maude<span class="w"> </span>coffee.maude<span class="w"> </span>smt-check.maude<span class="w"> </span>maude-se-meta.maude
 </pre></div>
 </div>
 </section>
@@ -302,8 +315,8 @@ For example, you can check whether the following formula is satisfiable under th
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024-2025, Geunyeol Yu.
-      <span class="lastupdated">Last updated on Jun 08, 2025.
+    <p>&#169; Copyright 2019-2025, Geunyeol Yu.
+      <span class="lastupdated">Last updated on Jun 09, 2025.
       </span></p>
   </div>
 

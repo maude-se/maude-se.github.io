@@ -10,14 +10,15 @@ MaudeSE provides various analysis commands:
 (check)=
 ## check
 
-The `check` command determines the satisfiability of boolean formulas. For a given module `M`, a boolean formula `f`, and an (optional) SMT theory `Th`,
-it determines the satisfiability of `f` under the theory `Th`.
+This command determines the satisfiability of Boolean formulas. Given a module `M`, a Boolean formula `f`, and an SMT theory `Th`,
+it checks whether `f` is satisfiable under `Th`.
 
 ```maude
 MaudeSE> check in M : f using Th .
 ```
 
-For example, consider a module `EUF-EX` ({download}`euf-ex.maude <assets/euf-ex.maude>`) that contains uninterpreted function symbols declared with `smt euf` using `metadata`.
+For example, consider the module `EUF-EX` ({download}`euf-ex.maude <assets/euf-ex.maude>`) which contains uninterpreted function symbols 
+declared using `metadata` with `smt euf`.
 
 ```maude
 fmod EUF-EX is
@@ -31,10 +32,10 @@ endfm
 ```
 
 ```{note}
-See {doc}`examples` to how to declare SMT symbols using `metadata`.
+See {doc}`examples` to learn how to declare SMT symbols using `metadata`.
 ```
 
-We can check the satisfiability using the command as follows:
+You can check satisfiability using the following command:
 
 ```maude
 MaudeSE> check in EUF-EX : I:Integer > 2 and 
@@ -45,8 +46,8 @@ result: sat
 (show-model)=
 ## show model
 
-The show model command returns the satisfying assignment, if any, for the last `check` command.
-For example, we can get the assigment of the above check example as follows:
+The show model command returns the satisfying assignment, if any, for the most recent `check` command.
+For example, you can obtain the assignment for the above check example as follows:
 
 ```maude
 MaudeSE> show model .
@@ -59,17 +60,16 @@ MaudeSE> show model .
 (smt-search)=
 ## smt-search
 
-This command performs symbolic reachability analysis, along with folding. Given an initial term `t`, a goal pattern `u`, and a goal condition `c`, the following command searches for `n` solutions that are reachable within `m` rewrite steps from `t`, match the goal pattern `u`, and satisfy the goal condition `c` under the SMT theory `Th`:
+This command performs symbolic reachability analysis with folding. Given an initial term `t`, a goal pattern `u`, and a goal condition `c`, it searches for the `n`-th solution that is reachable from `t` within `m` rewrite steps, matches the goal pattern `u`, and satisfies the condition `c` under the SMT theory `Th`:
 
 ```maude
 MaudeSE> {fold} smt-search [n,m] in M : t =>* u such that c using Th .
 ```
 
-The arguments `{fold}`, `Th`, `n`, and `m` are optional. If `{fold}` is given, the command ignores constrained terms that are subsumed by other constrained terms.
+The arguments `{fold}`, `n`, and `m` are optional. If `{fold}` is specified, the command ignores constrained terms that are subsumed by others.
 
-
-As an example, consider the coffee machine module, explained in {doc}`getting_started`.
-The following command finds the first solution that goes to the `cdone` state with all the clocks and parameters are greater than or equal to 0.
+As an example, consider the coffee machine module, introduced in {doc}`getting_started`.
+The following command finds the first solution that reaches the `cdone` state, where all clocks and parameters are greater than or equal to 0.
 
 ```maude
 MaudeSE> {fold} smt-search [1] in COFFEE-MACHINE : 
@@ -105,9 +105,9 @@ Concrete state:
 (show-smt-path)=
 ## show smt-path
 
-This command returns a symbolic/concrete path of the last `smt-search` result. It takes a path type (either symbolic or concrete). A symbolic path is given by a sequence of contracted terms and rewrite rules. The corresponding concrete path is an instance of the symbolic path with a satisfying assignment.
+This command returns either a symbolic or concrete path for the most recent `smt-search` result. It takes a path type as an argument (symbolic or concrete). 
 
-For example, the following commands show the symbolic and concrete paths of the above `smt-search` command.
+A symbolic path consists of a sequence of contracted terms and rewrite rules. The corresponding concrete path is an instance of the symbolic path instantiated with a satisfying assignment. For example, the following show the symbolic and concrete paths of the above search command.
 
 ```maude
 MaudeSE> show smt-path concrete .

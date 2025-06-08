@@ -57,13 +57,17 @@ endm
 
 ### Basic Usage
 
-Use the following commmand to load the coffee machine maude file and set SMT solver to Yices2.
+Use the following commmand to load the example Maude file and set the SMT solver to Yices2.
 
 ```console
 $ maude-se coffee.maude -s yices
 ```
 
-If successful, you can see the MaudeSE interpreter as follows.
+```{note}
+Refer to the section below ({ref}`standalone-usage-notes`) to learn how to use the MaudeSE standalone executable, which differs slightly.
+```
+
+If successful, the MaudeSE interpreter will appear as follows.
 
 ```maude
           ===================================
@@ -85,7 +89,7 @@ Successfully load module.
 Use the `smt-search` command to perform symbolic reachability analysis.
 For example, you can find the first solution where the coffee machine is in the `cdone` state
 and `P1`, `P2`, and `P3` are all positive real numbers,
-starting from the `idle` state with a positive real number `X1` is equal to `X2`.
+starting from the `idle` state with a positive real number `X1` equal to `X2`.
 
 ```maude
 MaudeSE> smt-search [1] [ idle ; X1:Real ; X2:Real ] < P1:Real ; P2:Real ; P3:Real > 
@@ -94,7 +98,7 @@ MaudeSE> smt-search [1] [ idle ; X1:Real ; X2:Real ] < P1:Real ; P2:Real ; P3:Re
                 P1:Real >= 0/1 and P2:Real >= 0/1 and P3:Real >= 0/1 using QF_LRA .
 ```
 
-The command finds the first solution as follows.
+The command returns the first solution as follows.
 
 ```maude
 Solution 1 (state 13)
@@ -129,7 +133,7 @@ Concrete state:
  < cdone ; 10/1 ; 10/1 > < 0/1 ; 0/1 ; 0/1 >
 ```
 
-To get the concrete path of the analysis, use the `show smt-path` command.
+To display the concrete path of the analysis, use the `show smt-path` command.
 
 ```maude
 MaudeSE> show smt-path concrete .
@@ -151,7 +155,7 @@ MaudeSE> show smt-path concrete .
 < cdone ; 10/1 ; 10/1 > < 0/1 ; 0/1 ; 0/1 >
 ```
 
-Otherwise, to get the symbolic path, use the following command.
+Alternatively, to obtain the symbolic path, use the following command.
 
 ```maude
 MaudeSE> show smt-path symbolic .
@@ -170,8 +174,7 @@ Constrained Term:
 ### State Space Reduction
 
 MaudeSE supports a well-known state space reduction technique for symbolic reachability analysis: folding. 
-To illustrate this method, consider the following search command, which does not terminate due to an infinite number of states.
-
+To illustrate this method, consider the following search command, which fails to terminate due to an infinite number of states.
 
 ```maude
 MaudeSE> smt-search [1] < idle ; 0/1 ; 0/1 > < P1:Real ; P2:Real ; P3:Real > 
@@ -181,8 +184,8 @@ MaudeSE> smt-search [1] < idle ; 0/1 ; 0/1 > < P1:Real ; P2:Real ; P3:Real >
 ```
 
 To reduce the number of symbolic states, use the `{fold}` option with the `smt-search` command. 
-For example, the following command makes the state space finite, allowing it to exhaustively search the entire state space 
-and report that no such solution exists.
+For example, the following command makes the state space finite, enabling an exhaustive search that correctly 
+reports the absence of such a solution.
 
 ```maude
 MaudeSE> {fold} smt-search [1] < idle ; 0/1 ; 0/1 > < P1:Real ; P2:Real ; P3:Real > 
@@ -192,6 +195,18 @@ MaudeSE> {fold} smt-search [1] < idle ; 0/1 ; 0/1 > < P1:Real ; P2:Real ; P3:Rea
 
 No more solutions.
 ```
+
+(standalone-usage-notes)=
+### Standalone Executable Usage Notes
+
+If you are using the MaudeSE standalone executable, you need to manually load the MaudeSE meta-interpreter file [maude-se-meta.maude](https://github.com/postechsv/maude-se/blob/main/src/maude-se-meta.maude), which depends on [smt-check.maude](https://github.com/postechsv/maude-se/blob/main/src/smt-check.maude).
+
+For example, to load the coffee machine example, load the following Maude files:
+
+```console
+$ ./maude-se-z3 smt.maude coffee.maude smt-check.maude maude-se-meta.maude
+```
+
 
 ---
 

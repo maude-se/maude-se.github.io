@@ -12,8 +12,8 @@ We provide a zip file ({download}`maude-se-examples.zip <assets/maude-se-example
 
 ## smt-check-ex.maude
 
-This file demonstrates the usage of `check` using various theories and formulas including interpreted and uninterpreted symbols.
-The file contains four functional module: 
+This file demonstrates the usage of `check` with various theories and formulas, including both interpreted and uninterpreted symbols.
+It contains four functional modules:
 
 * `SIMPLE` 
 * `EUF` 
@@ -21,7 +21,7 @@ The file contains four functional module:
 * `EUF-XOR` 
 
 
-**1. The `SIMPLE` module**: This module simply imports `INTEGER` module.
+**1. The `SIMPLE` module**: A minimal example that imports the INTEGER module.
 
 ```maude
 fmod SIMPLE is
@@ -30,7 +30,7 @@ fmod SIMPLE is
 endfm
 ```
 
-**2. The `EUF` module**: This module defines a new sort `A` and an uninterpreted symbol `f`.
+**2. The `EUF` module**: Defines a new sort `A` and declares `f` as an uninterpreted function symbol.
 
 ```maude
 fmod EUF is
@@ -43,7 +43,7 @@ fmod EUF is
 endfm
 ```
 
-**3. The `EUF-ARRAY` module**: This module connects interpreted symbols from the `Array` theory to Maude operators.
+**3. The `EUF-ARRAY` module**: Connects interpreted symbols from the SMT theory to Maude operators.
 
 ```maude
 fmod ARRAY is
@@ -58,7 +58,7 @@ fmod ARRAY is
 endfm
 ```
 
-**4. The `EUF-XOR` module**: This module contains a single uninterpreted symbol.
+**4. The `EUF-XOR` module**: Contains a single uninterpreted symbol.
 
 ```maude
 fmod EUF-XOR is
@@ -67,17 +67,21 @@ fmod EUF-XOR is
 endfm
 ```
 
-As the modules `EUF` and `EUF-XOR` show, we can declare uninterpreted symbols by declaring operators and annotating them as uninterpreted symbols 
-using the `metadata` attribute. For example, the uninterpreted symbol `f` of `EUF` is annotated with metadata `smt euf`, meaning that
-the operator is an SMT symbol (`smt`) and an uninterpreted symbol (`euf`).
+As shown in the `EUF` and `EUF-XOR` modules, uninterpreted symbols can be declared by defining operators and annotating them with the `metadata` attribute. 
+For example, the uninterpreted symbol `f` in `EUF` is annotated with metadata `smt euf`, indicating that the operator is both an SMT symbol (`smt`) 
+and an uninterpreted function (`euf`).
 
-Another module `ARRAY` show how to connect interpreted symbol to Maude. We also use the `metadata` attribute.
-For example, we use the metadata `smt array:select` to denote the interpreted symbol `select` of the `array` theory.
-In addition, we can connect a single interpreted symbol to different Maude operators. For example, we connect the `select` to `select` and `_[_]` in 
-the `ARRAY` module. 
+Another module, `ARRAY`, shows how to connect interpreted symbols to Maude using the `metadata` attribute.
+For example, the metadata `smt array:select` is used to denote the interpreted symbol `select` from the `array` theory.
+Additionally, a single interpreted symbol can be connected to multiple Maude operators. 
+In the ARRAY module, for instance, `select` is associated with both `select` and `_[_]`.
 
-We can check the satisfiability of various formulas under EUF and Array theories.
-For example, we can check the satisfiability of the following formula using the QF_UF logic. More example commands can be found in the file.
+```{important}
+To connect interpreted symbols to Maude, you need to extend or implement an SMT [converter](https://github.com/postechsv/maude-se/tree/main/src/pysmt/converter).
+```
+
+As usual, we can check the satisfiability of various formulas under the EUF and Array theories. 
+For example, the following formula can be checked using the QF_UF logic. Additional example commands are available in the file.
 
 ```maude
 MaudeSE> check in EUF : f(f(X:A)) === X:A and f(X:A) === Y:A 
@@ -101,8 +105,8 @@ red metaSmtCheck(upModule('EUF-XOR, false), upTerm(0 <= (N xor 255)), 'QF_UFLIA,
 
 ## smt-check-meta-ex.maude
 
-This file contains the usage of `metaSmtCheck` with several usage examples.
-The satisfiability can be checked as explained in {doc}`cmds`.
+This file demonstrates the usage of `metaSmtCheck` with several usage examples.
+Satisfiability checking can be performed as explained in {doc}`interface`.
 
 
 <!-- We can run the `smt-check-ex.maude` file with CVC5 using the following command:
@@ -157,7 +161,7 @@ result SmtCheckResult: {('N:Integer |-> '1.Integer),{"_xor_" |-> "(lambda ((_arg
 (smt-search-ex)=
 ## smt-search-ex.maude
 
-This file provides examples for `smt-search` using `gcd` and `robot` examples.
+This file includes examples demonstrating the use of `smt-search` with the `gcd` and `robot` modules.
 
 ```maude
 mod GCD is
@@ -171,12 +175,12 @@ mod GCD is
 
   crl [r1] : gcd(X, Y) => gcd(X - Y, Y) if X > Y = true [nonexec] .
   crl [r2] : gcd(X, Y) => gcd(X, Y - X) if X < Y = true [nonexec] .
-  crl [r3] : gcd(X, Y) => return (X) if X === Y  = true [nonexec] .
+   rl [r3] : gcd(X, X) => return (X) .
 endm
 ```
 
 The following command searches for the first solution term that matches `return(J)` and satisfies
-the consition `I < 9 and I > 0`, starting from an initial term `gcd(10, I)` under the `QF_LRA` logic.
+the consition `I < 9 and I > 0`, starting from the initial term `gcd(10, I)` under the `QF_LRA` logic.
 
 ```maude
 MaudeSE> smt-search [1] in GCD : gcd(10, I:Integer) =>* return(J:Integer) 
@@ -247,8 +251,8 @@ omod ROBOT-DYNAMICS is
 endom
 ```
 
-This command searches for the first solution, with the `QF_NRA` logic, that matches the goal pattern `< r : Robot | pos : [NPX, NPY], ATTRSET >` 
-and satisfies the consition `NPX === 10/1 and NPY === 10/1`, starting from an initial term, where all its attributes are zeros.
+This command searches for the first solution, using the `QF_NRA` logic, that matches the goal pattern `< r : Robot | pos : [NPX, NPY], ATTRSET >` 
+and satisfies the consition `NPX === 10/1 and NPY === 10/1`, starting from an initial term where all its attributes are set to zeros.
 
 ```maude
 MaudeSE> smt-search [1] in ROBOT-DYNAMICS :
@@ -286,13 +290,13 @@ Concrete state:
 
 ## smt-search-meta-ex.maude
 
-This file contains the usage of `metaSmtSearch`, corresponding to the two commands explained in the previous {ref}`section <smt-search-ex>`.
+This file demonstrates the usage of `metaSmtSearch`, corresponding to the two commands described in the previous {ref}`section <smt-search-ex>`.
 
 ---
 
 ## Module restrictions
 
-Currently, we make several restrictions to rewrite rules and equations:
-* Rewrite rules should not have non-SMT constraints in their conditions.
-* Equations should not contradict or conflict with SMT theories. 
-* When defining and connecting SMT symbols using metadata, one should not use equational axiom attritues (e.g., assoc, comm, id) and the metadata attributes together.
+Currently, we impose several restrictions on rewrite rules and equations:
+* The condition of a rewrite rule must be decomposed into pure SMT and non-SMT conditions.
+* Equations must not contradict or conflict with SMT theories. 
+* When defining and connecting SMT symbols using metadata, equational axiom attributes (e.g., assoc, comm, id) must not be used together with metadata attributes.
