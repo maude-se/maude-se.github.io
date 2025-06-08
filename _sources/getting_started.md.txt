@@ -232,7 +232,7 @@ $ ./maude-se-z3 coffee.maude smt-check.maude maude-se-meta.maude
 ```
 
 ```{warning}
-The standalone version currently supports quantifier-free Boolean, Integer, and Real theories. Therefore, some examples that include SMT symbols from other theories (e.g., Array), or uninterpreted symbols used in the {doc}`cmds`, {doc}`interface`, and {doc}`examples` sections, are not supported.
+The standalone version currently supports quantifier-free Boolean, Integer, and Real theories. Therefore, examples that include SMT symbols from other theories (e.g., Array), or uninterpreted symbols used in the {doc}`cmds`, {doc}`interface`, and {doc}`examples` sections, are not supported.
 ```
 
 ---
