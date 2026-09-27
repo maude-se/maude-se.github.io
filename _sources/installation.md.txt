@@ -119,11 +119,15 @@ maude-se-installer install native z3
 
 This builds the plugin locally. It requires the native build prerequisites,
 network access to obtain the matching MaudeSE source and solver dependencies,
-and write access to the installed Python package. Check the plugin and select
-it when running MaudeSE:
+and write access to the installed Python package. Check the plugin:
 
 ```sh
 maude-se-installer doctor native z3
+```
+
+Then select it when running MaudeSE:
+
+```sh
 maude-se examples/smt-check-ex.maude -s z3 -native
 ```
 

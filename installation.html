@@ -212,10 +212,12 @@ corresponding Python solver package.</p>
 </div>
 <p>This builds the plugin locally. It requires the native build prerequisites,
 network access to obtain the matching MaudeSE source and solver dependencies,
-and write access to the installed Python package. Check the plugin and select
-it when running MaudeSE:</p>
+and write access to the installed Python package. Check the plugin:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>maude-se-installer<span class="w"> </span>doctor<span class="w"> </span>native<span class="w"> </span>z3
-maude-se<span class="w"> </span>examples/smt-check-ex.maude<span class="w"> </span>-s<span class="w"> </span>z3<span class="w"> </span>-native
+</pre></div>
+</div>
+<p>Then select it when running MaudeSE:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>maude-se<span class="w"> </span>examples/smt-check-ex.maude<span class="w"> </span>-s<span class="w"> </span>z3<span class="w"> </span>-native
 </pre></div>
 </div>
 <p>The installer also accepts <code class="docutils literal notranslate"><span class="pre">yices</span></code>, <code class="docutils literal notranslate"><span class="pre">cvc5</span></code>, or <code class="docutils literal notranslate"><span class="pre">all</span></code> after <code class="docutils literal notranslate"><span class="pre">native</span></code>. For build
