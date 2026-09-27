@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Z3 with tactics &mdash; MaudeSE  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css?v=e09d5059" />
 
@@ -108,22 +108,22 @@ We provide a new functional module <code class="docutils literal notranslate"><s
 <section id="simplify">
 <h3>Simplify<a class="headerlink" href="#simplify" title="Link to this heading"></a></h3>
 <p>For example, you can apply <code class="docutils literal notranslate"><span class="pre">simplify</span></code> tactic as follows:</p>
-<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="k">red</span> <span class="n">apply</span><span class="o">(</span><span class="n">i</span><span class="o">(</span><span class="s">&quot;</span><span class="n">a</span><span class="s">&quot;</span><span class="o">)</span> <span class="o">+</span> <span class="n">1</span> <span class="o">&lt;</span> <span class="n">1</span><span class="o">,</span> <span class="n">simplify</span><span class="o">)</span> <span class="o">.</span>
-<span class="k">red</span> <span class="n">apply</span><span class="o">(</span><span class="n">b</span><span class="o">(</span><span class="s">&quot;</span><span class="n">a</span><span class="s">&quot;</span><span class="o">)</span> <span class="o">===</span> <span class="n">true</span><span class="o">,</span> <span class="n">simplify</span><span class="o">)</span> <span class="o">.</span>
-<span class="k">red</span> <span class="n">apply</span><span class="o">(</span><span class="n">forall</span><span class="o">(</span><span class="n">i</span><span class="o">(</span><span class="s">&quot;</span><span class="n">a</span><span class="s">&quot;</span><span class="o">),</span> <span class="n">i</span><span class="o">(</span><span class="s">&quot;</span><span class="n">a</span><span class="s">&quot;</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">1</span><span class="o">),</span> <span class="n">simplify</span><span class="o">)</span> <span class="o">.</span>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="k">red</span> <span class="n">apply</span><span class="o">(</span><span class="n">i</span><span class="o">(</span><span class="s">"</span><span class="n">a</span><span class="s">"</span><span class="o">)</span> <span class="o">+</span> <span class="n">1</span> <span class="o">&lt;</span> <span class="n">1</span><span class="o">,</span> <span class="n">simplify</span><span class="o">)</span> <span class="o">.</span>
+<span class="k">red</span> <span class="n">apply</span><span class="o">(</span><span class="n">b</span><span class="o">(</span><span class="s">"</span><span class="n">a</span><span class="s">"</span><span class="o">)</span> <span class="o">===</span> <span class="n">true</span><span class="o">,</span> <span class="n">simplify</span><span class="o">)</span> <span class="o">.</span>
+<span class="k">red</span> <span class="n">apply</span><span class="o">(</span><span class="n">forall</span><span class="o">(</span><span class="n">i</span><span class="o">(</span><span class="s">"</span><span class="n">a</span><span class="s">"</span><span class="o">),</span> <span class="n">i</span><span class="o">(</span><span class="s">"</span><span class="n">a</span><span class="s">"</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">1</span><span class="o">),</span> <span class="n">simplify</span><span class="o">)</span> <span class="o">.</span>
 </pre></div>
 </div>
 <p>The results are as follows:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">==========================================</span>
-<span class="go">reduce in TEST : apply(i(&quot;a&quot;) + (1).Integer &lt; (1).Integer, simplify) .</span>
+<span class="go">reduce in TEST : apply(i("a") + (1).Integer &lt; (1).Integer, simplify) .</span>
 <span class="go">rewrites: 1</span>
-<span class="go">result BooleanExpr: not (0).Integer &lt;= i(&quot;a&quot;)</span>
+<span class="go">result BooleanExpr: not (0).Integer &lt;= i("a")</span>
 <span class="go">==========================================</span>
-<span class="go">reduce in TEST : apply(b(&quot;a&quot;) === (true).Boolean, simplify) .</span>
+<span class="go">reduce in TEST : apply(b("a") === (true).Boolean, simplify) .</span>
 <span class="go">rewrites: 1</span>
-<span class="go">result BooleanVar: b(&quot;a&quot;)</span>
+<span class="go">result BooleanVar: b("a")</span>
 <span class="go">==========================================</span>
-<span class="go">reduce in TEST : apply(forall(i(&quot;a&quot;), i(&quot;a&quot;) &gt; (1).Integer), simplify) .</span>
+<span class="go">reduce in TEST : apply(forall(i("a"), i("a") &gt; (1).Integer), simplify) .</span>
 <span class="go">rewrites: 1</span>
 <span class="go">result BooleanExpr: forall(freshIntVar(0), not freshIntVar(0) &lt;= (1).Integer)</span>
 </pre></div>
@@ -137,32 +137,32 @@ MaudeSE generates these indexed variables using three operators (i.e., <code cla
 <section id="quantifier-elimination">
 <h3>Quantifier Elimination<a class="headerlink" href="#quantifier-elimination" title="Link to this heading"></a></h3>
 <p>You can apply <code class="docutils literal notranslate"><span class="pre">qe</span></code> (or similarly <code class="docutils literal notranslate"><span class="pre">qe2</span></code>) tactic as follows:</p>
-<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="k">red</span> <span class="n">apply</span><span class="o">(</span><span class="n">forall</span><span class="o">(</span><span class="n">i</span><span class="o">(</span><span class="s">&quot;</span><span class="n">a</span><span class="s">&quot;</span><span class="o">),</span> <span class="n">i</span><span class="o">(</span><span class="s">&quot;</span><span class="n">a</span><span class="s">&quot;</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">1</span><span class="o">),</span> <span class="n">qe</span><span class="o">)</span> <span class="o">.</span>
-<span class="k">red</span> <span class="n">apply</span><span class="o">(</span><span class="n">exists</span><span class="o">(</span><span class="n">i</span><span class="o">(</span><span class="s">&quot;</span><span class="n">a</span><span class="s">&quot;</span><span class="o">),</span> <span class="n">i</span><span class="o">(</span><span class="s">&quot;</span><span class="n">a</span><span class="s">&quot;</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">1</span><span class="o">),</span> <span class="n">qe</span><span class="o">)</span> <span class="o">.</span>
-<span class="k">red</span> <span class="n">apply</span><span class="o">(</span><span class="n">forall</span><span class="o">(</span><span class="n">i</span><span class="o">(</span><span class="s">&quot;</span><span class="n">a</span><span class="s">&quot;</span><span class="o">),</span> <span class="n">i</span><span class="o">(</span><span class="s">&quot;</span><span class="n">a2</span><span class="s">&quot;</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">1</span><span class="o">),</span> <span class="n">qe</span><span class="o">)</span> <span class="o">.</span>
-<span class="k">red</span> <span class="n">apply</span><span class="o">(</span><span class="n">exists</span><span class="o">(</span><span class="n">i</span><span class="o">(</span><span class="s">&quot;</span><span class="n">a</span><span class="s">&quot;</span><span class="o">),</span> <span class="n">i</span><span class="o">(</span><span class="s">&quot;</span><span class="n">a2</span><span class="s">&quot;</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">1</span><span class="o">),</span> <span class="n">qe</span><span class="o">)</span> <span class="o">.</span>
-<span class="k">red</span> <span class="n">apply</span><span class="o">(</span><span class="n">exists</span><span class="o">(</span><span class="n">i</span><span class="o">(</span><span class="s">&quot;</span><span class="n">a</span><span class="s">&quot;</span><span class="o">),</span> <span class="n">exists</span><span class="o">(</span><span class="n">i</span><span class="o">(</span><span class="s">&quot;</span><span class="n">a1</span><span class="s">&quot;</span><span class="o">),</span> <span class="n">i</span><span class="o">(</span><span class="s">&quot;</span><span class="n">a1</span><span class="s">&quot;</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">1</span><span class="o">)),</span> <span class="n">qe</span><span class="o">)</span> <span class="o">.</span>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="k">red</span> <span class="n">apply</span><span class="o">(</span><span class="n">forall</span><span class="o">(</span><span class="n">i</span><span class="o">(</span><span class="s">"</span><span class="n">a</span><span class="s">"</span><span class="o">),</span> <span class="n">i</span><span class="o">(</span><span class="s">"</span><span class="n">a</span><span class="s">"</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">1</span><span class="o">),</span> <span class="n">qe</span><span class="o">)</span> <span class="o">.</span>
+<span class="k">red</span> <span class="n">apply</span><span class="o">(</span><span class="n">exists</span><span class="o">(</span><span class="n">i</span><span class="o">(</span><span class="s">"</span><span class="n">a</span><span class="s">"</span><span class="o">),</span> <span class="n">i</span><span class="o">(</span><span class="s">"</span><span class="n">a</span><span class="s">"</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">1</span><span class="o">),</span> <span class="n">qe</span><span class="o">)</span> <span class="o">.</span>
+<span class="k">red</span> <span class="n">apply</span><span class="o">(</span><span class="n">forall</span><span class="o">(</span><span class="n">i</span><span class="o">(</span><span class="s">"</span><span class="n">a</span><span class="s">"</span><span class="o">),</span> <span class="n">i</span><span class="o">(</span><span class="s">"</span><span class="n">a2</span><span class="s">"</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">1</span><span class="o">),</span> <span class="n">qe</span><span class="o">)</span> <span class="o">.</span>
+<span class="k">red</span> <span class="n">apply</span><span class="o">(</span><span class="n">exists</span><span class="o">(</span><span class="n">i</span><span class="o">(</span><span class="s">"</span><span class="n">a</span><span class="s">"</span><span class="o">),</span> <span class="n">i</span><span class="o">(</span><span class="s">"</span><span class="n">a2</span><span class="s">"</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">1</span><span class="o">),</span> <span class="n">qe</span><span class="o">)</span> <span class="o">.</span>
+<span class="k">red</span> <span class="n">apply</span><span class="o">(</span><span class="n">exists</span><span class="o">(</span><span class="n">i</span><span class="o">(</span><span class="s">"</span><span class="n">a</span><span class="s">"</span><span class="o">),</span> <span class="n">exists</span><span class="o">(</span><span class="n">i</span><span class="o">(</span><span class="s">"</span><span class="n">a1</span><span class="s">"</span><span class="o">),</span> <span class="n">i</span><span class="o">(</span><span class="s">"</span><span class="n">a1</span><span class="s">"</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">1</span><span class="o">)),</span> <span class="n">qe</span><span class="o">)</span> <span class="o">.</span>
 </pre></div>
 </div>
 <p>The results are as follows:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">==========================================</span>
-<span class="go">reduce in TEST : apply(forall(i(&quot;a&quot;), i(&quot;a&quot;) &gt; (1).Integer), qe) .</span>
+<span class="go">reduce in TEST : apply(forall(i("a"), i("a") &gt; (1).Integer), qe) .</span>
 <span class="go">rewrites: 1</span>
 <span class="go">result Boolean: (false).Boolean</span>
 <span class="go">==========================================</span>
-<span class="go">reduce in TEST : apply(exists(i(&quot;a&quot;), i(&quot;a&quot;) &gt; (1).Integer), qe) .</span>
+<span class="go">reduce in TEST : apply(exists(i("a"), i("a") &gt; (1).Integer), qe) .</span>
 <span class="go">rewrites: 1</span>
 <span class="go">result Boolean: (true).Boolean</span>
 <span class="go">==========================================</span>
-<span class="go">reduce in TEST : apply(forall(i(&quot;a&quot;), i(&quot;a2&quot;) &gt; (1).Integer), qe) .</span>
+<span class="go">reduce in TEST : apply(forall(i("a"), i("a2") &gt; (1).Integer), qe) .</span>
 <span class="go">rewrites: 1</span>
-<span class="go">result BooleanExpr: not i(&quot;a2&quot;) &lt;= (1).Integer</span>
+<span class="go">result BooleanExpr: not i("a2") &lt;= (1).Integer</span>
 <span class="go">==========================================</span>
-<span class="go">reduce in TEST : apply(exists(i(&quot;a&quot;), i(&quot;a2&quot;) &gt; (1).Integer), qe) .</span>
+<span class="go">reduce in TEST : apply(exists(i("a"), i("a2") &gt; (1).Integer), qe) .</span>
 <span class="go">rewrites: 1</span>
-<span class="go">result BooleanExpr: not i(&quot;a2&quot;) &lt;= (1).Integer</span>
+<span class="go">result BooleanExpr: not i("a2") &lt;= (1).Integer</span>
 <span class="go">==========================================</span>
-<span class="go">reduce in TEST : apply(exists(i(&quot;a&quot;), exists(i(&quot;a1&quot;), i(&quot;a1&quot;) &gt; (1).Integer)), qe) .</span>
+<span class="go">reduce in TEST : apply(exists(i("a"), exists(i("a1"), i("a1") &gt; (1).Integer)), qe) .</span>
 <span class="go">rewrites: 1</span>
 <span class="go">result Boolean: (true).Boolean</span>
 </pre></div>
@@ -171,11 +171,11 @@ MaudeSE generates these indexed variables using three operators (i.e., <code cla
 <section id="and">
 <h3>And<a class="headerlink" href="#and" title="Link to this heading"></a></h3>
 <p>You can combine multiple tactics using <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> as follow:</p>
-<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="k">red</span> <span class="n">apply</span><span class="o">(</span><span class="n">forall</span><span class="o">(</span><span class="n">i</span><span class="o">(</span><span class="s">&quot;</span><span class="n">a</span><span class="s">&quot;</span><span class="o">),</span> <span class="n">forall</span><span class="o">(</span><span class="n">i</span><span class="o">(</span><span class="s">&quot;</span><span class="n">a2</span><span class="s">&quot;</span><span class="o">),</span> <span class="n">i</span><span class="o">(</span><span class="s">&quot;</span><span class="n">a</span><span class="s">&quot;</span><span class="o">)</span> <span class="o">+</span> <span class="n">i</span><span class="o">(</span><span class="s">&quot;</span><span class="n">a2</span><span class="s">&quot;</span><span class="o">)</span> <span class="o">+</span> <span class="n">i</span><span class="o">(</span><span class="s">&quot;</span><span class="n">a3</span><span class="s">&quot;</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">1</span><span class="o">)),</span>
+<div class="highlight-maude notranslate"><div class="highlight"><pre><span></span><span class="k">red</span> <span class="n">apply</span><span class="o">(</span><span class="n">forall</span><span class="o">(</span><span class="n">i</span><span class="o">(</span><span class="s">"</span><span class="n">a</span><span class="s">"</span><span class="o">),</span> <span class="n">forall</span><span class="o">(</span><span class="n">i</span><span class="o">(</span><span class="s">"</span><span class="n">a2</span><span class="s">"</span><span class="o">),</span> <span class="n">i</span><span class="o">(</span><span class="s">"</span><span class="n">a</span><span class="s">"</span><span class="o">)</span> <span class="o">+</span> <span class="n">i</span><span class="o">(</span><span class="s">"</span><span class="n">a2</span><span class="s">"</span><span class="o">)</span> <span class="o">+</span> <span class="n">i</span><span class="o">(</span><span class="s">"</span><span class="n">a3</span><span class="s">"</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">1</span><span class="o">)),</span>
     <span class="k">then</span><span class="o">(</span><span class="n">qe</span><span class="o">,</span> <span class="n">ctxSolverSimplify</span> <span class="n">qe</span> <span class="n">qe2</span> <span class="n">ctxSolverSimplify</span> <span class="n">propagateInEqs</span> <span class="n">purifyArith</span><span class="o">))</span> <span class="o">.</span>
 </pre></div>
 </div>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">reduce in TEST : apply(forall(i(&quot;a&quot;), forall(i(&quot;a2&quot;), i(&quot;a&quot;) + i(&quot;a2&quot;) + i(&quot;a3&quot;) &gt; (1).Integer)), </span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">reduce in TEST : apply(forall(i("a"), forall(i("a2"), i("a") + i("a2") + i("a3") &gt; (1).Integer)), </span>
 <span class="go">    then(qe, ctxSolverSimplify qe qe2 ctxSolverSimplify propagateInEqs purifyArith)) .</span>
 <span class="go">rewrites: 1</span>
 <span class="go">result Boolean: (false).Boolean</span>
@@ -197,8 +197,8 @@ MaudeSE generates these indexed variables using three operators (i.e., <code cla
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2019-2025, Geunyeol Yu.
-      <span class="lastupdated">Last updated on Jun 09, 2025.
+    <p>&#169; Copyright 2019-2026, Geunyeol Yu.
+      <span class="lastupdated">Last updated on Sep 27, 2026.
       </span></p>
   </div>
 
